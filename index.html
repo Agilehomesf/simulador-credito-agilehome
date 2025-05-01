@@ -360,7 +360,83 @@
       });
       
       // Generar gráfico comparativo
-      generateComparisonChart(bankResults);
+      // Generar gráfico comparativo de cuotas mensuales
+function generateComparisonChart(bankResults) {
+  const ctx = document.getElementById('comparisonChart').getContext('2d');
+  
+  // Destruir gráfico existente si hay uno
+  if (window.comparisonChart instanceof Chart) {
+    window.comparisonChart.destroy();
+  }
+  
+  // Preparar datos
+  const labels = bankResults.map(result => result.bankName);
+  const monthlyPayments = bankResults.map(result => Math.round(result.monthlyPayment));
+  
+  // Encontrar pago mínimo y máximo para escala personalizada
+  const minPayment = Math.min(...monthlyPayments);
+  const maxPayment = Math.max(...monthlyPayments);
+  
+  // Calcular el mínimo de la escala (90% del valor mínimo)
+  const scaleMin = Math.floor(minPayment * 0.9);
+  
+  // Colores para las barras - graduado desde el mejor al peor
+  const colors = bankResults.map((_, index) => {
+    if (index === 0) return 'rgba(40, 167, 69, 0.8)'; // Verde para el mejor
+    const intensity = Math.min(0.3 + (index * 0.1), 0.9); // Intensidad creciente
+    return `rgba(0, 123, 255, ${intensity})`;
+  });
+  
+  // Crear gráfico
+  window.comparisonChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Cuota Mensual',
+        data: monthlyPayments,
+        backgroundColor: colors,
+        borderColor: colors.map(color => color.replace(/[\d\.]+\)$/, '1)')),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          min: scaleMin, // Comenzar la escala en un valor menor para mostrar diferencias
+          ticks: {
+            callback: function(value) {
+              return '$' + formatCurrency(value);
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false // Ocultar leyenda
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const value = context.raw;
+              const diff = value - minPayment;
+              let diffText = '';
+              
+              if (context.dataIndex === 0) {
+                diffText = ' (mejor opción)';
+              } else {
+                diffText = ` (+$${formatCurrency(diff)} respecto al mejor)`;
+              }
+              
+              return 'Cuota: $' + formatCurrency(value) + diffText;
+            }
+          }
+        }
+      }
+    }
+  });
+}
       
       // Generar mapa de calor de tasas
       generateInterestRateHeatMap(bankResults);

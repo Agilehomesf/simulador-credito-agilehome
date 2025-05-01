@@ -8,6 +8,34 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+  :root {
+    --primary-color: #3498db;       /* Azul (color principal) */
+    --primary-hover: #2980b9;       /* Azul oscuro (hover) */
+    --secondary-color: #2c3e50;     /* Azul oscuro (secundario) */
+    --success-color: #27ae60;       /* Verde (éxito) */
+    --info-color: #3498db;          /* Azul claro (información) */
+    --warning-color: #f39c12;       /* Naranja (advertencia) */
+    --danger-color: #e74c3c;        /* Rojo (error) */
+    --light-color: #ecf0f1;         /* Gris claro (fondos) */
+    --dark-color: #2c3e50;          /* Azul oscuro (texto) */
+  }
+  
+  body { font-family: 'Segoe UI', sans-serif; }
+  .card { border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+  
+  /* Cabecera con el color principal */
+  header { background-color: var(--primary-color); color: white; }
+  .header-title { color: white; }
+  
+  /* Botones con los colores personalizados */
+  .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+  .btn-primary:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
+  
+  /* Cuota mensual destacada */
+  .monthly-payment { font-size: 1.3rem; font-weight: bold; color: var(--primary-color); }
+  
+  /* Otros estilos... */
+</style>
     body { font-family: 'Segoe UI', sans-serif; }
     .card { border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
     .monthly-payment { font-size: 1.3rem; font-weight: bold; color: #007bff; }

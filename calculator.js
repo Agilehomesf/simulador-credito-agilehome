@@ -4,7 +4,7 @@ let banks = {};
 // Function to load bank data from JSON file
 async function loadBankData() {
   try {
-    const response = await fetch('/static/data/bank_rates.json');
+    const response = await fetch('tasas_bancarias.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

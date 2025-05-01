@@ -1,0 +1,236 @@
+:root {
+  --primary-orange: #ff6b00;
+  --primary-blue: #002d5a;
+  --hover-orange: #e65a00;
+  --light-grey: #f8f8f8;
+  --medium-grey: #cccccc;
+  --dark-grey: #666666;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #ffffff;
+  color: var(--primary-blue);
+  min-height: 100vh;
+}
+
+.brand-title {
+  color: var(--primary-orange);
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+}
+
+.card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  border: none;
+}
+
+.card-header {
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 600;
+}
+
+label {
+  color: var(--primary-blue);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-grey);
+}
+
+.currency-input {
+  padding-left: 32px;
+}
+
+.btn-primary {
+  background-color: var(--primary-orange);
+  border-color: var(--primary-orange);
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--hover-orange);
+  border-color: var(--hover-orange);
+}
+
+.btn-outline-primary {
+  color: var(--primary-orange);
+  border-color: var(--primary-orange);
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+  background-color: var(--primary-orange);
+  color: white;
+}
+
+.result-card {
+  border-left: 5px solid var(--primary-orange);
+  transition: transform 0.2s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-3px);
+}
+
+.bank-logo {
+  width: 100px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.payment-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.highlight {
+  color: var(--primary-orange);
+  font-weight: 700;
+}
+
+.section-title {
+  border-bottom: 2px solid var(--primary-orange);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.tooltip-icon {
+  color: var(--dark-grey);
+  cursor: pointer;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .card {
+    margin-bottom: 15px;
+  }
+  
+  .payment-value {
+    font-size: 1.2rem;
+  }
+  
+  .bank-logo {
+    width: 80px;
+    height: 45px;
+  }
+}
+
+.comparison-table th {
+  background-color: var(--light-grey);
+  color: var(--primary-blue);
+}
+
+.amortization-toggle {
+  cursor: pointer;
+  color: var(--primary-orange);
+  text-decoration: underline;
+}
+
+.amortization-table-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.footer {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--dark-grey);
+  font-style: italic;
+}
+
+.spinner-border {
+  color: var(--primary-orange);
+  margin-right: 10px;
+}
+
+/* Heat Map Styles */
+.heat-map-cell {
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  font-weight: 600;
+}
+
+.heat-map-indicator {
+  display: flex;
+  height: 24px;
+  border-radius: 6px;
+  margin: 8px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.heat-map-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.lowest-rate {
+  background-color: #40c057; /* Verde fuerte para la mejor tasa */
+  color: white !important;
+}
+
+.low-rate {
+  background-color: #82c91e; /* Verde medio */
+  color: white !important;
+}
+
+.mid-rate {
+  background-color: #ffe066; /* Amarillo */
+  color: #333 !important;
+}
+
+.high-rate {
+  background-color: #ff922b; /* Naranja */
+  color: white !important;
+}
+
+.highest-rate {
+  background-color: #f03e3e; /* Rojo para la peor tasa */
+  color: white !important;
+}

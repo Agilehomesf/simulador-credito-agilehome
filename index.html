@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Crédito Hipotecario Multibanco Agile Home</title>
+  <title>Simulador Comparativo de Crédito Hipotecario Agile Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
@@ -19,38 +22,57 @@
     }
     
     body { 
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       color: #4a4a4a;
+      font-size: 0.9rem;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
     }
     
     .card { 
-      border-radius: 8px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+      border-radius: 10px; 
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
       margin-bottom: 20px; 
       border-color: #e1e1e1;
+      overflow: hidden;
     }
     
     .card-header {
       background-color: rgba(2, 14, 46, 0.05);
-      font-weight: bold;
+      font-weight: 600;
       color: var(--primary-color);
+      padding: 0.8rem 1.25rem;
+      font-size: 1rem;
     }
     
     /* Cabecera */
     header { 
       background-color: white;
       border-bottom: 1px solid #e1e1e1;
+      padding: 1.5rem 0;
     }
     
     .header-title { 
-      color: var(--primary-color);
-      font-weight: bold;
+      color: var(--secondary-color);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .header-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 0;
     }
     
     /* Botones */
     .btn-primary { 
       background-color: var(--primary-color); 
       border-color: var(--primary-color);
+      border-radius: 6px;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
     }
     
     .btn-primary:hover { 
@@ -61,6 +83,9 @@
     .btn-success {
       background-color: var(--secondary-color);
       border-color: var(--secondary-color);
+      border-radius: 6px;
+      font-weight: 500;
+      padding: 0.6rem 1.8rem;
     }
     
     .btn-success:hover {
@@ -68,10 +93,16 @@
       border-color: #e1430a;
     }
     
+    .btn-outline-secondary {
+      border-radius: 6px;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+    }
+    
     /* Cuota mensual destacada */
     .monthly-payment { 
-      font-size: 1.3rem; 
-      font-weight: bold; 
+      font-size: 1.2rem; 
+      font-weight: 700; 
       color: var(--primary-color);
     }
     
@@ -86,41 +117,54 @@
       background-color: var(--light-blue);
       border-color: rgba(2, 14, 46, 0.2);
       color: var(--primary-color);
+      border-radius: 8px;
     }
     
     /* Footer */
     .footer {
       background-color: var(--primary-color);
       color: white;
-      padding: 30px 0;
-      margin-top: 30px;
+      padding: 2.5rem 0;
+      margin-top: 2.5rem;
+      font-size: 0.85rem;
     }
     
     .footer h5 {
       color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
     }
     
     .footer ul {
       color: rgba(255, 255, 255, 0.9);
+      padding-left: 1.25rem;
+    }
+    
+    .footer p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
     }
     
     /* Intro icons */
     .intro-icon {
-      font-size: 48px;
+      font-size: 42px;
       color: var(--primary-color);
+      margin-bottom: 0.5rem;
     }
     
     .intro-container {
       position: relative;
-      padding: 20px;
+      padding: 1.75rem;
       background-color: var(--light-blue);
       border-radius: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
+      overflow: hidden;
     }
     
     .house-icon-large {
       font-size: 120px;
-      color: rgba(2, 14, 46, 0.1);
+      color: rgba(2, 14, 46, 0.07);
       position: absolute;
       right: 20px;
       bottom: 10px;
@@ -134,27 +178,111 @@
     
     /* Selector de bancos */
     .bank-selector-item {
-      border: 1px solid #e1e1e1;
+      border: 1px solid #e6e6e6;
       border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+      background-color: #fff;
     }
     
     .bank-selector-item:hover {
       border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.05);
+      background-color: rgba(2, 14, 46, 0.02);
     }
     
     .bank-selector-item.selected {
       border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.1);
+      background-color: rgba(2, 14, 46, 0.05);
     }
     
     .bank-selector-item .form-check-input:checked {
       background-color: var(--primary-color);
       border-color: var(--primary-color);
+    }
+    
+    /* Información importante */
+    .info-important {
+      background-color: #1e2124;
+      border-radius: 10px;
+      color: #fff;
+      padding: 1.5rem;
+    }
+    
+    .info-important h5 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-important p {
+      margin-bottom: 0.75rem;
+    }
+    
+    .info-important ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0;
+    }
+    
+    .info-important li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .info-important li:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* Ajustes en bancos */
+    .bank-card {
+      transition: all 0.2s ease;
+      border: 1px solid #e6e6e6;
+    }
+    
+    .bank-card:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    
+    /* Whatsapp button */
+    .whatsapp-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .whatsapp-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Tablas */
+    .table {
+      font-size: 0.85rem;
+    }
+    
+    .table th {
+      font-weight: 600;
+      background-color: rgba(2, 14, 46, 0.03);
+    }
+    
+    /* Badge mejora */
+    .badge-best {
+      background-color: var(--secondary-color) !important;
+      font-weight: 500;
+      padding: 0.35em 0.65em;
+    }
+    
+    /* Inputs */
+    .form-control, .form-select {
+      font-size: 0.9rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+    }
+    
+    .form-label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
     }
   </style>
 </head>
@@ -163,14 +291,14 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-2 text-center text-md-start">
-          <i class="bi bi-house-heart-fill text-primary" style="font-size: 3rem;"></i>
+          <i class="bi bi-house-heart-fill" style="font-size: 2.5rem; color: var(--secondary-color);"></i>
         </div>
         <div class="col-md-8 text-center">
-          <h1 class="header-title">Simulador de Crédito Hipotecario</h1>
-          <p class="text-muted">Compare opciones de préstamos hipotecarios en Colombia</p>
+          <h1 class="header-title">Simulador Comparativo de Crédito Hipotecario Agile Home</h1>
+          <p class="header-subtitle">Compare opciones de préstamos hipotecarios en Colombia</p>
         </div>
         <div class="col-md-2 d-none d-md-block text-end">
-          <i class="bi bi-bank text-primary" style="font-size: 2.5rem;"></i>
+          <i class="bi bi-bank" style="font-size: 2.2rem; color: var(--primary-color);"></i>
         </div>
       </div>
     </div>
@@ -182,20 +310,20 @@
       <div class="intro-container mb-4">
         <div class="row">
           <div class="col-md-8">
-            <h3 class="text-primary mb-3">¿Sueñas con tener tu casa propia?</h3>
+            <h3 class="mb-3" style="color: var(--primary-color); font-weight: 600; font-size: 1.4rem;">¿Sueñas con tener tu casa propia?</h3>
             <p class="mb-3">Este simulador te permite calcular y comparar cuotas mensuales de créditos hipotecarios ofrecidos por diferentes bancos en Colombia. ¡Da el primer paso hacia tu hogar ideal!</p>
             <div class="row mt-4">
               <div class="col-4 text-center">
                 <i class="bi bi-house-door intro-icon"></i>
-                <h6 class="mt-2">Ingrese el valor de la vivienda</h6>
+                <h6 class="mt-2" style="font-size: 0.85rem;">Ingrese el valor de la vivienda</h6>
               </div>
               <div class="col-4 text-center">
                 <i class="bi bi-calculator intro-icon"></i>
-                <h6 class="mt-2">Defina cuota inicial y plazo</h6>
+                <h6 class="mt-2" style="font-size: 0.85rem;">Defina cuota inicial y plazo</h6>
               </div>
               <div class="col-4 text-center">
                 <i class="bi bi-bank intro-icon"></i>
-                <h6 class="mt-2">Compare bancos</h6>
+                <h6 class="mt-2" style="font-size: 0.85rem;">Compare bancos</h6>
               </div>
             </div>
           </div>
@@ -204,7 +332,9 @@
       </div>
 
       <div class="card mb-4">
-        <div class="card-header">Información del Préstamo</div>
+        <div class="card-header">
+          <i class="bi bi-sliders me-2"></i>Información del Préstamo
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -223,7 +353,8 @@
               <div><small class="text-muted">Equivale al <span id="downPaymentPercentage">0</span>% del valor</small></div>
             </div>
             <div class="col-12 mb-3">
-              <div class="alert alert-info">
+              <div class="alert alert-info d-flex align-items-center py-2">
+                <i class="bi bi-info-circle me-2 fs-5"></i>
                 <strong>Monto a financiar: $<span id="loanAmount">0</span></strong>
               </div>
             </div>
@@ -243,21 +374,29 @@
           
           <!-- Selector de bancos -->
           <div class="mt-4">
-            <label class="form-label">Seleccione los bancos a incluir en la comparación:</label>
+            <label class="form-label d-flex align-items-center">
+              <i class="bi bi-bank me-2"></i>Seleccione los bancos a incluir en la comparación:
+            </label>
             <div class="row" id="bankSelector">
               <!-- Se llenará dinámicamente con JavaScript -->
             </div>
           </div>
           
           <div class="d-flex justify-content-between mt-4">
-            <button type="button" id="resetBtn" class="btn btn-outline-secondary">Reiniciar</button>
-            <button type="button" id="calculateBtn" class="btn btn-primary">Calcular cuotas</button>
+            <button type="button" id="resetBtn" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar
+            </button>
+            <button type="button" id="calculateBtn" class="btn btn-primary">
+              <i class="bi bi-calculator me-1"></i>Calcular cuotas
+            </button>
           </div>
         </div>
       </div>
 
       <div id="resultsContainer" class="d-none">
-        <h3 class="mb-4 text-primary">Resultados de la Simulación</h3>
+        <h3 class="mb-3" style="color: var(--primary-color); font-weight: 600; font-size: 1.3rem;">
+          <i class="bi bi-graph-up me-2"></i>Resultados de la Simulación
+        </h3>
         <div id="resultsContent"></div>
         
         <!-- Gráfica Comparativa (más pequeña) -->
@@ -278,10 +417,10 @@
             <i class="bi bi-grid-3x3-gap me-2"></i>Mapa de Calor de Tasas de Interés
           </div>
           <div class="card-body">
-            <p class="text-muted mb-3">Este mapa de calor muestra visualmente qué bancos ofrecen las mejores tasas de interés. Los colores más verdes indican tasas más bajas, mientras que los colores más rojos indican tasas más altas.</p>
+            <p class="text-muted mb-3 small">Este mapa de calor muestra visualmente qué bancos ofrecen las mejores tasas de interés. Los colores más verdes indican tasas más bajas, mientras que los colores más rojos indican tasas más altas.</p>
             <div class="table-responsive">
               <table id="interestRateHeatMap" class="table table-bordered">
-                <thead class="table-primary">
+                <thead class="table-light">
                   <tr>
                     <th>Banco</th>
                     <th>Tasa EA</th>
@@ -298,21 +437,22 @@
         </div>
         
         <div class="text-center my-4">
-          <a href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" class="btn btn-success btn-lg">
+          <a href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" class="btn btn-success btn-lg whatsapp-btn">
             <i class="bi bi-whatsapp me-2"></i>Contactar asesor por WhatsApp
           </a>
-          <p class="text-muted mt-2"><small>Un asesor de Agile Home te brindará información detallada sobre tu simulación</small></p>
+          <p class="text-muted mt-2 small">Un asesor de Agile Home te brindará información detallada sobre tu simulación</p>
         </div>
         
         <!-- Sección legal con fondo más destacado -->
-        <div id="legales" class="mt-4 p-4 bg-dark text-white rounded">
-          <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i>Información Importante</h5>
+        <div id="legales" class="mt-4 info-important">
+          <h5><i class="bi bi-info-circle me-2"></i>Información Importante</h5>
           <p><strong>Esta herramienta realiza estimaciones aproximadas en Pesos Colombianos (COP).</strong></p>
-          <ul class="mb-0">
+          <ul>
             <li>Las tasas de interés y condiciones pueden variar según la política de cada entidad financiera.</li>
             <li>La cuota mensual no incluye seguros ni otros costos asociados.</li>
             <li>La tasa definitiva aplicará según las condiciones vigentes al momento del desembolso.</li>
             <li>Para conocer el detalle de cada banco, contacta a tu asesor de Agile Home.</li>
+            <li>Los valores calculados no constituyen compromiso alguno de parte del Banco y de Agile Home.</li>
           </ul>
         </div>
       </div>
@@ -323,7 +463,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h5>Simulador de Crédito Hipotecario Multibanco Agile Home</h5>
+          <h5>Simulador Comparativo de Crédito Hipotecario Agile Home</h5>
           <div class="mb-0">
             <p>Esta herramienta es proporcionada por Agile Home para ayudarte a comparar opciones de financiamiento para tu nuevo hogar.</p>
             <p>Las tasas mostradas son actualizadas periódicamente y representan valores aproximados. Contacta a un asesor para información personalizada.</p>
@@ -564,10 +704,6 @@
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, paymentPeriods)) 
                              / (Math.pow(1 + monthlyRate, paymentPeriods) - 1);
         
-        // Ya no necesitamos calcular estos valores que no se mostrarán
-        // const totalPayment = monthlyPayment * paymentPeriods;
-        // const totalInterest = totalPayment - loanAmount;
-        
         bankResults.push({
           bankName, logoClass: bank.logoClass, yearlyRate, monthlyRate,
           rateDescription: bank.rateDescription || "",
@@ -591,10 +727,10 @@
       }
       
       bankResults.forEach((result, index) => {
-        const isBest = index === 0 ? '<span class="badge bg-success ms-2">Mejor opción</span>' : '';
+        const isBest = index === 0 ? '<span class="badge badge-best ms-2">Mejor opción</span>' : '';
         
         const card = document.createElement('div');
-        card.className = 'card mb-3';
+        card.className = 'card mb-3 bank-card';
         card.innerHTML = `
           <div class="card-body">
             <div class="row align-items-center">
@@ -603,22 +739,24 @@
                 <h5 class="mb-0">${result.bankName} ${isBest}</h5>
               </div>
               <div class="col-md-3 mb-3 mb-md-0 text-center">
-                <div class="text-muted">Tasas</div>
+                <div class="text-muted small">Tasas</div>
                 <div class="fw-bold">${result.rateDescription} ${(result.yearlyRate * 100).toFixed(2)}% EA</div>
-                <div class="text-muted">${(result.monthlyRate * 100).toFixed(2)}% MV</div>
+                <div class="text-muted small">${(result.monthlyRate * 100).toFixed(2)}% MV</div>
               </div>
               <div class="col-md-3 mb-3 mb-md-0 text-center">
-                <div class="text-muted">Cuota Mensual</div>
+                <div class="text-muted small">Cuota Mensual</div>
                 <div class="monthly-payment">$${formatCurrency(Math.round(result.monthlyPayment))}</div>
               </div>
               <div class="col-md-3 text-center">
-                <button class="btn btn-sm btn-outline-primary view-details-btn" data-bank="${result.bankName.replace(/\s+/g, '-')}">Ver detalles</button>
+                <button class="btn btn-sm btn-outline-primary view-details-btn" data-bank="${result.bankName.replace(/\s+/g, '-')}">
+                  <i class="bi bi-eye me-1"></i>Ver detalles
+                </button>
               </div>
             </div>
             <div class="mt-3 bank-details d-none" id="details-${result.bankName.replace(/\s+/g, '-')}">
               <div class="row">
                 <div class="col-md-12">
-                  <h6 class="mb-3">Detalles del Préstamo</h6>
+                  <h6 class="mb-3 fw-bold small">Detalles del Préstamo</h6>
                   <table class="table table-sm table-bordered">
                     <tr><th>Valor de la propiedad:</th><td>$${formatCurrency(propertyValue)}</td></tr>
                     <tr><th>Cuota inicial:</th><td>$${formatCurrency(downPayment)} (${(downPayment / propertyValue * 100).toFixed(1)}%)</td></tr>
@@ -650,16 +788,16 @@
             
             // Cambiar texto de todos los botones
             document.querySelectorAll('.view-details-btn').forEach(btn => {
-              btn.textContent = 'Ver detalles';
+              btn.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
             });
             
             // Mostrar este detalle
             detailsSection.classList.remove('d-none');
-            this.textContent = 'Ocultar detalles';
+            this.innerHTML = '<i class="bi bi-eye-slash me-1"></i>Ocultar detalles';
           } else {
             // Ocultar detalles
             detailsSection.classList.add('d-none');
-            this.textContent = 'Ver detalles';
+            this.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
           }
         });
       });
@@ -778,7 +916,7 @@
         const heatColor = getHeatMapColor(percentage);
         
         row.innerHTML = `
-          <td>${bank.bankName}</td>
+          <td><i class="bi ${bank.logoClass} me-2"></i>${bank.bankName}</td>
           <td>${bank.rateDescription} ${(bank.yearlyRate * 100).toFixed(2)}%</td>
           <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
           <td>

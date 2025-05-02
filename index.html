@@ -19,6 +19,7 @@
       --light-color: #f8f9fa;          /* Gris claro */
       --dark-color: #020e2e;           /* Azul oscuro texto */
       --light-blue: #e6f0ff;           /* Azul claro para fondos */
+      --whatsapp-color: #25D366;       /* Color de WhatsApp */
     }
     
     body { 
@@ -81,16 +82,16 @@
     }
     
     .btn-success {
-      background-color: var(--secondary-color);
-      border-color: var(--secondary-color);
+      background-color: var(--whatsapp-color);
+      border-color: var(--whatsapp-color);
       border-radius: 6px;
       font-weight: 500;
       padding: 0.6rem 1.8rem;
     }
     
     .btn-success:hover {
-      background-color: #e1430a;
-      border-color: #e1430a;
+      background-color: #20ba5a;
+      border-color: #20ba5a;
     }
     
     .btn-outline-secondary {
@@ -117,6 +118,10 @@
       background-color: var(--light-blue);
       border-color: rgba(2, 14, 46, 0.2);
       color: var(--primary-color);
+      border-radius: 8px;
+    }
+    
+    .alert-warning {
       border-radius: 8px;
     }
     
@@ -284,6 +289,14 @@
       font-size: 0.9rem;
       margin-bottom: 0.4rem;
     }
+    
+    /* Legal text */
+    .legal-text {
+      font-size: 0.75rem;
+      color: #6c757d;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -394,6 +407,11 @@
       </div>
 
       <div id="resultsContainer" class="d-none">
+        <div id="minCreditWarning" class="alert alert-warning d-none mb-4">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <span id="minCreditWarningText"></span>
+        </div>
+      
         <h3 class="mb-3" style="color: var(--primary-color); font-weight: 600; font-size: 1.3rem;">
           <i class="bi bi-graph-up me-2"></i>Resultados de la Simulación
         </h3>
@@ -438,7 +456,7 @@
         
         <div class="text-center my-4">
           <a href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" class="btn btn-success btn-lg whatsapp-btn">
-            <i class="bi bi-whatsapp me-2"></i>Contactar asesor por WhatsApp
+            <i class="bi bi-whatsapp me-2"></i>Contacte a un Experto
           </a>
           <p class="text-muted mt-2 small">Un asesor de Agile Home te brindará información detallada sobre tu simulación</p>
         </div>
@@ -485,32 +503,38 @@
       "BBVA": { 
         rate: 0.1102, 
         rateDescription: "Desde", 
-        logoClass: "bi-bank2" 
+        logoClass: "bi-bank2",
+        minLoanAmount: 6000000
       },
       "Itaú": { 
         rate: 0.1259, 
         rateDescription: "Desde", 
-        logoClass: "bi-building-fill" 
+        logoClass: "bi-building-fill",
+        minLoanAmount: 30000000
       },
       "Banco de Occidente": { 
         rate: 0.1088, 
         rateDescription: "Desde", 
-        logoClass: "bi-bank" 
+        logoClass: "bi-bank",
+        minLoanAmount: 50000000
       },
       "Banco Caja Social": { 
         rate: 0.11, 
         rateDescription: "Desde", 
-        logoClass: "bi-house" 
+        logoClass: "bi-house",
+        minLoanAmount: 0
       },
       "Credifamilia": { 
         rate: 0.107, 
         rateDescription: "Desde", 
-        logoClass: "bi-building" 
+        logoClass: "bi-building",
+        minLoanAmount: 0
       },
       "Banco de Bogotá": { 
         rate: 0.1082, 
         rateDescription: "Desde", 
-        logoClass: "bi-bank" 
+        logoClass: "bi-bank",
+        minLoanAmount: 0
       }
     };
 
@@ -657,6 +681,7 @@
       document.getElementById('loanAmount').textContent = '0';
       document.getElementById('downPaymentPercentage').textContent = '0';
       document.getElementById('resultsContainer').classList.add('d-none');
+      document.getElementById('minCreditWarning').classList.add('d-none');
       
       // Reiniciar selección de bancos
       selectedBanks = Object.keys(banks);
@@ -686,11 +711,60 @@
       
       const loanAmount = propertyValue - downPayment;
       
-      // Calcular para cada banco seleccionado
+      // Verificar montos mínimos de crédito
+      const minCreditWarning = document.getElementById('minCreditWarning');
+      const minCreditWarningText = document.getElementById('minCreditWarningText');
+      const eligibleBanks = [];
+      const ineligibleBanks = [];
+      
+      for (const bankName of selectedBanks) {
+        const bank = banks[bankName];
+        if (bank.minLoanAmount > 0 && loanAmount < bank.minLoanAmount) {
+          ineligibleBanks.push({
+            name: bankName,
+            minAmount: bank.minLoanAmount
+          });
+        } else {
+          eligibleBanks.push(bankName);
+        }
+      }
+      
+      // Mostrar advertencia si hay bancos con monto mínimo
+      if (ineligibleBanks.length > 0) {
+        let warningMessage = 'El monto a financiar no cumple con el mínimo requerido por ';
+        
+        if (ineligibleBanks.length === 1) {
+          warningMessage += `${ineligibleBanks[0].name} (mínimo $${formatCurrency(ineligibleBanks[0].minAmount)}).`;
+        } else {
+          warningMessage += 'los siguientes bancos: ';
+          ineligibleBanks.forEach((bank, index) => {
+            warningMessage += `${bank.name} (mínimo $${formatCurrency(bank.minAmount)})`;
+            if (index < ineligibleBanks.length - 1) {
+              warningMessage += ', ';
+            }
+          });
+          warningMessage += '.';
+        }
+        
+        minCreditWarningText.textContent = warningMessage;
+        minCreditWarning.classList.remove('d-none');
+        
+        // Si no quedan bancos válidos, mostrar advertencia y detener cálculo
+        if (eligibleBanks.length === 0) {
+          const resultsContent = document.getElementById('resultsContent');
+          resultsContent.innerHTML = '<div class="alert alert-warning">No hay bancos disponibles para el monto de financiación solicitado.</div>';
+          document.getElementById('resultsContainer').classList.remove('d-none');
+          return;
+        }
+      } else {
+        minCreditWarning.classList.add('d-none');
+      }
+      
+      // Calcular para cada banco elegible
       const bankResults = [];
       const mostrarSoloBogota = loanTerm > 20 && propertyValue <= 213525000;
       
-      for (const bankName of selectedBanks) {
+      for (const bankName of eligibleBanks) {
         if (mostrarSoloBogota && bankName !== "Banco de Bogotá") {
           continue;
         }
@@ -766,6 +840,8 @@
                     <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
                     <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
                   </table>
+                  
+                  <p class="legal-text">* Cálculos con tasas de referencia vigentes, cuota no constituye un compromiso para el Banco o para Agile Home.</p>
                 </div>
               </div>
             </div>
@@ -916,7 +992,7 @@
         const heatColor = getHeatMapColor(percentage);
         
         row.innerHTML = `
-          <td><i class="bi ${bank.logoClass} me-2"></i>${bank.bankName}</td>
+          <td>${bank.bankName}</td>
           <td>${bank.rateDescription} ${(bank.yearlyRate * 100).toFixed(2)}%</td>
           <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
           <td>

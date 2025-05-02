@@ -9,20 +9,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --primary-color: #020e2e;       /* Azul Oscuro (color principal) */
-      
-      --secondary-color: #b0b0b0;     /* Gris Claro */
-      --success-color: #fd4c0b;       /* Naranja (éxito) */
-      --info-color:  #b0b0b0;          /* Gris Claro (información) */
-      --warning-color: #f39c12;       /* Naranja (advertencia) */
-      --danger-color: #e74c3c;        /* Rojo (error) */
-      --light-color: #ecf0f1;         /* Gris claro (fondos) */
-      --dark-color:  #020e2e;          /* Azul oscuro (texto) */
+      --primary-color: #020e2e;        /* Azul oscuro Agile Home */
+      --primary-hover: #041c5c;        /* Azul oscuro Agile Home (hover) */
+      --secondary-color: #fd4c0b;      /* Naranja Agile Home */
+      --success-color: #4a4a4a;        /* Gris oscuro Agile Home */
+      --light-color: #f8f9fa;          /* Gris claro */
+      --dark-color: #020e2e;           /* Azul oscuro texto */
+      --light-blue: #e6f0ff;           /* Azul claro para fondos */
     }
     
     body { 
       font-family: 'Segoe UI', sans-serif;
-      color: var(--dark-color);
+      color: #4a4a4a;
     }
     
     .card { 
@@ -33,7 +31,7 @@
     }
     
     .card-header {
-      background-color: rgba(52, 152, 219, 0.1);
+      background-color: rgba(2, 14, 46, 0.05);
       font-weight: bold;
       color: var(--primary-color);
     }
@@ -61,13 +59,13 @@
     }
     
     .btn-success {
-      background-color: var(--success-color);
-      border-color: var(--success-color);
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
     }
     
     .btn-success:hover {
-      background-color: #219d54;
-      border-color: #219d54;
+      background-color: #e1430a;
+      border-color: #e1430a;
     }
     
     /* Cuota mensual destacada */
@@ -85,30 +83,101 @@
     
     /* Alertas */
     .alert-info {
-      background-color: rgba(52, 152, 219, 0.1);
-      border-color: rgba(52, 152, 219, 0.2);
+      background-color: var(--light-blue);
+      border-color: rgba(2, 14, 46, 0.2);
       color: var(--primary-color);
     }
     
     /* Footer */
     .footer {
-      background-color: #f8f9fa;
-      border-top: 1px solid #e1e1e1;
+      background-color: var(--primary-color);
+      color: white;
       padding: 30px 0;
       margin-top: 30px;
+    }
+    
+    .footer h5 {
+      color: white;
+    }
+    
+    .footer ul {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Intro icons */
+    .intro-icon {
+      font-size: 48px;
+      color: var(--primary-color);
+    }
+    
+    .intro-container {
+      position: relative;
+      padding: 20px;
+      background-color: var(--light-blue);
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    
+    .house-icon-large {
+      font-size: 120px;
+      color: rgba(2, 14, 46, 0.1);
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+      z-index: 0;
+    }
+    
+    /* Tabla comparativa más pequeña */
+    #comparisonChart {
+      max-height: 180px !important;
     }
   </style>
 </head>
 <body>
   <header class="py-3 shadow-sm">
     <div class="container">
-      <h1 class="text-center header-title">Simulador de Crédito Hipotecario Multibanco Agile Home</h1>
-      <p class="text-center text-muted">Compare opciones de préstamos hipotecarios en Colombia</p>
+      <div class="row align-items-center">
+        <div class="col-md-2 text-center text-md-start">
+          <i class="bi bi-house-heart-fill text-primary" style="font-size: 3rem;"></i>
+        </div>
+        <div class="col-md-8 text-center">
+          <h1 class="header-title">Simulador de Crédito Hipotecario</h1>
+          <p class="text-muted">Compare opciones de préstamos hipotecarios en Colombia</p>
+        </div>
+        <div class="col-md-2 d-none d-md-block text-end">
+          <i class="bi bi-bank text-primary" style="font-size: 2.5rem;"></i>
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="py-4">
     <div class="container">
+      <!-- Sección de introducción con iconos -->
+      <div class="intro-container mb-4">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="text-primary mb-3">¿Sueñas con tener tu casa propia?</h3>
+            <p class="mb-3">Este simulador te permite calcular y comparar cuotas mensuales de créditos hipotecarios ofrecidos por diferentes bancos en Colombia. ¡Da el primer paso hacia tu hogar ideal!</p>
+            <div class="row mt-4">
+              <div class="col-4 text-center">
+                <i class="bi bi-house-door intro-icon"></i>
+                <h6 class="mt-2">Ingrese el valor de la vivienda</h6>
+              </div>
+              <div class="col-4 text-center">
+                <i class="bi bi-calculator intro-icon"></i>
+                <h6 class="mt-2">Defina cuota inicial y plazo</h6>
+              </div>
+              <div class="col-4 text-center">
+                <i class="bi bi-bank intro-icon"></i>
+                <h6 class="mt-2">Compare bancos</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <i class="bi bi-houses-fill house-icon-large"></i>
+      </div>
+
       <div class="card mb-4">
         <div class="card-header">Información del Préstamo</div>
         <div class="card-body">
@@ -157,13 +226,15 @@
         <h3 class="mb-4 text-primary">Resultados de la Simulación</h3>
         <div id="resultsContent"></div>
         
-        <!-- Gráfica Comparativa -->
+        <!-- Gráfica Comparativa (más pequeña) -->
         <div class="card mt-4">
           <div class="card-header">
             <i class="bi bi-bar-chart-fill me-2"></i>Comparativa de Cuotas Mensuales
           </div>
           <div class="card-body">
-            <canvas id="comparisonChart" height="200"></canvas>
+            <div style="height: 180px;">
+              <canvas id="comparisonChart"></canvas>
+            </div>
           </div>
         </div>
         
@@ -199,9 +270,11 @@
           <p class="text-muted mt-2"><small>Un asesor de Agile Home te brindará información detallada sobre tu simulación</small></p>
         </div>
         
-        <div id="legales" class="mt-4 p-3 bg-light rounded">
-          <strong>Esta herramienta realiza estimaciones aproximadas en Pesos Colombianos (COP).</strong>
-          <ul class="mb-0 mt-2">
+        <!-- Sección legal con fondo más destacado -->
+        <div id="legales" class="mt-4 p-4 bg-dark text-white rounded">
+          <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i>Información Importante</h5>
+          <p><strong>Esta herramienta realiza estimaciones aproximadas en Pesos Colombianos (COP).</strong></p>
+          <ul class="mb-0">
             <li>Las tasas de interés y condiciones pueden variar según la política de cada entidad financiera.</li>
             <li>La cuota mensual no incluye seguros ni otros costos asociados.</li>
             <li>La tasa definitiva aplicará según las condiciones vigentes al momento del desembolso.</li>
@@ -216,19 +289,15 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h5 class="text-primary">Simulador de Crédito Hipotecario Multibanco Agile Home</h5>
+          <h5>Simulador de Crédito Hipotecario Multibanco Agile Home</h5>
           <div class="mb-0">
-            <strong>Esta herramienta realiza estimaciones aproximadas en Pesos Colombianos (COP).</strong>
-            <ul class="mb-0 mt-1">
-              <li>Las tasas de interés y condiciones pueden variar según la política de cada entidad financiera.</li>
-              <li>La cuota mensual no incluye seguros ni otros costos asociados.</li>
-              <li>Para conocer el detalle de cada banco, contacta a tu asesor de Agile Home.</li>
-            </ul>
+            <p>Esta herramienta es proporcionada por Agile Home para ayudarte a comparar opciones de financiamiento para tu nuevo hogar.</p>
+            <p>Las tasas mostradas son actualizadas periódicamente y representan valores aproximados. Contacta a un asesor para información personalizada.</p>
           </div>
         </div>
         <div class="col-md-4 text-md-end mt-3 mt-md-0">
           <p class="mb-0">© 2025 Simulador Multibanco Agile Home</p>
-          <div id="lastUpdated" class="text-muted small"></div>
+          <div id="lastUpdated" class="small">Tasas actualizadas: Mayo 2025</div>
         </div>
       </div>
     </div>
@@ -237,14 +306,38 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
-    // Datos de los bancos
+    // Datos de los bancos con tasas actualizadas
     let banks = {
-      "Banco de Occidente": { rate: 0.1290, rateDescription: "Desde", logoClass: "bi-bank" },
-      "Banco Caja Social": { rate: 0.1310, rateDescription: "Tasa promedio", logoClass: "bi-house" },
-      "Credifamilia": { rate: 0.1410, rateDescription: "Desde", logoClass: "bi-building" },
-      "BBVA": { rate: 0.1265, rateDescription: "Tasa promedio", logoClass: "bi-bank2" },
-      "Itaú": { rate: 0.1380, rateDescription: "Desde", logoClass: "bi-building-fill" },
-      "Banco de Bogotá": { rate: 0.1275, rateDescription: "Desde", logoClass: "bi-bank" }
+      "BBVA": { 
+        rate: 0.1102, 
+        rateDescription: "Desde", 
+        logoClass: "bi-bank2" 
+      },
+      "Itaú": { 
+        rate: 0.1259, 
+        rateDescription: "Desde", 
+        logoClass: "bi-building-fill" 
+      },
+      "Banco de Occidente": { 
+        rate: 0.1088, 
+        rateDescription: "Desde", 
+        logoClass: "bi-bank" 
+      },
+      "Banco Caja Social": { 
+        rate: 0.11, 
+        rateDescription: "Desde", 
+        logoClass: "bi-house" 
+      },
+      "Credifamilia": { 
+        rate: 0.107, 
+        rateDescription: "Desde", 
+        logoClass: "bi-building" 
+      },
+      "Banco de Bogotá": { 
+        rate: 0.1082, 
+        rateDescription: "Desde", 
+        logoClass: "bi-bank" 
+      }
     };
 
     // Inicialización
@@ -489,9 +582,9 @@
       
       // Colores para las barras - graduado desde el mejor al peor
       const colors = bankResults.map((_, index) => {
-        if (index === 0) return 'rgba(40, 167, 69, 0.8)'; // Verde para el mejor
+        if (index === 0) return 'rgba(253, 76, 11, 0.8)'; // Naranja Agile Home para el mejor
         const intensity = Math.min(0.3 + (index * 0.1), 0.9); // Intensidad creciente
-        return `rgba(0, 123, 255, ${intensity})`;
+        return `rgba(2, 14, 46, ${intensity})`; // Azul Agile Home para el resto
       });
       
       // Crear gráfico
@@ -509,6 +602,7 @@
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               min: scaleMin, // Comenzar la escala en un valor menor para mostrar diferencias
@@ -584,14 +678,21 @@
       });
     }
     
-    // Obtener color para el mapa de calor (verde para bajo, rojo para alto)
+    // Obtener color para el mapa de calor (verde para bajo, naranja para alto)
     function getHeatMapColor(percentage) {
-      // Verde para 0%, rojo para 100%
-      const r = Math.round(255 * percentage);
-      const g = Math.round(255 * (1 - percentage));
-      const b = 0;
-      
-      return `rgba(${r}, ${g}, ${b}, 0.7)`;
+      if (percentage < 0.2) {
+        // Muy buen valor - verde
+        return 'rgba(40, 167, 69, 0.7)';
+      } else if (percentage < 0.5) {
+        // Valor medio-bajo - verde claro a amarillo
+        return `rgba(${Math.round(40 + (percentage * 2 * 215))}, 167, 69, 0.7)`;
+      } else if (percentage < 0.8) {
+        // Valor medio-alto - amarillo a naranja
+        return `rgba(${Math.round(215 + (percentage * 40))}, ${Math.round(167 - (percentage * 167))}, 0, 0.7)`;
+      } else {
+        // Valor alto - naranja a rojo
+        return `rgba(253, ${Math.round(76 * (1 - percentage))}, 11, 0.7)`;
+      }
     }
   </script>
 </body>

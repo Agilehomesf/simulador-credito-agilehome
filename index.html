@@ -131,6 +131,31 @@
     #comparisonChart {
       max-height: 180px !important;
     }
+    
+    /* Selector de bancos */
+    .bank-selector-item {
+      border: 1px solid #e1e1e1;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .bank-selector-item:hover {
+      border-color: var(--primary-color);
+      background-color: rgba(2, 14, 46, 0.05);
+    }
+    
+    .bank-selector-item.selected {
+      border-color: var(--primary-color);
+      background-color: rgba(2, 14, 46, 0.1);
+    }
+    
+    .bank-selector-item .form-check-input:checked {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
   </style>
 </head>
 <body>
@@ -141,7 +166,7 @@
           <i class="bi bi-house-heart-fill text-primary" style="font-size: 3rem;"></i>
         </div>
         <div class="col-md-8 text-center">
-          <h1 class="header-title">Simulador Comparativo de Crédito Hipotecario Agile Home</h1>
+          <h1 class="header-title">Simulador de Crédito Hipotecario</h1>
           <p class="text-muted">Compare opciones de préstamos hipotecarios en Colombia</p>
         </div>
         <div class="col-md-2 d-none d-md-block text-end">
@@ -215,7 +240,16 @@
               </select>
             </div>
           </div>
-          <div class="d-flex justify-content-between mt-3">
+          
+          <!-- Selector de bancos -->
+          <div class="mt-4">
+            <label class="form-label">Seleccione los bancos a incluir en la comparación:</label>
+            <div class="row" id="bankSelector">
+              <!-- Se llenará dinámicamente con JavaScript -->
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-between mt-4">
             <button type="button" id="resetBtn" class="btn btn-outline-secondary">Reiniciar</button>
             <button type="button" id="calculateBtn" class="btn btn-primary">Calcular cuotas</button>
           </div>
@@ -340,6 +374,9 @@
       }
     };
 
+    // Bancos seleccionados para la comparación (por defecto todos)
+    let selectedBanks = Object.keys(banks);
+
     // Inicialización
     document.addEventListener('DOMContentLoaded', async function() {
       // Intentar cargar tasas desde archivo externo
@@ -359,6 +396,9 @@
         // Continuará usando los datos predeterminados definidos arriba
       }
       
+      // Inicializar selector de bancos
+      initBankSelector();
+      
       const propertyValueInput = document.getElementById('propertyValue');
       const downPaymentInput = document.getElementById('downPayment');
       const calculateBtn = document.getElementById('calculateBtn');
@@ -377,6 +417,63 @@
       calculateBtn.addEventListener('click', calculateMortgage);
       resetBtn.addEventListener('click', resetForm);
     });
+
+    // Inicializar selector de bancos
+    function initBankSelector() {
+      const bankSelector = document.getElementById('bankSelector');
+      bankSelector.innerHTML = '';
+      
+      // Crear elementos de selección para cada banco
+      Object.keys(banks).forEach(bankName => {
+        const bank = banks[bankName];
+        
+        const col = document.createElement('div');
+        col.className = 'col-md-4 col-sm-6 mb-2';
+        
+        const item = document.createElement('div');
+        item.className = 'bank-selector-item selected';
+        item.dataset.bank = bankName;
+        
+        item.innerHTML = `
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="bank-${bankName.replace(/\s+/g, '-')}" checked>
+            <label class="form-check-label d-flex align-items-center" for="bank-${bankName.replace(/\s+/g, '-')}">
+              <i class="bi ${bank.logoClass} me-2"></i>
+              <span>${bankName}</span>
+              <span class="badge bg-light text-dark ms-auto">${(bank.rate * 100).toFixed(2)}%</span>
+            </label>
+          </div>
+        `;
+        
+        col.appendChild(item);
+        bankSelector.appendChild(col);
+        
+        // Event listener para la selección de bancos
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', function() {
+          if (this.checked) {
+            item.classList.add('selected');
+            if (!selectedBanks.includes(bankName)) {
+              selectedBanks.push(bankName);
+            }
+          } else {
+            item.classList.remove('selected');
+            selectedBanks = selectedBanks.filter(name => name !== bankName);
+          }
+        });
+        
+        // También hacer que el clic en el div active/desactive el checkbox
+        item.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'INPUT') {
+            checkbox.checked = !checkbox.checked;
+            
+            // Disparar evento change manualmente
+            const event = new Event('change');
+            checkbox.dispatchEvent(event);
+          }
+        });
+      });
+    }
 
     // Formatear como moneda
     function formatCurrency(value) {
@@ -420,6 +517,13 @@
       document.getElementById('loanAmount').textContent = '0';
       document.getElementById('downPaymentPercentage').textContent = '0';
       document.getElementById('resultsContainer').classList.add('d-none');
+      
+      // Reiniciar selección de bancos
+      selectedBanks = Object.keys(banks);
+      document.querySelectorAll('#bankSelector input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = true;
+        checkbox.closest('.bank-selector-item').classList.add('selected');
+      });
     }
 
     // Calcular préstamo hipotecario
@@ -434,13 +538,19 @@
         return;
       }
       
+      // Validar que al menos un banco esté seleccionado
+      if (selectedBanks.length === 0) {
+        alert('Debe seleccionar al menos un banco para la comparación');
+        return;
+      }
+      
       const loanAmount = propertyValue - downPayment;
       
-      // Calcular para cada banco
+      // Calcular para cada banco seleccionado
       const bankResults = [];
       const mostrarSoloBogota = loanTerm > 20 && propertyValue <= 213525000;
       
-      for (const bankName in banks) {
+      for (const bankName of selectedBanks) {
         if (mostrarSoloBogota && bankName !== "Banco de Bogotá") {
           continue;
         }
@@ -454,14 +564,14 @@
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, paymentPeriods)) 
                              / (Math.pow(1 + monthlyRate, paymentPeriods) - 1);
         
-        // Calcular interés total
-        const totalPayment = monthlyPayment * paymentPeriods;
-        const totalInterest = totalPayment - loanAmount;
+        // Ya no necesitamos calcular estos valores que no se mostrarán
+        // const totalPayment = monthlyPayment * paymentPeriods;
+        // const totalInterest = totalPayment - loanAmount;
         
         bankResults.push({
           bankName, logoClass: bank.logoClass, yearlyRate, monthlyRate,
           rateDescription: bank.rateDescription || "",
-          monthlyPayment, totalPayment, totalInterest
+          monthlyPayment
         });
       }
       
@@ -473,6 +583,12 @@
       const resultsContent = document.getElementById('resultsContent');
       
       resultsContent.innerHTML = '';
+      
+      if (bankResults.length === 0) {
+        resultsContent.innerHTML = '<div class="alert alert-warning">No hay resultados disponibles con los criterios seleccionados.</div>';
+        resultsContainer.classList.remove('d-none');
+        return;
+      }
       
       bankResults.forEach((result, index) => {
         const isBest = index === 0 ? '<span class="badge bg-success ms-2">Mejor opción</span>' : '';
@@ -511,8 +627,6 @@
                     <tr><th>Tasa EA:</th><td>${result.rateDescription} ${(result.yearlyRate * 100).toFixed(2)}%</td></tr>
                     <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
                     <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
-                    <tr><th>Total a pagar:</th><td>$${formatCurrency(Math.round(result.totalPayment))}</td></tr>
-                    <tr><th>Intereses totales:</th><td>$${formatCurrency(Math.round(result.totalInterest))}</td></tr>
                   </table>
                 </div>
               </div>

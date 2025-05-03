@@ -297,6 +297,73 @@
       margin-top: 0.75rem;
       font-style: italic;
     }
+    
+    /* Bank selector options mejorado */
+    .bank-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .select-all-option {
+      width: 100%;
+      margin-bottom: 5px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      background-color: var(--light-blue);
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(2, 14, 46, 0.2);
+    }
+    
+    .select-all-option:hover {
+      background-color: rgba(2, 14, 46, 0.08);
+    }
+    
+    .bank-option {
+      flex: 1 0 calc(33.333% - 10px);
+      max-width: calc(33.333% - 10px);
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .bank-option:hover {
+      border-color: var(--primary-color);
+      background-color: rgba(2, 14, 46, 0.02);
+    }
+    
+    .bank-option.selected {
+      border-color: var(--primary-color);
+      background-color: rgba(2, 14, 46, 0.05);
+    }
+    
+    .bank-option i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .bank-option {
+        flex: 1 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .bank-option {
+        flex: 1 0 100%;
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -385,12 +452,18 @@
             </div>
           </div>
           
-          <!-- Selector de bancos -->
+          <!-- Selector de bancos mejorado -->
           <div class="mt-4">
             <label class="form-label d-flex align-items-center">
               <i class="bi bi-bank me-2"></i>Seleccione los bancos a incluir en la comparación:
             </label>
-            <div class="row" id="bankSelector">
+            
+            <div class="select-all-option" id="selectAllBanks">
+              <input type="checkbox" class="form-check-input me-2" id="checkAllBanks" checked>
+              <label class="form-check-label" for="checkAllBanks">Todos los bancos</label>
+            </div>
+            
+            <div class="bank-options" id="bankOptions">
               <!-- Se llenará dinámicamente con JavaScript -->
             </div>
           </div>
@@ -560,7 +633,7 @@
         // Continuará usando los datos predeterminados definidos arriba
       }
       
-      // Inicializar selector de bancos
+      // Inicializar selector de bancos mejorado
       initBankSelector();
       
       const propertyValueInput = document.getElementById('propertyValue');
@@ -582,61 +655,103 @@
       resetBtn.addEventListener('click', resetForm);
     });
 
-    // Inicializar selector de bancos
+    // Inicializar selector de bancos mejorado
     function initBankSelector() {
-      const bankSelector = document.getElementById('bankSelector');
-      bankSelector.innerHTML = '';
+      const bankOptions = document.getElementById('bankOptions');
+      const selectAllCheckbox = document.getElementById('checkAllBanks');
+      const selectAllOption = document.getElementById('selectAllBanks');
       
-      // Crear elementos de selección para cada banco
+      // Limpiar opciones existentes
+      bankOptions.innerHTML = '';
+      
+      // Crear elementos para cada banco
       Object.keys(banks).forEach(bankName => {
         const bank = banks[bankName];
         
-        const col = document.createElement('div');
-        col.className = 'col-md-4 col-sm-6 mb-2';
+        const bankOption = document.createElement('div');
+        bankOption.className = 'bank-option selected';
+        bankOption.dataset.bank = bankName;
         
-        const item = document.createElement('div');
-        item.className = 'bank-selector-item selected';
-        item.dataset.bank = bankName;
-        
-        item.innerHTML = `
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="bank-${bankName.replace(/\s+/g, '-')}" checked>
-            <label class="form-check-label d-flex align-items-center" for="bank-${bankName.replace(/\s+/g, '-')}">
-              <i class="bi ${bank.logoClass} me-2"></i>
-              <span>${bankName}</span>
-              <span class="badge bg-light text-dark ms-auto">${(bank.rate * 100).toFixed(2)}%</span>
-            </label>
-          </div>
+        bankOption.innerHTML = `
+          <input type="checkbox" class="form-check-input" id="bank-${bankName.replace(/\s+/g, '-')}" checked>
+          <i class="bi ${bank.logoClass}"></i>
+          <span>${bankName}</span>
         `;
         
-        col.appendChild(item);
-        bankSelector.appendChild(col);
+        bankOptions.appendChild(bankOption);
         
         // Event listener para la selección de bancos
-        const checkbox = item.querySelector('input[type="checkbox"]');
+        const checkbox = bankOption.querySelector('input[type="checkbox"]');
+        
         checkbox.addEventListener('change', function() {
-          if (this.checked) {
-            item.classList.add('selected');
+          updateBankSelection(this, bankOption, bankName);
+        });
+        
+        // Hacer que el clic en el div active/desactive el checkbox
+        bankOption.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'INPUT') {
+            checkbox.checked = !checkbox.checked;
+            updateBankSelection(checkbox, bankOption, bankName);
+          }
+        });
+      });
+      
+      // Event listener para "Todos los bancos"
+      selectAllCheckbox.addEventListener('change', function() {
+        const isChecked = this.checked;
+        
+        // Actualizar todos los checkboxes individuales
+        document.querySelectorAll('.bank-option input[type="checkbox"]').forEach(checkbox => {
+          checkbox.checked = isChecked;
+          const bankOption = checkbox.closest('.bank-option');
+          const bankName = bankOption.dataset.bank;
+          
+          if (isChecked) {
+            bankOption.classList.add('selected');
             if (!selectedBanks.includes(bankName)) {
               selectedBanks.push(bankName);
             }
           } else {
-            item.classList.remove('selected');
+            bankOption.classList.remove('selected');
             selectedBanks = selectedBanks.filter(name => name !== bankName);
           }
         });
-        
-        // También hacer que el clic en el div active/desactive el checkbox
-        item.addEventListener('click', function(e) {
-          if (e.target.tagName !== 'INPUT') {
-            checkbox.checked = !checkbox.checked;
-            
-            // Disparar evento change manualmente
-            const event = new Event('change');
-            checkbox.dispatchEvent(event);
-          }
-        });
       });
+      
+      // También hacer que el clic en el div "Todos los bancos" active/desactive el checkbox
+      selectAllOption.addEventListener('click', function(e) {
+        if (e.target.tagName !== 'INPUT') {
+          selectAllCheckbox.checked = !selectAllCheckbox.checked;
+          selectAllCheckbox.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+    
+    // Actualizar selección de banco
+    function updateBankSelection(checkbox, bankOption, bankName) {
+      if (checkbox.checked) {
+        bankOption.classList.add('selected');
+        if (!selectedBanks.includes(bankName)) {
+          selectedBanks.push(bankName);
+        }
+      } else {
+        bankOption.classList.remove('selected');
+        selectedBanks = selectedBanks.filter(name => name !== bankName);
+      }
+      
+      // Actualizar el estado del checkbox "Todos los bancos"
+      const allBanks = Object.keys(banks);
+      const selectAllCheckbox = document.getElementById('checkAllBanks');
+      
+      if (selectedBanks.length === allBanks.length) {
+        selectAllCheckbox.checked = true;
+        selectAllCheckbox.indeterminate = false;
+      } else if (selectedBanks.length === 0) {
+        selectAllCheckbox.checked = false;
+        selectAllCheckbox.indeterminate = false;
+      } else {
+        selectAllCheckbox.indeterminate = true;
+      }
     }
 
     // Formatear como moneda
@@ -685,9 +800,16 @@
       
       // Reiniciar selección de bancos
       selectedBanks = Object.keys(banks);
-      document.querySelectorAll('#bankSelector input[type="checkbox"]').forEach(checkbox => {
+      
+      // Marcar todas las opciones
+      const selectAllCheckbox = document.getElementById('checkAllBanks');
+      selectAllCheckbox.checked = true;
+      selectAllCheckbox.indeterminate = false;
+      
+      document.querySelectorAll('.bank-option').forEach(option => {
+        option.classList.add('selected');
+        const checkbox = option.querySelector('input[type="checkbox"]');
         checkbox.checked = true;
-        checkbox.closest('.bank-selector-item').classList.add('selected');
       });
     }
 
@@ -840,7 +962,6 @@
                     <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
                     <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
                   </table>
-                  
                   <p class="legal-text">* Cálculos con tasas de referencia vigentes, cuota no constituye un compromiso para el Banco o para Agile Home.</p>
                 </div>
               </div>
@@ -992,7 +1113,12 @@
         const heatColor = getHeatMapColor(percentage);
         
         row.innerHTML = `
-          <td>${bank.bankName}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <i class="bi ${bank.logoClass} me-2"></i>
+              ${bank.bankName}
+            </div>
+          </td>
           <td>${bank.rateDescription} ${(bank.yearlyRate * 100).toFixed(2)}%</td>
           <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
           <td>

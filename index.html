@@ -573,43 +573,14 @@
   <script>
     // Datos de los bancos con tasas actualizadas
     let banks = {
-      "BBVA": { 
-        rate: 0.1140, 
-        rateDescription: "Desde", 
-        logoClass: "bi-bank2",
-        minLoanAmount: 6000000
-      },
-      "Itaú": { 
-        rate: 0.1379, 
-        rateDescription: "Desde", 
-        logoClass: "bi-building-fill",
-        minLoanAmount: 30000000
-      },
-      "Banco de Occidente": { 
-        rate: 0.1185, 
-        rateDescription: "Desde", 
-        logoClass: "bi-bank",
-        minLoanAmount: 50000000
-      },
-      "Banco Caja Social": { 
-        rate: 0.11, 
-        rateDescription: "Desde", 
-        logoClass: "bi-house",
-        minLoanAmount: 0
-      },
-      "Credifamilia": { 
-        rate: 0.1592, 
-        rateDescription: "Desde", 
-        logoClass: "bi-building",
-        minLoanAmount: 0
-      },
-      "Banco de Bogotá": { 
-        rate: 0.1228, 
-        rateDescription: "Desde", 
-        logoClass: "bi-bank",
-        minLoanAmount: 0
-      }
-    };
+  "BBVA": { minRate: 0.1100, maxRate: 0.1597, logoClass: "bi-bank2", minLoanAmount: 6000000 },
+  "Itaú": { minRate: 0.1217, maxRate: 0.1292, logoClass: "bi-building-fill", minLoanAmount: 30000000 },
+  "Banco de Occidente": { minRate: 0.1070, maxRate: 0.1601, logoClass: "bi-bank", minLoanAmount: 50000000 },
+  "Banco Caja Social": { minRate: 0.1100, maxRate: 0.1810, logoClass: "bi-house", minLoanAmount: 0 },
+  "Credifamilia": { minRate: 0.1030, maxRate: 0.1030, logoClass: "bi-building", minLoanAmount: 0 },
+  "Banco de Bogotá": { minRate: 0.1082, maxRate: 0.1228, logoClass: "bi-bank", minLoanAmount: 0 },
+  "Bancolombia": { minRate: 0.1230, maxRate: 0.1370, logoClass: "bi-cash-coin", minLoanAmount: 0 }
+};
 
     // Bancos seleccionados para la comparación (por defecto todos)
     let selectedBanks = Object.keys(banks);

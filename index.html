@@ -787,338 +787,191 @@
     // Calcular préstamo hipotecario
     function calculateMortgage() {
       const propertyValue = parseCurrency(document.getElementById('propertyValue').value);
-      const downPayment = parseCurrency(document.getElementById('downPayment').value);
-      const loanTerm = parseInt(document.getElementById('loanTerm').value);
-      
-      // Validación básica
-      if (propertyValue <= 0 || downPayment <= 0 || downPayment >= propertyValue || isNaN(loanTerm)) {
-        alert('Por favor, verifique los datos ingresados');
-        return;
-      }
-      
-      // Validar que al menos un banco esté seleccionado
-      if (selectedBanks.length === 0) {
-        alert('Debe seleccionar al menos un banco para la comparación');
-        return;
-      }
-      
-      const loanAmount = propertyValue - downPayment;
-      
-      // Verificar montos mínimos de crédito
-      const minCreditWarning = document.getElementById('minCreditWarning');
-      const minCreditWarningText = document.getElementById('minCreditWarningText');
-      const eligibleBanks = [];
-      const ineligibleBanks = [];
-      
-      for (const bankName of selectedBanks) {
-        const bank = banks[bankName];
-        if (bank.minLoanAmount > 0 && loanAmount < bank.minLoanAmount) {
-          ineligibleBanks.push({
-            name: bankName,
-            minAmount: bank.minLoanAmount
-          });
-        } else {
-          eligibleBanks.push(bankName);
-        }
-      }
-      
-      // Mostrar advertencia si hay bancos con monto mínimo
-      if (ineligibleBanks.length > 0) {
-        let warningMessage = 'El monto a financiar no cumple con el mínimo requerido por ';
-        
-        if (ineligibleBanks.length === 1) {
-          warningMessage += `${ineligibleBanks[0].name} (mínimo $${formatCurrency(ineligibleBanks[0].minAmount)}).`;
-        } else {
-          warningMessage += 'los siguientes bancos: ';
-          ineligibleBanks.forEach((bank, index) => {
-            warningMessage += `${bank.name} (mínimo $${formatCurrency(bank.minAmount)})`;
-            if (index < ineligibleBanks.length - 1) {
-              warningMessage += ', ';
-            }
-          });
-          warningMessage += '.';
-        }
-        
-        minCreditWarningText.textContent = warningMessage;
-        minCreditWarning.classList.remove('d-none');
-        
-        // Si no quedan bancos válidos, mostrar advertencia y detener cálculo
-        if (eligibleBanks.length === 0) {
-          const resultsContent = document.getElementById('resultsContent');
-          resultsContent.innerHTML = '<div class="alert alert-warning">No hay bancos disponibles para el monto de financiación solicitado.</div>';
-          document.getElementById('resultsContainer').classList.remove('d-none');
-          return;
-        }
-      } else {
-        minCreditWarning.classList.add('d-none');
-      }
-      
-      // Calcular para cada banco elegible
-      const bankResults = [];
-      const mostrarSoloBogota = loanTerm > 20 && propertyValue <= 213525000;
-      
-      for (const bankName of eligibleBanks) {
-        if (mostrarSoloBogota && bankName !== "Banco de Bogotá") {
-          continue;
-        }
-        
-        const bank = banks[bankName];
-        const yearlyRate = bank.rate;
-        const monthlyRate = Math.pow(1 + yearlyRate, 1/12) - 1; // Tasa Mensual Vencida (MV)
-        const paymentPeriods = loanTerm * 12;
-        
-        // Calcular pago mensual
-        const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, paymentPeriods)) 
-                             / (Math.pow(1 + monthlyRate, paymentPeriods) - 1);
-        
-        bankResults.push({
-          bankName, logoClass: bank.logoClass, yearlyRate, monthlyRate,
-          rateDescription: bank.rateDescription || "",
-          monthlyPayment
-        });
-      }
-      
-      // Ordenar por pago mensual (menor primero)
-      bankResults.sort((a, b) => a.monthlyPayment - b.monthlyPayment);
-      
-      // Mostrar resultados
-      const resultsContainer = document.getElementById('resultsContainer');
-      const resultsContent = document.getElementById('resultsContent');
-      
-      resultsContent.innerHTML = '';
-      
-      if (bankResults.length === 0) {
-        resultsContent.innerHTML = '<div class="alert alert-warning">No hay resultados disponibles con los criterios seleccionados.</div>';
-        resultsContainer.classList.remove('d-none');
-        return;
-      }
-      
-      bankResults.forEach((result, index) => {
-        const isBest = index === 0 ? '<span class="badge badge-best ms-2">Mejor opción</span>' : '';
-        
-        const card = document.createElement('div');
-        card.className = 'card mb-3 bank-card';
-        card.innerHTML = `
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-md-3 mb-3 mb-md-0 text-center text-md-start">
-                <i class="bi ${result.logoClass} fs-1 text-primary"></i>
-                <h5 class="mb-0">${result.bankName} ${isBest}</h5>
-              </div>
-              <div class="col-md-3 mb-3 mb-md-0 text-center">
-                <div class="text-muted small">Tasas</div>
-                <div class="fw-bold">${result.rateDescription} ${(result.yearlyRate * 100).toFixed(2)}% EA</div>
-                <div class="text-muted small">${(result.monthlyRate * 100).toFixed(2)}% MV</div>
-              </div>
-              <div class="col-md-3 mb-3 mb-md-0 text-center">
-                <div class="text-muted small">Cuota Mensual</div>
-                <div class="monthly-payment">$${formatCurrency(Math.round(result.monthlyPayment))}</div>
-              </div>
-              <div class="col-md-3 text-center">
-                <button class="btn btn-sm btn-outline-primary view-details-btn" data-bank="${result.bankName.replace(/\s+/g, '-')}">
-                  <i class="bi bi-eye me-1"></i>Ver detalles
-                </button>
-              </div>
-            </div>
-            <div class="mt-3 bank-details d-none" id="details-${result.bankName.replace(/\s+/g, '-')}">
-              <div class="row">
-                <div class="col-md-12">
-                  <h6 class="mb-3 fw-bold small">Detalles del Préstamo</h6>
-                  <table class="table table-sm table-bordered">
-                    <tr><th>Valor de la propiedad:</th><td>$${formatCurrency(propertyValue)}</td></tr>
-                    <tr><th>Cuota inicial:</th><td>$${formatCurrency(downPayment)} (${(downPayment / propertyValue * 100).toFixed(1)}%)</td></tr>
-                    <tr><th>Monto del crédito:</th><td>$${formatCurrency(loanAmount)}</td></tr>
-                    <tr><th>Plazo:</th><td>${loanTerm} años (${loanTerm * 12} meses)</td></tr>
-                    <tr><th>Tasa EA:</th><td>${result.rateDescription} ${(result.yearlyRate * 100).toFixed(2)}%</td></tr>
-                    <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
-                    <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
-                  </table>
-                  <p class="legal-text">* Cálculos con tasas de referencia vigentes, cuota no constituye un compromiso para el Banco o para Agile Home.</p>
-                </div>
-              </div>
-            </div>
+  const downPayment = parseCurrency(document.getElementById('downPayment').value);
+  const loanTerm = parseInt(document.getElementById('loanTerm').value);
+
+  if (propertyValue <= 0 || downPayment <= 0 || downPayment >= propertyValue || isNaN(loanTerm)) {
+    alert('Por favor, verifique los datos ingresados');
+    return;
+  }
+
+  if (selectedBanks.length === 0) {
+    alert('Debe seleccionar al menos un banco para la comparación');
+    return;
+  }
+
+  const loanAmount = propertyValue - downPayment;
+
+  const resultsContent = document.getElementById('resultsContent');
+  const resultsContainer = document.getElementById('resultsContainer');
+  resultsContent.innerHTML = '';
+  resultsContainer.classList.remove('d-none');
+
+  let allResults = [];
+
+  selectedBanks.forEach(bankName => {
+    const bank = banks[bankName];
+
+    ["minRate", "maxRate"].forEach(rateType => {
+      const yearlyRate = bank[rateType];
+      if (!yearlyRate) return;
+
+      const monthlyRate = Math.pow(1 + yearlyRate, 1 / 12) - 1;
+      const paymentPeriods = loanTerm * 12;
+      const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, paymentPeriods)) /
+                              (Math.pow(1 + monthlyRate, paymentPeriods) - 1);
+
+      allResults.push({
+        bankName,
+        logoClass: bank.logoClass,
+        yearlyRate,
+        monthlyRate,
+        rateLabel: rateType === "minRate" ? "Tasa más baja" : "Tasa más alta",
+        monthlyPayment
+      });
+    });
+  });
+
+  allResults.sort((a, b) => a.monthlyPayment - b.monthlyPayment);
+
+  allResults.forEach((result, index) => {
+    const isBest = index === 0 ? '<span class="badge badge-best ms-2">Mejor opción</span>' : '';
+    const card = document.createElement('div');
+    card.className = 'card mb-3 bank-card';
+    card.innerHTML = `
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-3 text-center text-md-start">
+            <i class="bi ${result.logoClass} fs-1 text-primary"></i>
+            <h5 class="mb-0">${result.bankName} ${isBest}</h5>
           </div>
-        `;
-        
-        resultsContent.appendChild(card);
-        
-        // Añadir event listener para el botón "Ver detalles"
-        const detailsBtn = card.querySelector('.view-details-btn');
-        detailsBtn.addEventListener('click', function() {
-          const bankId = this.getAttribute('data-bank');
-          const detailsSection = document.getElementById(`details-${bankId}`);
-          
-          if (detailsSection.classList.contains('d-none')) {
-            // Cerrar todos los detalles primero
-            document.querySelectorAll('.bank-details').forEach(el => {
-              el.classList.add('d-none');
-            });
-            
-            // Cambiar texto de todos los botones
-            document.querySelectorAll('.view-details-btn').forEach(btn => {
-              btn.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
-            });
-            
-            // Mostrar este detalle
-            detailsSection.classList.remove('d-none');
-            this.innerHTML = '<i class="bi bi-eye-slash me-1"></i>Ocultar detalles';
-          } else {
-            // Ocultar detalles
-            detailsSection.classList.add('d-none');
-            this.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
-          }
-        });
+          <div class="col-md-3 text-center">
+            <div class="text-muted small">${result.rateLabel}</div>
+            <div class="fw-bold">${(result.yearlyRate * 100).toFixed(2)}% EA</div>
+            <div class="text-muted small">${(result.monthlyRate * 100).toFixed(2)}% MV</div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="text-muted small">Cuota Mensual</div>
+            <div class="monthly-payment">$${formatCurrency(Math.round(result.monthlyPayment))}</div>
+          </div>
+          <div class="col-md-3 text-center">
+            <button class="btn btn-sm btn-outline-primary view-details-btn" data-rate="${result.rateLabel}" data-bank="${result.bankName.replace(/\s+/g, '-')}-${result.rateLabel.replace(/\s+/g, '-')}">
+              <i class="bi bi-eye me-1"></i>Ver detalles
+            </button>
+          </div>
+        </div>
+        <div class="mt-3 bank-details d-none" id="details-${result.bankName.replace(/\s+/g, '-')}-${result.rateLabel.replace(/\s+/g, '-')}">
+          <h6 class="mb-3 fw-bold small">Detalles del Préstamo</h6>
+          <table class="table table-sm table-bordered">
+            <tr><th>Valor de la propiedad:</th><td>$${formatCurrency(propertyValue)}</td></tr>
+            <tr><th>Cuota inicial:</th><td>$${formatCurrency(downPayment)} (${(downPayment / propertyValue * 100).toFixed(1)}%)</td></tr>
+            <tr><th>Monto del crédito:</th><td>$${formatCurrency(loanAmount)}</td></tr>
+            <tr><th>Plazo:</th><td>${loanTerm} años (${loanTerm * 12} meses)</td></tr>
+            <tr><th>${result.rateLabel} (EA):</th><td>${(result.yearlyRate * 100).toFixed(2)}%</td></tr>
+            <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
+            <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
+          </table>
+          <p class="legal-text">* Cálculos con tasas vigentes. Esta simulación no constituye compromiso para el banco ni para Agile Home.</p>
+        </div>
+      </div>
+    `;
+
+    resultsContent.appendChild(card);
+
+    const detailsBtn = card.querySelector('.view-details-btn');
+    detailsBtn.addEventListener('click', function () {
+      const id = this.getAttribute('data-bank');
+      const detailsSection = document.getElementById(`details-${id}`);
+      const allSections = document.querySelectorAll('.bank-details');
+
+      allSections.forEach(el => el.classList.add('d-none'));
+      document.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
       });
-      
-      // Generar gráfico comparativo
-      generateComparisonChart(bankResults);
-      
-      // Generar mapa de calor de tasas
-      generateInterestRateHeatMap(bankResults);
-      
-      resultsContainer.classList.remove('d-none');
-      resultsContainer.scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    // Generar gráfico comparativo de cuotas mensuales
-    function generateComparisonChart(bankResults) {
-      const ctx = document.getElementById('comparisonChart').getContext('2d');
-      
-      // Destruir gráfico existente si hay uno
-      if (window.comparisonChart instanceof Chart) {
-        window.comparisonChart.destroy();
+
+      if (detailsSection.classList.contains('d-none')) {
+        detailsSection.classList.remove('d-none');
+        this.innerHTML = '<i class="bi bi-eye-slash me-1"></i>Ocultar detalles';
+      } else {
+        detailsSection.classList.add('d-none');
+        this.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
       }
-      
-      // Preparar datos
-      const labels = bankResults.map(result => result.bankName);
-      const monthlyPayments = bankResults.map(result => Math.round(result.monthlyPayment));
-      
-      // Encontrar pago mínimo y máximo para escala personalizada
-      const minPayment = Math.min(...monthlyPayments);
-      const maxPayment = Math.max(...monthlyPayments);
-      
-      // Calcular el mínimo de la escala (90% del valor mínimo)
-      const scaleMin = Math.floor(minPayment * 0.9);
-      
-      // Colores para las barras - graduado desde el mejor al peor
-      const colors = bankResults.map((_, index) => {
-        if (index === 0) return 'rgba(253, 76, 11, 0.8)'; // Naranja Agile Home para el mejor
-        const intensity = Math.min(0.3 + (index * 0.1), 0.9); // Intensidad creciente
-        return `rgba(2, 14, 46, ${intensity})`; // Azul Agile Home para el resto
-      });
-      
-      // Crear gráfico
-      window.comparisonChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Cuota Mensual',
-            data: monthlyPayments,
-            backgroundColor: colors,
-            borderColor: colors.map(color => color.replace(/[\d\.]+\)$/, '1)')),
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              min: scaleMin, // Comenzar la escala en un valor menor para mostrar diferencias
-              ticks: {
-                callback: function(value) {
-                  return '$' + formatCurrency(value);
-                }
-              }
-            }
-          },
-          plugins: {
-            legend: {
-              display: false // Ocultar leyenda
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  const value = context.raw;
-                  const diff = value - minPayment;
-                  let diffText = '';
-                  
-                  if (context.dataIndex === 0) {
-                    diffText = ' (mejor opción)';
-                  } else {
-                    diffText = ` (+$${formatCurrency(diff)} respecto al mejor)`;
-                  }
-                  
-                  return 'Cuota: $' + formatCurrency(value) + diffText;
-                }
-              }
-            }
+    });
+  });
+
+  // ACTUALIZA GRÁFICOS
+  generateComparisonChart(allResults);
+  generateInterestRateHeatMap(allResults);
+}
+
+    // Generar mapa de calor de tasas de interés
+   const ctx = document.getElementById('comparisonChart').getContext('2d');
+  if (window.comparisonChart instanceof Chart) window.comparisonChart.destroy();
+
+  const labels = results.map(r => `${r.bankName} - ${r.rateLabel}`);
+  const payments = results.map(r => Math.round(r.monthlyPayment));
+  const minPayment = Math.min(...payments);
+
+  const colors = results.map((r, i) =>
+    payments[i] === minPayment ? 'rgba(253, 76, 11, 0.9)' : 'rgba(2, 14, 46, 0.7)'
+  );
+
+  window.comparisonChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Cuota Mensual',
+        data: payments,
+        backgroundColor: colors,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          ticks: {
+            callback: value => '$' + formatCurrency(value)
           }
         }
-      });
-    }
-    
-    // Generar mapa de calor de tasas de interés
-    function generateInterestRateHeatMap(bankResults) {
-      const heatMapTable = document.getElementById('interestRateHeatMap');
-      const tbody = heatMapTable.querySelector('tbody');
-      
-      // Limpiar tabla
-      tbody.innerHTML = '';
-      
-      // Encontrar tasas mínima y máxima para el gradiente de colores
-      const rates = bankResults.map(result => result.yearlyRate);
-      const minRate = Math.min(...rates);
-      const maxRate = Math.max(...rates);
-      
-      // Ordenar bancos por tasa (menor a mayor)
-      const sortedBanks = [...bankResults].sort((a, b) => a.yearlyRate - b.yearlyRate);
-      
-      // Generar filas
-      sortedBanks.forEach(bank => {
-        const row = document.createElement('tr');
-        
-        // Calcular color para el mapa de calor (verde para la menor tasa, rojo para la mayor)
-        const percentage = (bank.yearlyRate - minRate) / (maxRate - minRate);
-        const heatColor = getHeatMapColor(percentage);
-        
-        row.innerHTML = `
-          <td>
-            <div class="d-flex align-items-center">
-              <i class="bi ${bank.logoClass} me-2"></i>
-              ${bank.bankName}
-            </div>
-          </td>
-          <td>${bank.rateDescription} ${(bank.yearlyRate * 100).toFixed(2)}%</td>
-          <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
-          <td>
-            <div class="heat-map-cell" style="background-color: ${heatColor}; width: 100%;">
-              &nbsp;
-            </div>
-          </td>
-        `;
-        
-        tbody.appendChild(row);
-      });
-    }
-    
-    // Obtener color para el mapa de calor (verde para bajo, naranja para alto)
-    function getHeatMapColor(percentage) {
-      if (percentage < 0.2) {
-        // Muy buen valor - verde
-        return 'rgba(40, 167, 69, 0.7)';
-      } else if (percentage < 0.5) {
-        // Valor medio-bajo - verde claro a amarillo
-        return `rgba(${Math.round(40 + (percentage * 2 * 215))}, 167, 69, 0.7)`;
-      } else if (percentage < 0.8) {
-        // Valor medio-alto - amarillo a naranja
-        return `rgba(${Math.round(215 + (percentage * 40))}, ${Math.round(167 - (percentage * 167))}, 0, 0.7)`;
-      } else {
-        // Valor alto - naranja a rojo
-        return `rgba(253, ${Math.round(76 * (1 - percentage))}, 11, 0.7)`;
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: context => 'Cuota: $' + formatCurrency(context.raw)
+          }
+        }
       }
     }
-  </script>
-</body>
-</html>
+  });
+}
+
+function getHeatMapColor(pct) {
+  if (pct < 0.2) return 'rgba(40, 167, 69, 0.7)';
+  if (pct < 0.5) return `rgba(${40 + pct * 2 * 215}, 167, 69, 0.7)`;
+  if (pct < 0.8) return `rgba(${215 + pct * 40}, ${167 - pct * 167}, 0, 0.7)`;
+  return 'rgba(253, ' + Math.round(76 * (1 - pct)) + ', 11, 0.7)';
+}
+
+function generateInterestRateHeatMap(results) {
+  const tbody = document.querySelector('#interestRateHeatMap tbody');
+  tbody.innerHTML = '';
+  const rates = results.map(r => r.yearlyRate);
+  const minRate = Math.min(...rates), maxRate = Math.max(...rates);
+  const sorted = [...results].sort((a, b) => a.yearlyRate - b.yearlyRate);
+
+  sorted.forEach(bank => {
+    const pct = (bank.yearlyRate - minRate) / (maxRate - minRate || 1);
+    const heatColor = getHeatMapColor(pct);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><i class="bi ${bank.logoClass} me-2"></i>${bank.bankName} (${bank.rateLabel})</td>
+      <td>${(bank.yearlyRate * 100).toFixed(2)}%</td>
+      <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
+      <td><div class="heat-map-cell" style="background-color: ${heatColor}; width: 100%;">&nbsp;</div></td>
+    `;
+    tbody.appendChild(row);
+  });
+}

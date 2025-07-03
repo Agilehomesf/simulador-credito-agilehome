@@ -15,17 +15,22 @@
       --primary-color: #020e2e;        /* Azul oscuro Agile Home */
       --primary-hover: #041c5c;        /* Azul oscuro Agile Home (hover) */
       --secondary-color: #fd4c0b;      /* Naranja Agile Home */
-      --success-color: #4a4a4a;        /* Gris oscuro Agile Home */
+      --accent-color: #ff6f00;         /* Naranja más vibrante */
+      --success-color: #00c851;        /* Verde vibrante */
       --light-color: #f8f9fa;          /* Gris claro */
       --dark-color: #020e2e;           /* Azul oscuro texto */
       --light-blue: #e6f0ff;           /* Azul claro para fondos */
       --whatsapp-color: #25D366;       /* Color de WhatsApp */
+      --gradient-primary: linear-gradient(135deg, #020e2e 0%, #fd4c0b 100%);
+      --gradient-secondary: linear-gradient(135deg, #fd4c0b 0%, #ff6f00 100%);
     }
     
     body { 
       font-family: 'Poppins', sans-serif;
       color: #4a4a4a;
       font-size: 0.9rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e6f0ff 100%);
+      min-height: 100vh;
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -33,377 +38,501 @@
     }
     
     .card { 
-      border-radius: 10px; 
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
+      border-radius: 15px; 
+      box-shadow: 0 8px 25px rgba(2, 14, 46, 0.15); 
       margin-bottom: 20px; 
-      border-color: #e1e1e1;
+      border: none;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
     }
     
     .card-header {
-      background-color: rgba(2, 14, 46, 0.05);
+      background: var(--gradient-primary);
+      color: white;
       font-weight: 600;
-      color: var(--primary-color);
-      padding: 0.8rem 1.25rem;
+      padding: 1rem 1.5rem;
       font-size: 1rem;
+      border: none;
     }
     
     /* Cabecera */
     header { 
-      background-color: white;
-      border-bottom: 1px solid #e1e1e1;
-      padding: 1.5rem 0;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      z-index: 0;
+    }
+    
+    header .container {
+      position: relative;
+      z-index: 1;
     }
     
     .header-title { 
-      color: var(--secondary-color);
+      color: white;
       font-weight: 700;
       margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
     .header-subtitle {
-      font-size: 0.9rem;
-      color: #6c757d;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
       margin-bottom: 0;
     }
     
     /* Botones */
     .btn-primary { 
-      background-color: var(--primary-color); 
-      border-color: var(--primary-color);
-      border-radius: 6px;
-      font-weight: 500;
-      padding: 0.5rem 1.5rem;
+      background: var(--gradient-secondary);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(253, 76, 11, 0.4);
     }
     
     .btn-primary:hover { 
-      background-color: var(--primary-hover); 
-      border-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(253, 76, 11, 0.6);
     }
     
     .btn-success {
-      background-color: var(--whatsapp-color);
-      border-color: var(--whatsapp-color);
-      border-radius: 6px;
-      font-weight: 500;
-      padding: 0.6rem 1.8rem;
+      background: var(--whatsapp-color);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     }
     
     .btn-success:hover {
-      background-color: #20ba5a;
-      border-color: #20ba5a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
     }
     
     .btn-outline-secondary {
-      border-radius: 6px;
-      font-weight: 500;
-      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: 25px;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+      background: var(--primary-color);
+      transform: translateY(-2px);
     }
     
     /* Cuota mensual destacada */
     .monthly-payment { 
-      font-size: 1.2rem; 
+      font-size: 1.4rem; 
       font-weight: 700; 
-      color: var(--primary-color);
-    }
-    
-    /* Mapa de calor */
-    .heat-map-cell { 
-      padding: 6px; 
-      border-radius: 4px;
+      background: var(--gradient-secondary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     /* Alertas */
     .alert-info {
-      background-color: var(--light-blue);
-      border-color: rgba(2, 14, 46, 0.2);
+      background: linear-gradient(135deg, var(--light-blue) 0%, rgba(253, 76, 11, 0.1) 100%);
+      border: 2px solid rgba(2, 14, 46, 0.2);
       color: var(--primary-color);
-      border-radius: 8px;
+      border-radius: 15px;
+      font-weight: 500;
     }
     
     .alert-warning {
-      border-radius: 8px;
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+      border: 2px solid #f39c12;
+      border-radius: 15px;
+      font-weight: 500;
     }
     
     /* Footer */
     .footer {
-      background-color: var(--primary-color);
+      background: var(--gradient-primary);
       color: white;
-      padding: 2.5rem 0;
-      margin-top: 2.5rem;
-      font-size: 0.85rem;
+      padding: 3rem 0;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid2" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid2)"/></svg>');
+      z-index: 0;
+    }
+    
+    .footer .container {
+      position: relative;
+      z-index: 1;
     }
     
     .footer h5 {
       color: white;
       font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 1.25rem;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
     }
     
     .footer ul {
       color: rgba(255, 255, 255, 0.9);
-      padding-left: 1.25rem;
+      padding-left: 1.5rem;
     }
     
     .footer p {
       color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
     
     /* Intro icons */
     .intro-icon {
-      font-size: 42px;
-      color: var(--primary-color);
+      font-size: 48px;
+      background: var(--gradient-secondary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 0.5rem;
     }
     
     .intro-container {
       position: relative;
-      padding: 1.75rem;
-      background-color: var(--light-blue);
-      border-radius: 10px;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(230, 240, 255, 0.8) 100%);
+      border-radius: 20px;
       margin-bottom: 2rem;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
     
     .house-icon-large {
-      font-size: 120px;
-      color: rgba(2, 14, 46, 0.07);
+      font-size: 150px;
+      color: rgba(253, 76, 11, 0.1);
       position: absolute;
       right: 20px;
-      bottom: 10px;
+      bottom: -20px;
       z-index: 0;
     }
     
-    /* Tabla comparativa más pequeña */
-    #comparisonChart {
-      max-height: 180px !important;
+    /* Bank selector mejorado */
+    .bank-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
     }
     
-    /* Selector de bancos */
-    .bank-selector-item {
-      border: 1px solid #e6e6e6;
-      border-radius: 8px;
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
+    .select-all-option {
+      grid-column: 1 / -1;
+      padding: 15px 20px;
+      border-radius: 15px;
+      background: var(--gradient-secondary);
+      color: white;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      background-color: #fff;
-    }
-    
-    .bank-selector-item:hover {
-      border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.02);
-    }
-    
-    .bank-selector-item.selected {
-      border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.05);
-    }
-    
-    .bank-selector-item .form-check-input:checked {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
-    
-    /* Información importante */
-    .info-important {
-      background-color: #1e2124;
-      border-radius: 10px;
-      color: #fff;
-      padding: 1.5rem;
-    }
-    
-    .info-important h5 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
       display: flex;
       align-items: center;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(253, 76, 11, 0.3);
     }
     
-    .info-important p {
-      margin-bottom: 0.75rem;
+    .select-all-option:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(253, 76, 11, 0.4);
     }
     
-    .info-important ul {
-      padding-left: 1.25rem;
-      margin-bottom: 0;
+    .bank-option {
+      border: 2px solid #e6e6e6;
+      border-radius: 15px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      position: relative;
+      overflow: hidden;
     }
     
-    .info-important li {
-      margin-bottom: 0.5rem;
+    .bank-option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-secondary);
+      transition: all 0.3s ease;
+      z-index: 0;
+      opacity: 0.1;
     }
     
-    .info-important li:last-child {
-      margin-bottom: 0;
+    .bank-option:hover::before {
+      left: 0;
     }
     
-    /* Ajustes en bancos */
+    .bank-option:hover {
+      border-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(253, 76, 11, 0.2);
+    }
+    
+    .bank-option.selected {
+      border-color: var(--secondary-color);
+      background: linear-gradient(135deg, rgba(253, 76, 11, 0.05) 0%, rgba(2, 14, 46, 0.05) 100%);
+      box-shadow: 0 4px 15px rgba(253, 76, 11, 0.15);
+    }
+    
+    .bank-option > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bank-option i {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+    
+    /* Bank cards en resultados */
     .bank-card {
-      transition: all 0.2s ease;
-      border: 1px solid #e6e6e6;
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .bank-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-secondary);
+      z-index: 1;
     }
     
     .bank-card:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(2, 14, 46, 0.2);
     }
     
-    /* Whatsapp button */
-    .whatsapp-btn {
+    /* Rate comparison styles */
+    .rate-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .rate-option {
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .rate-option.best-rate {
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      border-color: var(--success-color);
+    }
+    
+    .rate-option.worst-rate {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+      border-color: #f39c12;
+    }
+    
+    .rate-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+    
+    .rate-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .monthly-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    /* Inputs mejorados */
+    .form-control, .form-select {
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 2px solid #e6e6e6;
       transition: all 0.3s ease;
     }
     
-    .whatsapp-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    .form-control:focus, .form-select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 0.2rem rgba(253, 76, 11, 0.25);
     }
     
-    /* Tablas */
-    .table {
-      font-size: 0.85rem;
-    }
-    
-    .table th {
+    .input-group-text {
+      background: var(--gradient-secondary);
+      color: white;
+      border: none;
       font-weight: 600;
-      background-color: rgba(2, 14, 46, 0.03);
-    }
-    
-    /* Badge mejora */
-    .badge-best {
-      background-color: var(--secondary-color) !important;
-      font-weight: 500;
-      padding: 0.35em 0.65em;
-    }
-    
-    /* Inputs */
-    .form-control, .form-select {
-      font-size: 0.9rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-    }
-    
-    .form-label {
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-bottom: 0.4rem;
     }
     
     /* Legal text */
     .legal-text {
       font-size: 0.75rem;
       color: #6c757d;
-      margin-top: 0.75rem;
+      margin-top: 1rem;
       font-style: italic;
-    }
-    
-    /* Bank selector options mejorado */
-    .bank-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    
-    .select-all-option {
-      width: 100%;
-      margin-bottom: 5px;
-      padding: 8px 15px;
-      border-radius: 8px;
-      background-color: var(--light-blue);
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      border: 1px solid rgba(2, 14, 46, 0.2);
-    }
-    
-    .select-all-option:hover {
-      background-color: rgba(2, 14, 46, 0.08);
-    }
-    
-    .bank-option {
-      flex: 1 0 calc(33.333% - 10px);
-      max-width: calc(33.333% - 10px);
-      border: 1px solid #e6e6e6;
-      border-radius: 8px;
       padding: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      background: rgba(108, 117, 125, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid var(--secondary-color);
     }
     
-    .bank-option:hover {
-      border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.02);
+    /* Badge mejorado */
+    .badge-best {
+      background: var(--gradient-secondary) !important;
+      font-weight: 600;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
-    .bank-option.selected {
-      border-color: var(--primary-color);
-      background-color: rgba(2, 14, 46, 0.05);
+    /* Whatsapp button mejorado */
+    .whatsapp-btn {
+      background: linear-gradient(135deg, var(--whatsapp-color) 0%, #20ba5a 100%);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
     }
     
-    .bank-option i {
-      font-size: 1.2rem;
-      color: var(--primary-color);
+    .whatsapp-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
     }
     
+    /* Info important mejorada */
+    .info-important {
+      background: var(--gradient-primary);
+      border-radius: 20px;
+      color: white;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .info-important::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid3" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid3)"/></svg>');
+      z-index: 0;
+    }
+    
+    .info-important > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .bank-option {
-        flex: 1 0 calc(50% - 10px);
-        max-width: calc(50% - 10px);
+      .bank-options {
+        grid-template-columns: 1fr;
       }
-    }
-    
-    @media (max-width: 576px) {
-      .bank-option {
-        flex: 1 0 100%;
-        max-width: 100%;
+      
+      .rate-comparison {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-title {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <header class="py-3 shadow-sm">
+  <header class="py-4 shadow-lg">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-2 text-center text-md-start">
-          <i class="bi bi-house-heart-fill" style="font-size: 2.5rem; color: var(--secondary-color);"></i>
+          <i class="bi bi-house-heart-fill" style="font-size: 3rem; color: white;"></i>
         </div>
         <div class="col-md-8 text-center">
-          <h1 class="header-title">Simulador Comparativo de Crédito Hipotecario Agile Home</h1>
-          <p class="header-subtitle">Compare opciones de préstamos hipotecarios en Colombia</p>
+          <h1 class="header-title">Simulador Comparativo de Crédito Hipotecario</h1>
+          <h2 class="header-subtitle">Agile Home</h2>
+          <p class="mt-2 mb-0" style="color: rgba(255, 255, 255, 0.8);">Compare opciones de préstamos hipotecarios en Colombia</p>
         </div>
         <div class="col-md-2 d-none d-md-block text-end">
-          <i class="bi bi-bank" style="font-size: 2.2rem; color: var(--primary-color);"></i>
+          <i class="bi bi-bank" style="font-size: 2.5rem; color: white;"></i>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="py-4">
+  <main class="py-5">
     <div class="container">
-      <!-- Sección de introducción con iconos -->
-      <div class="intro-container mb-4">
+      <!-- Sección de introducción -->
+      <div class="intro-container mb-5">
         <div class="row">
           <div class="col-md-8">
-            <h3 class="mb-3" style="color: var(--primary-color); font-weight: 600; font-size: 1.4rem;">¿Sueñas con tener tu casa propia?</h3>
-            <p class="mb-3">Este simulador te permite calcular y comparar cuotas mensuales de créditos hipotecarios ofrecidos por diferentes bancos en Colombia. ¡Da el primer paso hacia tu hogar ideal!</p>
+            <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700; font-size: 1.6rem;">¿Sueñas con tener tu casa propia?</h3>
+            <p class="mb-4" style="font-size: 1.1rem;">Este simulador te permite calcular y comparar cuotas mensuales de créditos hipotecarios con rangos de tasas actuales de los principales bancos en Colombia. ¡Da el primer paso hacia tu hogar ideal!</p>
             <div class="row mt-4">
               <div class="col-4 text-center">
                 <i class="bi bi-house-door intro-icon"></i>
-                <h6 class="mt-2" style="font-size: 0.85rem;">Ingrese el valor de la vivienda</h6>
+                <h6 class="mt-2 fw-bold">Ingrese el valor de la vivienda</h6>
               </div>
               <div class="col-4 text-center">
                 <i class="bi bi-calculator intro-icon"></i>
-                <h6 class="mt-2" style="font-size: 0.85rem;">Defina cuota inicial y plazo</h6>
+                <h6 class="mt-2 fw-bold">Defina cuota inicial y plazo</h6>
               </div>
               <div class="col-4 text-center">
                 <i class="bi bi-bank intro-icon"></i>
-                <h6 class="mt-2" style="font-size: 0.85rem;">Compare bancos</h6>
+                <h6 class="mt-2 fw-bold">Compare bancos</h6>
               </div>
             </div>
           </div>
@@ -411,35 +540,35 @@
         <i class="bi bi-houses-fill house-icon-large"></i>
       </div>
 
-      <div class="card mb-4">
+      <div class="card mb-5">
         <div class="card-header">
           <i class="bi bi-sliders me-2"></i>Información del Préstamo
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="propertyValue" class="form-label">Valor de la vivienda</label>
+            <div class="col-md-6 mb-4">
+              <label for="propertyValue" class="form-label fw-bold">Valor de la vivienda</label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
                 <input type="text" class="form-control" id="propertyValue" placeholder="Ej. 200.000.000">
               </div>
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="downPayment" class="form-label">Cuota inicial</label>
+            <div class="col-md-6 mb-4">
+              <label for="downPayment" class="form-label fw-bold">Cuota inicial</label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
                 <input type="text" class="form-control" id="downPayment" placeholder="Ej. 40.000.000">
               </div>
               <div><small class="text-muted">Equivale al <span id="downPaymentPercentage">0</span>% del valor</small></div>
             </div>
-            <div class="col-12 mb-3">
-              <div class="alert alert-info d-flex align-items-center py-2">
-                <i class="bi bi-info-circle me-2 fs-5"></i>
-                <strong>Monto a financiar: $<span id="loanAmount">0</span></strong>
+            <div class="col-12 mb-4">
+              <div class="alert alert-info d-flex align-items-center py-3">
+                <i class="bi bi-info-circle me-3 fs-4"></i>
+                <strong style="font-size: 1.1rem;">Monto a financiar: $<span id="loanAmount">0</span></strong>
               </div>
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="loanTerm" class="form-label">Plazo en años</label>
+            <div class="col-md-6 mb-4">
+              <label for="loanTerm" class="form-label fw-bold">Plazo en años</label>
               <select class="form-select" id="loanTerm">
                 <option value="" selected disabled>Seleccione el plazo</option>
                 <option value="5">5 años</option>
@@ -454,13 +583,13 @@
           
           <!-- Selector de bancos mejorado -->
           <div class="mt-4">
-            <label class="form-label d-flex align-items-center">
-              <i class="bi bi-bank me-2"></i>Seleccione los bancos a incluir en la comparación:
+            <label class="form-label d-flex align-items-center fw-bold mb-3">
+              <i class="bi bi-bank me-2 fs-5"></i>Seleccione los bancos a incluir en la comparación:
             </label>
             
-            <div class="select-all-option" id="selectAllBanks">
-              <input type="checkbox" class="form-check-input me-2" id="checkAllBanks" checked>
-              <label class="form-check-label" for="checkAllBanks">Todos los bancos</label>
+            <div class="select-all-option mb-3" id="selectAllBanks">
+              <input type="checkbox" class="form-check-input me-3" id="checkAllBanks" checked>
+              <label class="form-check-label fw-bold" for="checkAllBanks">TODOS LOS BANCOS</label>
             </div>
             
             <div class="bank-options" id="bankOptions">
@@ -468,12 +597,12 @@
             </div>
           </div>
           
-          <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex justify-content-between mt-5">
             <button type="button" id="resetBtn" class="btn btn-outline-secondary">
-              <i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar
+              <i class="bi bi-arrow-counterclockwise me-2"></i>Reiniciar
             </button>
             <button type="button" id="calculateBtn" class="btn btn-primary">
-              <i class="bi bi-calculator me-1"></i>Calcular cuotas
+              <i class="bi bi-calculator me-2"></i>Calcular cuotas
             </button>
           </div>
         </div>
@@ -485,18 +614,18 @@
           <span id="minCreditWarningText"></span>
         </div>
       
-        <h3 class="mb-3" style="color: var(--primary-color); font-weight: 600; font-size: 1.3rem;">
-          <i class="bi bi-graph-up me-2"></i>Resultados de la Simulación
+        <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700; font-size: 1.8rem;">
+          <i class="bi bi-graph-up me-3"></i>Resultados de la Simulación
         </h3>
         <div id="resultsContent"></div>
         
-        <!-- Gráfica Comparativa (más pequeña) -->
-        <div class="card mt-4">
+        <!-- Gráfica Comparativa -->
+        <div class="card mt-5">
           <div class="card-header">
             <i class="bi bi-bar-chart-fill me-2"></i>Comparativa de Cuotas Mensuales
           </div>
           <div class="card-body">
-            <div style="height: 180px;">
+            <div style="height: 200px;">
               <canvas id="comparisonChart"></canvas>
             </div>
           </div>
@@ -508,14 +637,13 @@
             <i class="bi bi-grid-3x3-gap me-2"></i>Mapa de Calor de Tasas de Interés
           </div>
           <div class="card-body">
-            <p class="text-muted mb-3 small">Este mapa de calor muestra visualmente qué bancos ofrecen las mejores tasas de interés. Los colores más verdes indican tasas más bajas, mientras que los colores más rojos indican tasas más altas.</p>
+            <p class="text-muted mb-3">Este mapa de calor muestra visualmente qué bancos ofrecen las mejores tasas de interés. Los colores más verdes indican tasas más bajas, mientras que los colores más rojos indican tasas más altas.</p>
             <div class="table-responsive">
               <table id="interestRateHeatMap" class="table table-bordered">
                 <thead class="table-light">
                   <tr>
                     <th>Banco</th>
-                    <th>Tasa EA</th>
-                    <th>Tasa MV</th>
+                    <th>Rango de Tasas EA</th>
                     <th>Comparativa Visual</th>
                   </tr>
                 </thead>
@@ -527,19 +655,20 @@
           </div>
         </div>
         
-        <div class="text-center my-4">
+        <div class="text-center my-5">
           <a href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" class="btn btn-success btn-lg whatsapp-btn">
-            <i class="bi bi-whatsapp me-2"></i>Contacte a un Experto
+            <i class="bi bi-whatsapp me-3"></i>Contacte a un Experto
           </a>
-          <p class="text-muted mt-2 small">Un asesor de Agile Home te brindará información detallada sobre tu simulación</p>
+          <p class="text-muted mt-3" style="font-size: 1rem;">Un asesor de Agile Home te brindará información detallada sobre tu simulación</p>
         </div>
         
-        <!-- Sección legal con fondo más destacado -->
-        <div id="legales" class="mt-4 info-important">
-          <h5><i class="bi bi-info-circle me-2"></i>Información Importante</h5>
+        <!-- Sección legal -->
+        <div id="legales" class="mt-5 info-important">
+          <h5><i class="bi bi-info-circle me-3"></i>Información Importante</h5>
           <p><strong>Esta herramienta realiza estimaciones aproximadas en Pesos Colombianos (COP).</strong></p>
-          <ul>
+          <ul class="mb-0">
             <li>Las tasas de interés y condiciones pueden variar según la política de cada entidad financiera.</li>
+            <li>Se muestran rangos de tasas vigentes, la tasa definitiva dependerá de la evaluación crediticia.</li>
             <li>La cuota mensual no incluye seguros ni otros costos asociados.</li>
             <li>La tasa definitiva aplicará según las condiciones vigentes al momento del desembolso.</li>
             <li>Para conocer el detalle de cada banco, contacta a tu asesor de Agile Home.</li>
@@ -557,12 +686,12 @@
           <h5>Simulador Comparativo de Crédito Hipotecario Agile Home</h5>
           <div class="mb-0">
             <p>Esta herramienta es proporcionada por Agile Home para ayudarte a comparar opciones de financiamiento para tu nuevo hogar.</p>
-            <p>Las tasas mostradas son actualizadas periódicamente y representan valores aproximados. Contacta a un asesor para información personalizada.</p>
+            <p>Las tasas mostradas representan rangos actuales del mercado y son actualizadas periódicamente. Contacta a un asesor para información personalizada.</p>
           </div>
         </div>
         <div class="col-md-4 text-md-end mt-3 mt-md-0">
           <p class="mb-0">© 2025 Simulador Multibanco Agile Home</p>
-          <div id="lastUpdated" class="small">Tasas actualizadas: Mayo 2025</div>
+          <div id="lastUpdated" class="small">Tasas actualizadas: Enero 2025</div>
         </div>
       </div>
     </div>
@@ -571,16 +700,58 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
-    // Datos de los bancos con tasas actualizadas
+    // Datos de los bancos con rangos de tasas actualizadas
     let banks = {
-  "BBVA": { minRate: 0.1100, maxRate: 0.1597, logoClass: "bi-bank2", minLoanAmount: 6000000 },
-  "Itaú": { minRate: 0.1217, maxRate: 0.1292, logoClass: "bi-building-fill", minLoanAmount: 30000000 },
-  "Banco de Occidente": { minRate: 0.1070, maxRate: 0.1601, logoClass: "bi-bank", minLoanAmount: 50000000 },
-  "Banco Caja Social": { minRate: 0.1100, maxRate: 0.1810, logoClass: "bi-house", minLoanAmount: 0 },
-  "Credifamilia": { minRate: 0.1030, maxRate: 0.1030, logoClass: "bi-building", minLoanAmount: 0 },
-  "Banco de Bogotá": { minRate: 0.1082, maxRate: 0.1228, logoClass: "bi-bank", minLoanAmount: 0 },
-  "Bancolombia": { minRate: 0.1230, maxRate: 0.1370, logoClass: "bi-cash-coin", minLoanAmount: 0 }
-};
+      "BBVA": { 
+        minRate: 0.11, 
+        maxRate: 0.1597,
+        rateDescription: "Desde", 
+        logoClass: "bi-bank2",
+        minLoanAmount: 6000000
+      },
+      "Itaú": { 
+        minRate: 0.1217, 
+        maxRate: 0.1292,
+        rateDescription: "Desde", 
+        logoClass: "bi-building-fill",
+        minLoanAmount: 30000000
+      },
+      "Banco de Occidente": { 
+        minRate: 0.1070, 
+        maxRate: 0.1601,
+        rateDescription: "Desde", 
+        logoClass: "bi-bank",
+        minLoanAmount: 50000000
+      },
+      "Banco Caja Social": { 
+        minRate: 0.11, 
+        maxRate: 0.1810,
+        rateDescription: "Desde", 
+        logoClass: "bi-house",
+        minLoanAmount: 0
+      },
+      "Credifamilia": { 
+        minRate: 0.103, 
+        maxRate: 0.103,
+        rateDescription: "Tasa fija", 
+        logoClass: "bi-building",
+        minLoanAmount: 0
+      },
+      "Bancolombia": { 
+        minRate: 0.1230, 
+        maxRate: 0.1370,
+        rateDescription: "Desde", 
+        logoClass: "bi-bank2",
+        minLoanAmount: 0
+      },
+      "Banco de Bogotá": { 
+        minRate: 0.1082, 
+        maxRate: 0.1228,
+        rateDescription: "Desde", 
+        logoClass: "bi-bank",
+        minLoanAmount: 0
+      }
+    };
 
     // Bancos seleccionados para la comparación (por defecto todos)
     let selectedBanks = Object.keys(banks);
@@ -594,17 +765,14 @@
           const data = await response.json();
           banks = data.banks;
           
-          // Mostrar fecha de actualización si existe
           if (data.lastUpdated) {
             document.getElementById('lastUpdated').textContent = `Tasas actualizadas: ${data.lastUpdated}`;
           }
         }
       } catch (error) {
-        console.error('Error al cargar tasas desde archivo:', error);
-        // Continuará usando los datos predeterminados definidos arriba
+        console.log('Usando tasas predeterminadas actualizadas');
       }
       
-      // Inicializar selector de bancos mejorado
       initBankSelector();
       
       const propertyValueInput = document.getElementById('propertyValue');
@@ -626,16 +794,14 @@
       resetBtn.addEventListener('click', resetForm);
     });
 
-    // Inicializar selector de bancos mejorado
+    // Inicializar selector de bancos
     function initBankSelector() {
       const bankOptions = document.getElementById('bankOptions');
       const selectAllCheckbox = document.getElementById('checkAllBanks');
       const selectAllOption = document.getElementById('selectAllBanks');
       
-      // Limpiar opciones existentes
       bankOptions.innerHTML = '';
       
-      // Crear elementos para cada banco
       Object.keys(banks).forEach(bankName => {
         const bank = banks[bankName];
         
@@ -646,19 +812,17 @@
         bankOption.innerHTML = `
           <input type="checkbox" class="form-check-input" id="bank-${bankName.replace(/\s+/g, '-')}" checked>
           <i class="bi ${bank.logoClass}"></i>
-          <span>${bankName}</span>
+          <span class="fw-bold">${bankName}</span>
         `;
         
         bankOptions.appendChild(bankOption);
         
-        // Event listener para la selección de bancos
         const checkbox = bankOption.querySelector('input[type="checkbox"]');
         
         checkbox.addEventListener('change', function() {
           updateBankSelection(this, bankOption, bankName);
         });
         
-        // Hacer que el clic en el div active/desactive el checkbox
         bankOption.addEventListener('click', function(e) {
           if (e.target.tagName !== 'INPUT') {
             checkbox.checked = !checkbox.checked;
@@ -667,11 +831,9 @@
         });
       });
       
-      // Event listener para "Todos los bancos"
       selectAllCheckbox.addEventListener('change', function() {
         const isChecked = this.checked;
         
-        // Actualizar todos los checkboxes individuales
         document.querySelectorAll('.bank-option input[type="checkbox"]').forEach(checkbox => {
           checkbox.checked = isChecked;
           const bankOption = checkbox.closest('.bank-option');
@@ -689,7 +851,6 @@
         });
       });
       
-      // También hacer que el clic en el div "Todos los bancos" active/desactive el checkbox
       selectAllOption.addEventListener('click', function(e) {
         if (e.target.tagName !== 'INPUT') {
           selectAllCheckbox.checked = !selectAllCheckbox.checked;
@@ -698,7 +859,6 @@
       });
     }
     
-    // Actualizar selección de banco
     function updateBankSelection(checkbox, bankOption, bankName) {
       if (checkbox.checked) {
         bankOption.classList.add('selected');
@@ -710,7 +870,6 @@
         selectedBanks = selectedBanks.filter(name => name !== bankName);
       }
       
-      // Actualizar el estado del checkbox "Todos los bancos"
       const allBanks = Object.keys(banks);
       const selectAllCheckbox = document.getElementById('checkAllBanks');
       
@@ -725,12 +884,10 @@
       }
     }
 
-    // Formatear como moneda
     function formatCurrency(value) {
       return new Intl.NumberFormat('es-CO').format(value);
     }
 
-    // Formatear entrada de moneda
     function formatInputCurrency(input) {
       const value = input.value.replace(/\D/g, '');
       if (value) {
@@ -740,12 +897,10 @@
       }
     }
 
-    // Convertir string de moneda a número
     function parseCurrency(value) {
       return parseInt(value.toString().replace(/\D/g, '')) || 0;
     }
 
-    // Calcular monto del préstamo
     function calculateLoanAmount() {
       const propertyValue = parseCurrency(document.getElementById('propertyValue').value);
       const downPayment = parseCurrency(document.getElementById('downPayment').value);
@@ -759,7 +914,6 @@
       document.getElementById('downPaymentPercentage').textContent = percentage;
     }
 
-    // Reiniciar formulario
     function resetForm() {
       document.getElementById('propertyValue').value = '';
       document.getElementById('downPayment').value = '';
@@ -769,10 +923,8 @@
       document.getElementById('resultsContainer').classList.add('d-none');
       document.getElementById('minCreditWarning').classList.add('d-none');
       
-      // Reiniciar selección de bancos
       selectedBanks = Object.keys(banks);
       
-      // Marcar todas las opciones
       const selectAllCheckbox = document.getElementById('checkAllBanks');
       selectAllCheckbox.checked = true;
       selectAllCheckbox.indeterminate = false;
@@ -784,194 +936,337 @@
       });
     }
 
-    // Calcular préstamo hipotecario
     function calculateMortgage() {
       const propertyValue = parseCurrency(document.getElementById('propertyValue').value);
-  const downPayment = parseCurrency(document.getElementById('downPayment').value);
-  const loanTerm = parseInt(document.getElementById('loanTerm').value);
-
-  if (propertyValue <= 0 || downPayment <= 0 || downPayment >= propertyValue || isNaN(loanTerm)) {
-    alert('Por favor, verifique los datos ingresados');
-    return;
-  }
-
-  if (selectedBanks.length === 0) {
-    alert('Debe seleccionar al menos un banco para la comparación');
-    return;
-  }
-
-  const loanAmount = propertyValue - downPayment;
-
-  const resultsContent = document.getElementById('resultsContent');
-  const resultsContainer = document.getElementById('resultsContainer');
-  resultsContent.innerHTML = '';
-  resultsContainer.classList.remove('d-none');
-
-  let allResults = [];
-
-  selectedBanks.forEach(bankName => {
-    const bank = banks[bankName];
-
-    ["minRate", "maxRate"].forEach(rateType => {
-      const yearlyRate = bank[rateType];
-      if (!yearlyRate) return;
-
-      const monthlyRate = Math.pow(1 + yearlyRate, 1 / 12) - 1;
-      const paymentPeriods = loanTerm * 12;
-      const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, paymentPeriods)) /
-                              (Math.pow(1 + monthlyRate, paymentPeriods) - 1);
-
-      allResults.push({
-        bankName,
-        logoClass: bank.logoClass,
-        yearlyRate,
-        monthlyRate,
-        rateLabel: rateType === "minRate" ? "Tasa más baja" : "Tasa más alta",
-        monthlyPayment
-      });
-    });
-  });
-
-  allResults.sort((a, b) => a.monthlyPayment - b.monthlyPayment);
-
-  allResults.forEach((result, index) => {
-    const isBest = index === 0 ? '<span class="badge badge-best ms-2">Mejor opción</span>' : '';
-    const card = document.createElement('div');
-    card.className = 'card mb-3 bank-card';
-    card.innerHTML = `
-      <div class="card-body">
-        <div class="row align-items-center">
-          <div class="col-md-3 text-center text-md-start">
-            <i class="bi ${result.logoClass} fs-1 text-primary"></i>
-            <h5 class="mb-0">${result.bankName} ${isBest}</h5>
-          </div>
-          <div class="col-md-3 text-center">
-            <div class="text-muted small">${result.rateLabel}</div>
-            <div class="fw-bold">${(result.yearlyRate * 100).toFixed(2)}% EA</div>
-            <div class="text-muted small">${(result.monthlyRate * 100).toFixed(2)}% MV</div>
-          </div>
-          <div class="col-md-3 text-center">
-            <div class="text-muted small">Cuota Mensual</div>
-            <div class="monthly-payment">$${formatCurrency(Math.round(result.monthlyPayment))}</div>
-          </div>
-          <div class="col-md-3 text-center">
-            <button class="btn btn-sm btn-outline-primary view-details-btn" data-rate="${result.rateLabel}" data-bank="${result.bankName.replace(/\s+/g, '-')}-${result.rateLabel.replace(/\s+/g, '-')}">
-              <i class="bi bi-eye me-1"></i>Ver detalles
-            </button>
-          </div>
-        </div>
-        <div class="mt-3 bank-details d-none" id="details-${result.bankName.replace(/\s+/g, '-')}-${result.rateLabel.replace(/\s+/g, '-')}">
-          <h6 class="mb-3 fw-bold small">Detalles del Préstamo</h6>
-          <table class="table table-sm table-bordered">
-            <tr><th>Valor de la propiedad:</th><td>$${formatCurrency(propertyValue)}</td></tr>
-            <tr><th>Cuota inicial:</th><td>$${formatCurrency(downPayment)} (${(downPayment / propertyValue * 100).toFixed(1)}%)</td></tr>
-            <tr><th>Monto del crédito:</th><td>$${formatCurrency(loanAmount)}</td></tr>
-            <tr><th>Plazo:</th><td>${loanTerm} años (${loanTerm * 12} meses)</td></tr>
-            <tr><th>${result.rateLabel} (EA):</th><td>${(result.yearlyRate * 100).toFixed(2)}%</td></tr>
-            <tr><th>Tasa MV:</th><td>${(result.monthlyRate * 100).toFixed(2)}%</td></tr>
-            <tr><th>Cuota mensual:</th><td>$${formatCurrency(Math.round(result.monthlyPayment))}</td></tr>
-          </table>
-          <p class="legal-text">* Cálculos con tasas vigentes. Esta simulación no constituye compromiso para el banco ni para Agile Home.</p>
-        </div>
-      </div>
-    `;
-
-    resultsContent.appendChild(card);
-
-    const detailsBtn = card.querySelector('.view-details-btn');
-    detailsBtn.addEventListener('click', function () {
-      const id = this.getAttribute('data-bank');
-      const detailsSection = document.getElementById(`details-${id}`);
-      const allSections = document.querySelectorAll('.bank-details');
-
-      allSections.forEach(el => el.classList.add('d-none'));
-      document.querySelectorAll('.view-details-btn').forEach(btn => {
-        btn.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
-      });
-
-      if (detailsSection.classList.contains('d-none')) {
-        detailsSection.classList.remove('d-none');
-        this.innerHTML = '<i class="bi bi-eye-slash me-1"></i>Ocultar detalles';
-      } else {
-        detailsSection.classList.add('d-none');
-        this.innerHTML = '<i class="bi bi-eye me-1"></i>Ver detalles';
+      const downPayment = parseCurrency(document.getElementById('downPayment').value);
+      const loanTerm = parseInt(document.getElementById('loanTerm').value);
+      
+      if (propertyValue <= 0 || downPayment <= 0 || downPayment >= propertyValue || isNaN(loanTerm)) {
+        alert('Por favor, verifique los datos ingresados');
+        return;
       }
-    });
-  });
-
-  // ACTUALIZA GRÁFICOS
-  generateComparisonChart(allResults);
-  generateInterestRateHeatMap(allResults);
-}
-
-    // Generar mapa de calor de tasas de interés
-   const ctx = document.getElementById('comparisonChart').getContext('2d');
-  if (window.comparisonChart instanceof Chart) window.comparisonChart.destroy();
-
-  const labels = results.map(r => `${r.bankName} - ${r.rateLabel}`);
-  const payments = results.map(r => Math.round(r.monthlyPayment));
-  const minPayment = Math.min(...payments);
-
-  const colors = results.map((r, i) =>
-    payments[i] === minPayment ? 'rgba(253, 76, 11, 0.9)' : 'rgba(2, 14, 46, 0.7)'
-  );
-
-  window.comparisonChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Cuota Mensual',
-        data: payments,
-        backgroundColor: colors,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          ticks: {
-            callback: value => '$' + formatCurrency(value)
+      
+      if (selectedBanks.length === 0) {
+        alert('Debe seleccionar al menos un banco para la comparación');
+        return;
+      }
+      
+      const loanAmount = propertyValue - downPayment;
+      
+      // Verificar montos mínimos
+      const minCreditWarning = document.getElementById('minCreditWarning');
+      const minCreditWarningText = document.getElementById('minCreditWarningText');
+      const eligibleBanks = [];
+      const ineligibleBanks = [];
+      
+      for (const bankName of selectedBanks) {
+        const bank = banks[bankName];
+        if (bank.minLoanAmount > 0 && loanAmount < bank.minLoanAmount) {
+          ineligibleBanks.push({
+            name: bankName,
+            minAmount: bank.minLoanAmount
+          });
+        } else {
+          eligibleBanks.push(bankName);
+        }
+      }
+      
+      if (ineligibleBanks.length > 0) {
+        let warningMessage = 'El monto a financiar no cumple con el mínimo requerido por ';
+        
+        if (ineligibleBanks.length === 1) {
+          warningMessage += `${ineligibleBanks[0].name} (mínimo $${formatCurrency(ineligibleBanks[0].minAmount)}).`;
+        } else {
+          warningMessage += 'los siguientes bancos: ';
+          ineligibleBanks.forEach((bank, index) => {
+            warningMessage += `${bank.name} (mínimo $${formatCurrency(bank.minAmount)})`;
+            if (index < ineligibleBanks.length - 1) {
+              warningMessage += ', ';
+            }
+          });
+          warningMessage += '.';
+        }
+        
+        minCreditWarningText.textContent = warningMessage;
+        minCreditWarning.classList.remove('d-none');
+        
+        if (eligibleBanks.length === 0) {
+          const resultsContent = document.getElementById('resultsContent');
+          resultsContent.innerHTML = '<div class="alert alert-warning">No hay bancos disponibles para el monto de financiación solicitado.</div>';
+          document.getElementById('resultsContainer').classList.remove('d-none');
+          return;
+        }
+      } else {
+        minCreditWarning.classList.add('d-none');
+      }
+      
+      // Calcular para cada banco elegible con ambas tasas
+      const bankResults = [];
+      const mostrarSoloBogota = loanTerm > 20 && propertyValue <= 213525000;
+      
+      for (const bankName of eligibleBanks) {
+        if (mostrarSoloBogota && bankName !== "Banco de Bogotá") {
+          continue;
+        }
+        
+        const bank = banks[bankName];
+        
+        // Cálculo con tasa mínima
+        const minYearlyRate = bank.minRate;
+        const minMonthlyRate = Math.pow(1 + minYearlyRate, 1/12) - 1;
+        const paymentPeriods = loanTerm * 12;
+        
+        const minMonthlyPayment = loanAmount * (minMonthlyRate * Math.pow(1 + minMonthlyRate, paymentPeriods)) 
+                                / (Math.pow(1 + minMonthlyRate, paymentPeriods) - 1);
+        
+        // Cálculo con tasa máxima
+        const maxYearlyRate = bank.maxRate;
+        const maxMonthlyRate = Math.pow(1 + maxYearlyRate, 1/12) - 1;
+        
+        const maxMonthlyPayment = loanAmount * (maxMonthlyRate * Math.pow(1 + maxMonthlyRate, paymentPeriods)) 
+                                / (Math.pow(1 + maxMonthlyRate, paymentPeriods) - 1);
+        
+        bankResults.push({
+          bankName, 
+          logoClass: bank.logoClass, 
+          rateDescription: bank.rateDescription || "",
+          minYearlyRate,
+          maxYearlyRate,
+          minMonthlyRate,
+          maxMonthlyRate,
+          minMonthlyPayment,
+          maxMonthlyPayment,
+          // Usar la tasa mínima para ordenamiento
+          monthlyPayment: minMonthlyPayment
+        });
+      }
+      
+      // Ordenar por pago mensual mínimo (menor primero)
+      bankResults.sort((a, b) => a.minMonthlyPayment - b.minMonthlyPayment);
+      
+      displayResults(bankResults, propertyValue, downPayment, loanAmount, loanTerm);
+    }
+    
+    function displayResults(bankResults, propertyValue, downPayment, loanAmount, loanTerm) {
+      const resultsContainer = document.getElementById('resultsContainer');
+      const resultsContent = document.getElementById('resultsContent');
+      
+      resultsContent.innerHTML = '';
+      
+      if (bankResults.length === 0) {
+        resultsContent.innerHTML = '<div class="alert alert-warning">No hay resultados disponibles con los criterios seleccionados.</div>';
+        resultsContainer.classList.remove('d-none');
+        return;
+      }
+      
+      bankResults.forEach((result, index) => {
+        const isBest = index === 0 ? '<span class="badge badge-best ms-3">Mejor Opción</span>' : '';
+        
+        const card = document.createElement('div');
+        card.className = 'card mb-4 bank-card';
+        card.innerHTML = `
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-3 mb-3 mb-md-0 text-center text-md-start">
+                <i class="bi ${result.logoClass} fs-1" style="color: var(--secondary-color);"></i>
+                <h5 class="mb-0 fw-bold" style="color: var(--primary-color);">${result.bankName} ${isBest}</h5>
+              </div>
+              <div class="col-md-6 mb-3 mb-md-0">
+                <div class="rate-comparison">
+                  <div class="rate-option best-rate">
+                    <div class="rate-title" style="color: var(--success-color);">🏆 MEJOR ESCENARIO</div>
+                    <div class="rate-value" style="color: var(--success-color);">${result.rateDescription} ${(result.minYearlyRate * 100).toFixed(2)}% EA</div>
+                    <div class="rate-value small" style="color: var(--success-color);">${(result.minMonthlyRate * 100).toFixed(2)}% MV</div>
+                    <div class="monthly-value">$${formatCurrency(Math.round(result.minMonthlyPayment))}</div>
+                  </div>
+                  <div class="rate-option worst-rate">
+                    <div class="rate-title" style="color: #e74c3c;">⚠️ ESCENARIO ALTO</div>
+                    <div class="rate-value" style="color: #e74c3c;">Hasta ${(result.maxYearlyRate * 100).toFixed(2)}% EA</div>
+                    <div class="rate-value small" style="color: #e74c3c;">${(result.maxMonthlyRate * 100).toFixed(2)}% MV</div>
+                    <div class="monthly-value">$${formatCurrency(Math.round(result.maxMonthlyPayment))}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 text-center">
+                <button class="btn btn-outline-primary view-details-btn fw-bold" data-bank="${result.bankName.replace(/\s+/g, '-')}">
+                  <i class="bi bi-eye me-2"></i>Ver Detalles
+                </button>
+              </div>
+            </div>
+            <div class="mt-4 bank-details d-none" id="details-${result.bankName.replace(/\s+/g, '-')}">
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 class="mb-3 fw-bold" style="color: var(--primary-color);">Detalles del Préstamo</h6>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <tr><th>Valor de la propiedad:</th><td>$${formatCurrency(propertyValue)}</td></tr>
+                      <tr><th>Cuota inicial:</th><td>$${formatCurrency(downPayment)} (${(downPayment / propertyValue * 100).toFixed(1)}%)</td></tr>
+                      <tr><th>Monto del crédito:</th><td>$${formatCurrency(loanAmount)}</td></tr>
+                      <tr><th>Plazo:</th><td>${loanTerm} años (${loanTerm * 12} meses)</td></tr>
+                      <tr><th>Rango de tasas EA:</th><td>${result.rateDescription} ${(result.minYearlyRate * 100).toFixed(2)}% - ${(result.maxYearlyRate * 100).toFixed(2)}%</td></tr>
+                      <tr><th>Cuota mensual mínima:</th><td>$${formatCurrency(Math.round(result.minMonthlyPayment))}</td></tr>
+                      <tr><th>Cuota mensual máxima:</th><td>$${formatCurrency(Math.round(result.maxMonthlyPayment))}</td></tr>
+                    </table>
+                  </div>
+                  <div class="legal-text">
+                    * Cálculos con tasas de referencia vigentes, cuota no constituye un compromiso para el Banco o para Agile Home.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        resultsContent.appendChild(card);
+        
+        const detailsBtn = card.querySelector('.view-details-btn');
+        detailsBtn.addEventListener('click', function() {
+          const bankId = this.getAttribute('data-bank');
+          const detailsSection = document.getElementById(`details-${bankId}`);
+          
+          if (detailsSection.classList.contains('d-none')) {
+            document.querySelectorAll('.bank-details').forEach(el => {
+              el.classList.add('d-none');
+            });
+            
+            document.querySelectorAll('.view-details-btn').forEach(btn => {
+              btn.innerHTML = '<i class="bi bi-eye me-2"></i>Ver Detalles';
+            });
+            
+            detailsSection.classList.remove('d-none');
+            this.innerHTML = '<i class="bi bi-eye-slash me-2"></i>Ocultar Detalles';
+          } else {
+            detailsSection.classList.add('d-none');
+            this.innerHTML = '<i class="bi bi-eye me-2"></i>Ver Detalles';
+          }
+        });
+      });
+      
+      generateComparisonChart(bankResults);
+      generateInterestRateHeatMap(bankResults);
+      
+      resultsContainer.classList.remove('d-none');
+      resultsContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function generateComparisonChart(bankResults) {
+      const ctx = document.getElementById('comparisonChart').getContext('2d');
+      
+      if (window.comparisonChart instanceof Chart) {
+        window.comparisonChart.destroy();
+      }
+      
+      const labels = bankResults.map(result => result.bankName);
+      const minPayments = bankResults.map(result => Math.round(result.minMonthlyPayment));
+      const maxPayments = bankResults.map(result => Math.round(result.maxMonthlyPayment));
+      
+      const minPayment = Math.min(...minPayments);
+      const scaleMin = Math.floor(minPayment * 0.9);
+      
+      window.comparisonChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Cuota Mínima',
+              data: minPayments,
+              backgroundColor: 'rgba(0, 200, 81, 0.8)',
+              borderColor: 'rgba(0, 200, 81, 1)',
+              borderWidth: 2
+            },
+            {
+              label: 'Cuota Máxima',
+              data: maxPayments,
+              backgroundColor: 'rgba(231, 76, 60, 0.8)',
+              borderColor: 'rgba(231, 76, 60, 1)',
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: scaleMin,
+              ticks: {
+                callback: function(value) {
+                  return '$' + formatCurrency(value);
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = context.raw;
+                  const diff = value - minPayment;
+                  let diffText = '';
+                  
+                  if (context.datasetIndex === 0 && context.dataIndex === 0) {
+                    diffText = ' (mejor opción)';
+                  } else if (diff > 0) {
+                    diffText = ` (+$${formatCurrency(diff)} respecto al mejor)`;
+                  }
+                  
+                  return context.dataset.label + ': $' + formatCurrency(value) + diffText;
+                }
+              }
+            }
           }
         }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: context => 'Cuota: $' + formatCurrency(context.raw)
-          }
-        }
+      });
+    }
+    
+    function generateInterestRateHeatMap(bankResults) {
+      const heatMapTable = document.getElementById('interestRateHeatMap');
+      const tbody = heatMapTable.querySelector('tbody');
+      
+      tbody.innerHTML = '';
+      
+      const minRates = bankResults.map(result => result.minYearlyRate);
+      const minRate = Math.min(...minRates);
+      const maxRate = Math.max(...bankResults.map(result => result.maxYearlyRate));
+      
+      const sortedBanks = [...bankResults].sort((a, b) => a.minYearlyRate - b.minYearlyRate);
+      
+      sortedBanks.forEach(bank => {
+        const row = document.createElement('tr');
+        
+        const percentage = (bank.minYearlyRate - minRate) / (maxRate - minRate);
+        const heatColor = getHeatMapColor(percentage);
+        
+        row.innerHTML = `
+          <td class="fw-bold">${bank.bankName}</td>
+          <td>${bank.rateDescription} ${(bank.minYearlyRate * 100).toFixed(2)}% - ${(bank.maxYearlyRate * 100).toFixed(2)}%</td>
+          <td>
+            <div class="heat-map-cell" style="background-color: ${heatColor}; width: 100%; color: white; text-align: center; font-weight: bold;">
+              ${(bank.minYearlyRate * 100).toFixed(2)}%
+            </div>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+    
+    function getHeatMapColor(percentage) {
+      if (percentage < 0.2) {
+        return 'rgba(0, 200, 81, 0.9)';
+      } else if (percentage < 0.5) {
+        return `rgba(${Math.round(percentage * 255)}, ${Math.round(200 - (percentage * 100))}, 0, 0.9)`;
+      } else if (percentage < 0.8) {
+        return `rgba(255, ${Math.round(165 * (1 - percentage))}, 0, 0.9)`;
+      } else {
+        return 'rgba(231, 76, 60, 0.9)';
       }
     }
-  });
-}
-
-function getHeatMapColor(pct) {
-  if (pct < 0.2) return 'rgba(40, 167, 69, 0.7)';
-  if (pct < 0.5) return `rgba(${40 + pct * 2 * 215}, 167, 69, 0.7)`;
-  if (pct < 0.8) return `rgba(${215 + pct * 40}, ${167 - pct * 167}, 0, 0.7)`;
-  return 'rgba(253, ' + Math.round(76 * (1 - pct)) + ', 11, 0.7)';
-}
-
-function generateInterestRateHeatMap(results) {
-  const tbody = document.querySelector('#interestRateHeatMap tbody');
-  tbody.innerHTML = '';
-  const rates = results.map(r => r.yearlyRate);
-  const minRate = Math.min(...rates), maxRate = Math.max(...rates);
-  const sorted = [...results].sort((a, b) => a.yearlyRate - b.yearlyRate);
-
-  sorted.forEach(bank => {
-    const pct = (bank.yearlyRate - minRate) / (maxRate - minRate || 1);
-    const heatColor = getHeatMapColor(pct);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><i class="bi ${bank.logoClass} me-2"></i>${bank.bankName} (${bank.rateLabel})</td>
-      <td>${(bank.yearlyRate * 100).toFixed(2)}%</td>
-      <td>${(bank.monthlyRate * 100).toFixed(2)}%</td>
-      <td><div class="heat-map-cell" style="background-color: ${heatColor}; width: 100%;">&nbsp;</div></td>
-    `;
-    tbody.appendChild(row);
-  });
-}
+  </script>
+</body>
+</html>

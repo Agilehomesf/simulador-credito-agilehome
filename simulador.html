@@ -1609,7 +1609,7 @@ function renderDocs(inp){
   const pb=b?profBlock(b,inp):null;
   const secs=docSections(inp,bank);
   const B=(S.docs.banks&&S.docs.banks[bank])||null;
-  const sig=JSON.stringify([bank,secs,pb,B&&B.note,B&&B.build,b&&bankNotesFor(b,inp)]);
+  const sig=JSON.stringify([ADV,bank,secs,pb,B&&B.note,B&&B.build,b&&bankNotesFor(b,inp)]);
   if(sig===lastDocsSig)return;
   lastDocsSig=sig;
   const note=B?(B.note?'<p class="note">'+esc(B.note)+'</p>':''):'<p class="note">Aún no hay una lista propia cargada para '+esc(bank)+'. Se muestra la lista base; confirma con el asesor del banco.</p>';
@@ -1617,7 +1617,7 @@ function renderDocs(inp){
   const bn=b?bankNotesFor(b,inp):[];
   const bnHtml=bn.length?'<ul class="bul">'+bn.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>':'';
   const bld=(B&&B.build&&inp.prod==='hipo')?'<details class="more"><summary>'+esc(B.build.t)+'</summary><ul class="bul">'+B.build.bul.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul><div class="dg"><h3>Documentos adicionales para construir</h3><ul>'+B.build.items.map(function(t){return '<li><label><input type="checkbox"><span>'+esc(t)+'</span></label></li>';}).join('')+'</ul></div></details>':'';
-  body.innerHTML='<p class="profline" style="margin:0">Documentos para solicitar el crédito en <b>'+esc(bank)+'</b> · '+esc(PROD[inp.prod].n)+'.</p>'+warn+((note||bnHtml)?'<details class="more"><summary>Políticas del banco y notas</summary>'+note+bnHtml+'</details>':'')+bld+secs.map(function(g){
+  body.innerHTML='<p class="profline" style="margin:0">Documentos para solicitar el crédito en <b>'+esc(bank)+'</b> · '+esc(PROD[inp.prod].n)+'.</p>'+warn+((ADV&&(note||bnHtml))?'<details class="more"><summary>Políticas del banco y notas (solo asesor)</summary>'+note+bnHtml+'</details>':'')+bld+secs.map(function(g){
     return '<div class="dg"><h3>'+esc(g.t)+(B&&g.base?' <span class="tagbase">Lista base</span>':'')+'</h3><ul>'+g.items.map(function(t){return '<li><label><input type="checkbox"><span>'+esc(t)+'</span></label></li>';}).join('')+'</ul></div>';
   }).join('');
   lastText='Documentos para tu solicitud de crédito en '+bank+' ('+PROD[inp.prod].n+')\n\n'+secs.map(function(g){return g.t.toUpperCase()+'\n'+g.items.map(function(t){return '- '+t;}).join('\n');}).join('\n\n')+'\n\nEs una guía; el banco puede pedir soportes adicionales.';

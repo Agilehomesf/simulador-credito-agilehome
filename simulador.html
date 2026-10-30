@@ -1095,9 +1095,9 @@ function sortOpts(a){
 }
 function syncTerm(prod){
   const sel=$('#f-term');if(!sel||sel.getAttribute('data-p')===prod)return;
-  const L=prod==='libre'?[0.5,1,1.5,2,3,4,5,6,7]:(prod==='cartera'?[3,5,7,10,15,20]:prod==='remo'?[5,7,10,12,15]:prod==='comer'?[5,7,10]:prod==='constr'?[5,7,10,15,20]:[5,7,10,15,20,25,30]);
+  const L=prod==='libre'?[0.5,1,1.5,2,3,4,5,6,7]:(prod==='cartera'?[3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20]:prod==='remo'?[5,7,10,12,15]:prod==='comer'?[5,7,10]:prod==='constr'?[5,7,10,15,20]:[5,7,10,15,20,25,30]);
   const d=prod==='libre'?5:(prod==='cartera'?15:(prod==='remo'||prod==='comer'||prod==='constr'?10:20));
-  sel.innerHTML=L.map(function(t){return '<option value="'+t+'"'+(t===d?' selected':'')+'>'+(prod==='libre'?(t*12)+' meses'+(t>=1?' ('+(t===1?'1 año':String(t).replace('.5',',5')+' años')+')':''):t+' años')+'</option>';}).join('');
+  sel.innerHTML=L.map(function(t){return '<option value="'+t+'"'+(t===d?' selected':'')+'>'+(prod==='libre'||prod==='cartera'?(t*12)+' meses'+(t>=1?' ('+(t===1?'1 año':String(t).replace('.5',',5')+' años')+')':''):t+' años')+'</option>';}).join('');
   sel.value=String(d);sel.setAttribute('data-p',prod);
   const lv=document.querySelector('label[for="f-valor"]');if(lv)lv.textContent=prod==='constr'?'Costo directo de la obra':'Valor del inmueble';
 }
@@ -1117,7 +1117,7 @@ function readInputs(){
   i.ingTit=tot;i.ingresos=tot+i.ing2+i.ing3;
   i.cap=S.smmlv*(i.zona==='main'?S.visCity:S.visOther);
   i.vis=i.prod!=='constr'&&i.valor>0&&i.valor<=i.cap;
-  const c={type:$('#f-ctype').value,dest:$('#f-cdest').value,rate:pnum($('#f-crate').value),cuota:digits('#f-cuotaact'),orig:+$('#f-corig').value,rem:+$('#f-crem').value};
+  const c={type:$('#f-ctype').value,dest:$('#f-cdest').value,rate:pnum($('#f-crate').value),cuota:digits('#f-cuotaact'),orig:(+$('#f-corig').value)/12,rem:(+$('#f-crem').value)/12};
   c.ok=c.rate>0&&c.cuota>0&&c.orig>0&&c.rem>0&&c.rem<=c.orig;
   i.cur=c;
   return i;
@@ -1180,8 +1180,8 @@ function shell(){
   '<div class="field"><label for="f-cdest">Quiero pasarlo a</label><div class="inwrap"><select id="f-cdest"><option value="pesos">Pesos</option><option value="uvr">UVR</option></select></div></div>'+
   '<div class="field"><label for="f-crate">Tasa actual del crédito</label><div class="inwrap"><input id="f-crate" type="text" inputmode="decimal" value="13,5"><i>% EA</i></div></div>'+
   '<div class="field"><label for="f-cuotaact">Cuota actual</label><div class="inwrap"><i>$</i><input id="f-cuotaact" type="text" inputmode="numeric" value="3.600.000"></div></div>'+
-  '<div class="field"><label for="f-corig">Plazo con el que lo tomó</label><div class="inwrap"><input id="f-corig" type="number" inputmode="decimal" min="1" max="30" step="0.5" value="20"><i>años</i></div></div>'+
-  '<div class="field"><label for="f-crem">Plazo que le falta por pagar</label><div class="inwrap"><input id="f-crem" type="number" inputmode="decimal" min="0.5" max="30" step="0.5" value="15"><i>años</i></div></div>'+
+  '<div class="field"><label for="f-corig">Plazo con el que lo tomó</label><div class="inwrap"><input id="f-corig" type="number" inputmode="numeric" min="12" max="360" step="1" value="240"><i>meses</i></div></div>'+
+  '<div class="field"><label for="f-crem">Plazo que le falta por pagar</label><div class="inwrap"><input id="f-crem" type="number" inputmode="numeric" min="6" max="360" step="1" value="180"><i>meses</i></div></div>'+
   '</div><p class="conv" id="conv"></p><p class="hint" id="saldo-est"></p></div></div>'+
   '<div class="capline" id="capline"></div><p class="warnline" id="warn" hidden></p></section>'+
 
@@ -1425,7 +1425,7 @@ function fsRender(inp,isCar){
   const val=function(id){const e=q(id);return e?e.value:'';};
   const sums={1:[txt('#f-city'),'$ '+val('#f-valor'),txt('#f-nuevo')].filter(Boolean).join(' · '),
     2:['$ '+val('#f-credito'),txt('#f-term'),(q('#f-seg')&&q('#f-seg').checked)?'con seguros':'sin seguros'].join(' · '),
-    3:[val('#f-crate')+'% EA','cuota $ '+val('#f-cuotaact'),'faltan '+val('#f-crem')+' años'].join(' · ')};
+    3:[val('#f-crate')+'% EA','cuota $ '+val('#f-cuotaact'),'faltan '+val('#f-crem')+' cuotas'].join(' · ')};
   const done={1:inp.valor>0,2:inp.credito>0,3:inp.cur&&inp.cur.rate>0&&inp.cur.cuota>0&&inp.cur.rem>0};
   Array.prototype.forEach.call(document.querySelectorAll('.fsec'),function(s){
     const n=+s.getAttribute('data-sec'),open=FSOPEN===n;

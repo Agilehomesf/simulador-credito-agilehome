@@ -1459,7 +1459,7 @@ function amortHtml(r,uvr,keyid){
     rows.push('<tr><td>'+(lim===n&&lim%12?fmtT(lim/12):'Año '+(lim/12))+'</td><td>'+money(cuo)+'</td><td>'+money(ia)+'</td><td>'+money(ca)+'</td><td>'+money(Math.max(0,sal))+'</td></tr>');
   });
   const tbl='<div class="tw"><table class="tt am"><thead><tr><th>Plazo</th><th>Cuota</th><th>Intereses</th><th>Capital</th><th>Deuda</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'+
-    '<p class="note">Cuota mensual en ese año; intereses y capital pagados acumulados desde el desembolso; deuda pendiente al cierre. Con la tasa "desde" y sin seguros'+(cap?'. La cuota baja cada mes porque el abono a capital es constante':'')+(uvr?'. En UVR están expresados en pesos de hoy: con la inflación los valores en pesos serán mayores':'')+'. Es una guía; la tabla oficial la entrega el banco.</p>';
+    '<p class="note"><b>Observación:</b> esta tabla no incluye los seguros de vida ni de incendio y terremoto. Por eso la cuota es menor que la cuota mensual de arriba, que los incluye cuando los activaste en la simulación.</p><p class="note">La cuota es la mensual en ese año; intereses y capital están acumulados desde el desembolso y la deuda es la pendiente al cierre. Se calcula con la tasa "desde"'+(cap?'. La cuota baja cada mes porque el abono a capital es constante':'')+(uvr?'. En UVR los valores están en pesos de hoy: con la inflación los valores en pesos serán mayores':'')+'. Es una guía; la tabla oficial la entrega el banco.</p>';
   return acc('am:'+keyid,I('calc')+' Ver cómo baja tu deuda año a año',tbl,false);
 }
 function bankRow(name,opts,firstBy,inp,rank,sc,maxAll){

@@ -1,0 +1,53 @@
+# Python y entornos virtuales
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.venv
+ENV/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs y archivos de ejecución
+*.log
+*.pid
+*.out
+nohup.out
+server_restart.log
+server_persistent.log
+
+# Archivos específicos de Replit
+.replit
+.upm/
+.config/
+.cache/
+.breakpoints
+.replit.runme
+
+# Archivos específicos de IDE
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos temporales
+.tmp/
+tmp/
+temp/
+
+# Archivos de compilación y paquetes
+*.tgz
+*.tar.gz
+*.zip
+*.rar
+
+# Archivos de base de datos
+*.db
+*.sqlite
+*.sqlite3

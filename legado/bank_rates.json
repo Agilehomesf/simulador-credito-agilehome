@@ -1,0 +1,35 @@
+{
+  "lastUpdated": "30 de abril de 2025",
+  "banks": {
+    "Banco de Occidente": {
+      "rate": 0.1290,
+      "rateDescription": "Desde",
+      "logoClass": "bi-bank"
+    },
+    "Banco Caja Social": {
+      "rate": 0.1310,
+      "rateDescription": "Tasa promedio",
+      "logoClass": "bi-house"
+    },
+    "Credifamilia": {
+      "rate": 0.1410,
+      "rateDescription": "Desde",
+      "logoClass": "bi-building"
+    },
+    "BBVA": {
+      "rate": 0.1265,
+      "rateDescription": "Tasa promedio",
+      "logoClass": "bi-bank2"
+    },
+    "Itaú": {
+      "rate": 0.1380,
+      "rateDescription": "Desde",
+      "logoClass": "bi-building-fill"
+    },
+    "Banco de Bogotá": {
+      "rate": 0.1275,
+      "rateDescription": "Desde",
+      "logoClass": "bi-bank"
+    }
+  }
+}

@@ -130,16 +130,25 @@
     btn.disabled = true; btn.textContent = 'Enviando…';
     var listo = function () { e.target.hidden = true; $('as-ok').hidden = false; };
     if (!enVivo) { listo(); return; }
+    var fallo = function () {
+      btn.disabled = false; btn.textContent = TEXTO;
+      error('No pudimos confirmar el envío de tus datos. Intenta de nuevo o escríbenos por WhatsApp al 312 310 9099.');
+    };
+    var control = window.AbortController ? new AbortController() : null;
+    var espera = setTimeout(function () { if (control) control.abort(); }, 25000);
     fetch(DESTINO, {
-      method: 'POST', mode: 'no-cors',
+      signal: control ? control.signal : undefined,
+      method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         fecha: new Date().toISOString(), nombre: nombre, celular: celular, correo: correo,
-        autorizacion: 'Sí', version_politica: '1.0', origen: location.href.split('#')[0] + ' | ' + calif + ' | Falta: ' + queFalta, producto: 'Asesoría desde la página web', top3: '[]', cuota_inicial: dato[0], reportes: rep === 'si' ? 'Sí' : 'No', ingresos_demostrables: dem === 'si' ? 'Sí' : 'No', ingresos_2_smlv: ing === 'si' ? 'Sí' : 'No', calificacion: calif, que_falta: queFalta
+        autorizacion: 'Sí', version_politica: '1.0', origen: location.href.split('#')[0], producto: 'Asesoría desde la página web', top3: '[]', cuota_inicial: dato[0], reportes: rep === 'si' ? 'Sí' : 'No', ingresos_demostrables: dem === 'si' ? 'Sí' : 'No', ingresos_2_smlv: ing === 'si' ? 'Sí' : 'No', calificacion: calif, que_falta: queFalta
       })
-    }).then(listo).catch(function () {
-      btn.disabled = false; btn.textContent = TEXTO;
-      error('No pudimos enviar tus datos. Intenta de nuevo o escríbenos a comercial@agilehomesf.com.');
+    }).then(function (r) { return r.text(); }).then(function (texto) {
+      clearTimeout(espera);
+      if (String(texto).trim() === 'ok') listo(); else fallo();
+    }).catch(function () {
+      clearTimeout(espera); fallo();
     });
   });
 })();

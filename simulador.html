@@ -456,6 +456,12 @@ a,.link{color:var(--orange-ink)}
 .visb.is{background:var(--good-bg);border-color:#B9E1CB}.visb.is .i{background:var(--good);color:#fff}.visb.is b{color:var(--good)}
 .visb.not{background:#FFF4EC;border-color:#FFD9BF}.visb.not .i{background:var(--orange);color:#fff}
 
+.lead [hidden]{display:none !important}
+.lead .paso{animation:ci-in .25s ease}
+@keyframes ci-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.lead .paso{animation:none}}
+#l-send:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.lead .ci-sn{display:flex;gap:18px}
 .lead .ci{border:0;margin:14px 0 0;padding:0;min-width:0}
 .lead .ci legend{padding:0;font-size:15px;font-weight:700;color:var(--ink)}
 .lead .ci-v{margin:4px 0 8px;font-size:14px;color:#555}
@@ -1243,10 +1249,10 @@ function shell(){
   '<form id="lead-f" novalidate><div class="grid-f"><div class="field"><label for="l-name">Nombre completo</label><div class="inwrap"><input id="l-name" type="text" autocomplete="name"></div></div>'+
   '<div class="field"><label for="l-tel">Celular</label><div class="inwrap"><input id="l-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567"></div></div>'+
   '<div class="field"><label for="l-mail">Correo electrónico</label><div class="inwrap"><input id="l-mail" type="email" autocomplete="email"></div></div></div>'+
-  '<fieldset class="ci" id="l-ci"><legend>¿Cuentas con la cuota inicial?</legend><p class="ci-v" id="l-ci-v" hidden></p><label class="ci-o"><input type="radio" name="l-ci" value="total"><span>Sí, tengo los recursos completos</span></label><label class="ci-o"><input type="radio" name="l-ci" value="proyecto"><span>Sí, la estoy pagando en un proyecto de vivienda</span></label><label class="ci-o"><input type="radio" name="l-ci" value="parcial"><span>Tengo una parte</span></label><label class="ci-o"><input type="radio" name="l-ci" value="no"><span>Aún no tengo recursos</span></label><p class="ci-n" id="l-ci-n" hidden>Para solicitar el crédito necesitas recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda. Déjanos tus datos y te orientamos.</p></fieldset>'+
-  '<label class="chk"><input type="checkbox" id="l-ok"><span>Autorizo a Agile Home S.A.S. para tratar mis datos personales y los de mi simulación con el fin de contactarme, asesorarme y compartir mi información con las entidades financieras que yo escoja, según la '+(S.privacyUrl?'<a href="'+esc(S.privacyUrl)+'" target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>':'Política de Tratamiento de Datos Personales')+'. Puedo conocer, actualizar o suprimir mis datos escribiendo a comercial@agilehomesf.com.</span></label>'+
+  '<fieldset class="ci paso" id="l-q1" hidden><legend>¿Tienes reportes negativos en centrales de riesgo?</legend><div class="ci-sn"><label class="ci-o"><input type="radio" name="l-rep" value="si"><span>Sí</span></label><label class="ci-o"><input type="radio" name="l-rep" value="no"><span>No</span></label></div></fieldset><fieldset class="ci paso" id="l-q2" hidden><legend>¿Puedes demostrar tus ingresos con documentos?</legend><div class="ci-sn"><label class="ci-o"><input type="radio" name="l-dem" value="si"><span>Sí</span></label><label class="ci-o"><input type="radio" name="l-dem" value="no"><span>No</span></label></div></fieldset><p class="ci-n" id="l-nr" hidden>Este requisito es necesario para solicitar el crédito. Déjanos tus datos y te orientamos.</p><fieldset class="ci paso" id="l-ci" hidden><legend>¿Cuentas con la cuota inicial?</legend><p class="ci-v" id="l-ci-v" hidden></p><label class="ci-o"><input type="radio" name="l-ci" value="total"><span>Sí, tengo los recursos completos</span></label><label class="ci-o"><input type="radio" name="l-ci" value="proyecto"><span>Sí, la estoy pagando en un proyecto de vivienda</span></label><label class="ci-o"><input type="radio" name="l-ci" value="parcial"><span>Tengo una parte</span></label><label class="ci-o"><input type="radio" name="l-ci" value="no"><span>Aún no tengo recursos</span></label><p class="ci-n" id="l-ci-n" hidden>Para solicitar el crédito necesitas recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda. Déjanos tus datos y te orientamos.</p></fieldset>'+
+  '<label class="chk paso" id="l-chk" hidden><input type="checkbox" id="l-ok"><span>Autorizo a Agile Home S.A.S. para tratar mis datos personales y los de mi simulación con el fin de contactarme, asesorarme y compartir mi información con las entidades financieras que yo escoja, según la '+(S.privacyUrl?'<a href="'+esc(S.privacyUrl)+'" target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>':'Política de Tratamiento de Datos Personales')+'. Puedo conocer, actualizar o suprimir mis datos escribiendo a comercial@agilehomesf.com.</span></label>'+
   '<input id="l-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">'+
-  '<p class="warnline" id="l-err" role="alert" hidden></p><div class="actions"><button type="submit" class="btn" id="l-send">Quiero mi asesoría gratuita</button></div></form>'+
+  '<p class="warnline" id="l-err" role="alert" hidden></p><div class="actions"><button type="submit" class="btn" id="l-send" disabled>Quiero mi asesoría gratuita</button></div></form>'+
   '<div class="lead-ok" id="l-done" hidden><span class="hic">'+I('shield')+'</span><div><b>¡Listo! Recibimos tus datos.</b><p>Un asesor de Agile Home te contactará pronto con tu resultado.</p></div></div></section>'+
   '</div>'+
 
@@ -1895,16 +1901,40 @@ const CI_NIVEL={total:['Tiene los recursos completos','Calificado'],proyecto:['L
 function leadCi(inp){
   LEADCI=['hipo','leasing','comer'].indexOf(inp.prod)>=0;
   const box=$('#l-ci'),v=$('#l-ci-v');if(!box)return;
-  box.hidden=!LEADCI;
   const falta=Math.round((inp.valor||0)-(inp.credito||0));
   v.hidden=!(LEADCI&&falta>0);
   v.textContent=falta>0?'Para este inmueble necesitas cerca de '+money(falta)+', más los gastos de escrituración.':'';
+  leadPasos();
+}
+function leadTel(){return $('#l-tel').value.replace(/[^\d+]/g,'').replace(/^\+?57/,'');}
+function leadNombreOk(){const n=$('#l-name').value.trim();return n.length>=3&&n.indexOf(' ')>=0;}
+function leadTelOk(){return /^3\d{9}$/.test(leadTel());}
+function leadMailOk(){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('#l-mail').value.trim());}
+function leadPasos(){
+  const f=$('#lead-f');if(!f)return;
+  const si=function(n){return !!f.querySelector('input[name="'+n+'"]:checked');};
+  const datos=leadNombreOk()&&leadTelOk()&&leadMailOk(),q1=datos&&si('l-rep'),q2=q1&&si('l-dem'),q3=q2&&(!LEADCI||si('l-ci'));
+  $('#l-q1').hidden=!datos;
+  $('#l-q2').hidden=!q1;
+  $('#l-ci').hidden=!(q2&&LEADCI);
+  $('#l-chk').hidden=!q3;
+  $('#l-send').disabled=!(q3&&$('#l-ok').checked);
 }
 function leadInit(){
   const f=$('#lead-f');if(!f)return;
   const err=function(m){const e=$('#l-err');e.textContent=m;e.hidden=!m;};
+  f.addEventListener('input',leadPasos);
   f.addEventListener('change',function(ev){
+    leadPasos();
+    const t=ev.target,v=t&&t.value&&t.value.trim();
+    if(t&&t.id==='l-name')err(v&&!leadNombreOk()?'Escribe tu nombre y apellido.':'');
+    if(t&&t.id==='l-tel')err(v&&!leadTelOk()?'Escribe un celular colombiano de 10 dígitos, por ejemplo 300 123 4567.':'');
+    if(t&&t.id==='l-mail')err(v&&!leadMailOk()?'Revisa tu correo electrónico.':'');
     if(ev.target&&ev.target.name==='l-ci')$('#l-ci-n').hidden=ev.target.value!=='no';
+    if(ev.target&&(ev.target.name==='l-rep'||ev.target.name==='l-dem')){
+      const a=f.querySelector('input[name="l-rep"]:checked'),b=f.querySelector('input[name="l-dem"]:checked');
+      $('#l-nr').hidden=!((a&&a.value==='si')||(b&&b.value==='no'));
+    }
   });
   f.addEventListener('submit',function(ev){
     ev.preventDefault();err('');
@@ -1914,18 +1944,29 @@ function leadInit(){
     if(nombre.length<3||nombre.indexOf(' ')<0){err('Escribe tu nombre y apellido.');return;}
     if(!/^3\d{9}$/.test(tel)){err('Escribe un celular colombiano de 10 dígitos, por ejemplo 300 123 4567.');return;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)){err('Revisa tu correo electrónico.');return;}
+    const repSel=f.querySelector('input[name="l-rep"]:checked'),demSel=f.querySelector('input[name="l-dem"]:checked');
+    if(!repSel){err('Cuéntanos si tienes reportes negativos en centrales de riesgo.');return;}
+    if(!demSel){err('Cuéntanos si puedes demostrar tus ingresos con documentos.');return;}
     const ciSel=f.querySelector('input[name="l-ci"]:checked');
     if(LEADCI&&!ciSel){err('Cuéntanos si cuentas con la cuota inicial.');return;}
     const ciDato=LEADCI?CI_NIVEL[ciSel.value]:['No aplica','No aplica'];
+    const noCumple=[];
+    if(repSel.value==='si')noCumple.push('Tiene reportes en centrales de riesgo');
+    if(demSel.value==='no')noCumple.push('No puede demostrar sus ingresos');
+    if(((LEADCTX&&LEADCTX.ingresos_totales)||0)<2*S.smmlv)noCumple.push('Ingresos menores a 2 SMLV');
+    if(LEADCI&&ciSel.value==='no')noCumple.push('No tiene recursos para la cuota inicial');
+    const ciParcial=LEADCI&&ciSel.value==='parcial';
+    const calif=noCumple.length?'D: No calificado':(ciParcial?'B: Calificado parcial':'A: Calificado');
+    const queFalta=noCumple.concat(ciParcial?['Completar la cuota inicial']:[]).join('; ')||'Nada';
     if(!$('#l-ok').checked){err('Debes autorizar el tratamiento de tus datos para continuar.');return;}
     const payload=Object.assign({fecha:new Date().toISOString(),nombre:nombre,celular:tel,correo:mail,autorizacion:'Sí',version_politica:'1.0',origen:(function(){try{return location.href.split('#')[0];}catch(e){return '';}})()},LEADCTX||{});
-    payload.top3=JSON.stringify(payload.top3||[]);payload.cuota_inicial=ciDato[0];payload.calificacion=ciDato[1];payload.origen=payload.origen+' | '+ciDato[1]+': '+ciDato[0];
+    payload.top3=JSON.stringify(payload.top3||[]);payload.cuota_inicial=ciDato[0];payload.reportes=repSel.value==='si'?'Sí':'No';payload.ingresos_demostrables=demSel.value==='si'?'Sí':'No';payload.calificacion=calif;payload.que_falta=queFalta;payload.origen=payload.origen+' | '+calif+' | Falta: '+queFalta;
     const btn=$('#l-send');btn.disabled=true;btn.textContent='Enviando…';
     const done=function(){LEADSENT=true;f.hidden=true;$('#l-done').hidden=false;};
     if(S.leadUrl){
       fetch(S.leadUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(done).catch(function(){btn.disabled=false;btn.textContent='Quiero mi asesoría gratuita';err('No pudimos enviar tus datos. Intenta de nuevo o escríbenos a comercial@agilehomesf.com.');});
     }else{
-      const body='Nombre: '+nombre+'\nCelular: '+tel+'\nCorreo: '+mail+'\nProducto: '+(payload.producto||'')+'\nValor inmueble: '+(payload.valor_inmueble||'')+'\nMejor banco: '+(payload.mejor_banco||'')+'\nCuota inicial: '+ciDato[0]+'\nCalificación: '+ciDato[1]+'\nAutorizo el tratamiento de mis datos según la política de Agile Home.';
+      const body='Nombre: '+nombre+'\nCelular: '+tel+'\nCorreo: '+mail+'\nProducto: '+(payload.producto||'')+'\nValor inmueble: '+(payload.valor_inmueble||'')+'\nMejor banco: '+(payload.mejor_banco||'')+'\nCuota inicial: '+ciDato[0]+'\nCalificación: '+calif+'\nQué le falta: '+queFalta+'\nAutorizo el tratamiento de mis datos según la política de Agile Home.';
       try{location.href='mailto:comercial@agilehomesf.com?subject='+encodeURIComponent('Quiero asesoría - Agile Match')+'&body='+encodeURIComponent(body);}catch(e){}
       done();
     }

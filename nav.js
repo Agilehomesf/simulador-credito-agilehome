@@ -67,18 +67,22 @@
   var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
   var TEXTO = 'Quiero Mi Asesoría Gratuita';
   var NIVEL = {
-    total: ['Tiene los recursos completos', 'Calificado'],
-    proyecto: ['La está pagando en un proyecto', 'Calificado'],
-    parcial: ['Tiene una parte', 'Calificado parcial'],
-    no: ['Aún no tiene recursos', 'No calificado']
+    total: ['Tiene los recursos completos'],
+    proyecto: ['La está pagando en un proyecto'],
+    parcial: ['Tiene una parte'],
+    no: ['Aún no tiene recursos']
   };
   var enVivo = /(^|\.)agilehomesf\.(com|github\.io)$/.test(location.hostname);
 
   function $(id) { return document.getElementById(id); }
   function error(m) { var e = $('as-err'); e.textContent = m; e.hidden = !m; }
+  function marcada(n) {
+    var o = document.querySelector('input[name="' + n + '"]:checked');
+    return o ? o.value : '';
+  }
   function reiniciar() {
     var f = $('as-form');
-    f.reset(); f.hidden = false; $('as-ok').hidden = true; $('as-n').hidden = true; error('');
+    f.reset(); f.hidden = false; $('as-ok').hidden = true; $('as-n').hidden = true; $('as-nr').hidden = true; error('');
     $('as-send').disabled = false; $('as-send').textContent = TEXTO;
   }
 
@@ -90,7 +94,12 @@
   });
 
   document.addEventListener('change', function (e) {
-    if (e.target && e.target.name === 'as-ci') $('as-n').hidden = e.target.value !== 'no';
+    if (!e.target) return;
+    if (e.target.name === 'as-ci') $('as-n').hidden = e.target.value !== 'no';
+    if (/^as-(rep|dem|ing)$/.test(e.target.name)) {
+      var r = marcada('as-rep'), d = marcada('as-dem'), i = marcada('as-ing');
+      $('as-nr').hidden = !(r === 'si' || d === 'no' || i === 'no');
+    }
   });
 
   document.addEventListener('submit', function (e) {
@@ -102,9 +111,20 @@
     if (nombre.length < 3 || nombre.indexOf(' ') < 0) { error('Escribe tu nombre y apellido.'); return; }
     if (!/^3\d{9}$/.test(celular)) { error('Escribe un celular colombiano de 10 dígitos, por ejemplo 300 123 4567.'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)) { error('Revisa tu correo electrónico.'); return; }
-    var ci = e.target.querySelector('input[name="as-ci"]:checked');
+    var rep = marcada('as-rep'), dem = marcada('as-dem'), ing = marcada('as-ing'), ci = marcada('as-ci');
+    if (!rep) { error('Cuéntanos si tienes reportes negativos en centrales de riesgo.'); return; }
+    if (!dem) { error('Cuéntanos si puedes demostrar tus ingresos con documentos.'); return; }
+    if (!ing) { error('Cuéntanos si tus ingresos suman al menos $3.501.810 al mes.'); return; }
     if (!ci) { error('Cuéntanos si cuentas con la cuota inicial.'); return; }
-    var dato = NIVEL[ci.value];
+    var dato = NIVEL[ci];
+    var noCumple = [];
+    if (rep === 'si') noCumple.push('Tiene reportes en centrales de riesgo');
+    if (dem === 'no') noCumple.push('No puede demostrar sus ingresos');
+    if (ing === 'no') noCumple.push('Ingresos menores a 2 SMLV');
+    if (ci === 'no') noCumple.push('No tiene recursos para la cuota inicial');
+    var calif = noCumple.length ? 'D: No calificado' : 'C: Por perfilar';
+    var falta = noCumple.length ? noCumple : ['Simular en Agile Match'].concat(ci === 'parcial' ? ['Completar la cuota inicial'] : []);
+    var queFalta = falta.join('; ');
     if (!$('as-acepta').checked) { error('Debes autorizar el tratamiento de tus datos para continuar.'); return; }
     var btn = $('as-send');
     btn.disabled = true; btn.textContent = 'Enviando…';
@@ -115,7 +135,7 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         fecha: new Date().toISOString(), nombre: nombre, celular: celular, correo: correo,
-        autorizacion: 'Sí', version_politica: '1.0', origen: location.href.split('#')[0] + ' | ' + dato[1] + ': ' + dato[0], producto: 'Asesoría desde la página web', top3: '[]', cuota_inicial: dato[0], calificacion: dato[1]
+        autorizacion: 'Sí', version_politica: '1.0', origen: location.href.split('#')[0] + ' | ' + calif + ' | Falta: ' + queFalta, producto: 'Asesoría desde la página web', top3: '[]', cuota_inicial: dato[0], reportes: rep === 'si' ? 'Sí' : 'No', ingresos_demostrables: dem === 'si' ? 'Sí' : 'No', ingresos_2_smlv: ing === 'si' ? 'Sí' : 'No', calificacion: calif, que_falta: queFalta
       })
     }).then(listo).catch(function () {
       btn.disabled = false; btn.textContent = TEXTO;

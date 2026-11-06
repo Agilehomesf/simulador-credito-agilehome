@@ -45,7 +45,7 @@ section{scroll-margin-top:96px}
 .hero{position:relative;overflow:hidden;background:#031335}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
 .hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,19,53,.92) 0%,rgba(3,19,53,.8) 40%,rgba(3,19,53,0) 66%)}
-.hero-in{position:relative;max-width:1240px;margin:0 auto;padding:32px 24px 36px;box-sizing:border-box}
+.hero-in{position:relative;max-width:1240px;margin:0 auto;padding:22px 24px 20px;box-sizing:border-box}
 .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:26px 6px;align-items:start}
 .fh{margin:0 0 18px;padding:13px 30px;color:#FFFFFF;font-size:19px;font-weight:700;line-height:1.2;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)}
 .fl{list-style:none;margin:0;padding:0 10px;position:relative;display:flex;flex-direction:column;gap:12px}
@@ -57,6 +57,16 @@ section{scroll-margin-top:96px}
 .fl details p{margin:6px 0 2px 52px;font-size:14px;line-height:1.5;color:#4E4F52}
 .as-btn{display:inline-flex;align-items:center;min-height:54px;padding:0 30px;border:2px solid #020E2E;border-radius:999px;background:transparent;color:#020E2E;font:inherit;font-weight:600;cursor:pointer}
 .as-btn:hover{background:#020E2E;color:#FFFFFF}
+.as-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:0 12px;margin:30px 0 0;font-size:15px;color:#4E4F52}
+.as-lnk{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;border:0;background:none;color:#020E2E;font:inherit;font-weight:600;cursor:pointer;text-decoration:underline;text-decoration-color:#FD4C0B;text-decoration-thickness:2px;text-underline-offset:5px}
+.as-lnk svg{flex:none;transition:transform .2s}
+.as-lnk:hover svg{transform:translateX(3px)}
+.as-lnk:focus-visible{outline:2px solid #FD4C0B;outline-offset:3px;border-radius:4px}
+.as-claro{justify-content:flex-start;margin:2px 0 0;color:#FFFFFF}
+.as-claro .as-lnk{color:#FFFFFF}
+@media (min-width:761px){.as-claro .as-lnk{min-height:38px}}
+@media (max-width:760px){.as-cta{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){.as-lnk svg{transition:none}}
 .as-d{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);box-sizing:border-box;padding:30px;border:0;border-top:5px solid #FD4C0B;border-radius:20px;color:#2A2B30;font-size:15px;line-height:1.5;overflow:auto}
 .as-d::backdrop{background:rgba(2,14,46,.62)}
 .as-x{position:absolute;top:12px;right:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:#F3F2FA;color:#020E2E;cursor:pointer}
@@ -70,6 +80,7 @@ section{scroll-margin-top:96px}
 .as-o{display:flex;gap:10px;align-items:center;min-height:42px;cursor:pointer}
 .as-o input{flex:none;width:20px;height:20px;margin:0;accent-color:#FD4C0B}
 .as-d .as-n{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#FFF4EC;font-size:13.5px}
+.as-sn{display:flex;gap:24px}
 .as-chk{display:flex;gap:10px;align-items:flex-start;margin:0 0 16px;font-size:13.5px;color:#4E4F52}
 .as-chk input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#FD4C0B}
 .as-chk a{color:#C93400}
@@ -170,6 +181,7 @@ html.js .menu.abierto{display:flex}
             <a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #FFFFFF; color: #020E2E; font-weight: 600; text-decoration: none">Evalúa Tu Perfil Ahora</a>
             <a href="https://wa.me/message/PMWO6BQHZCRSD1" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: transparent; color: #FFFFFF; border: 1px solid #FFFFFF; font-weight: 600; text-decoration: none">Escríbenos Por WhatsApp</a>
           </div>
+          <p class="as-cta as-claro"><span>¿Prefieres que te contactemos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
         </div>
       </div>
     </section>
@@ -333,6 +345,7 @@ html.js .menu.abierto{display:flex}
             </div>
           </article>
         </div>
+        <p class="as-cta"><span>¿No sabes cuál te conviene?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -375,7 +388,7 @@ html.js .menu.abierto{display:flex}
         <p style="margin: 10px 0 0; color: #4E4F52">El resultado es orientativo. La tasa, el monto y la aprobación final dependen del estudio de cada entidad.</p>
         <div style="margin-top: 26px">
           <div style="display: flex; flex-wrap: wrap; gap: 14px"><a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-weight: 600; text-decoration: none">Comenzar Mi Perfil Financiero</a><button class="as-btn" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría</button></div>
-          <p style="margin: 16px 0 0; color: #4E4F52"><strong style="color: #020E2E">Ten en cuenta:</strong> además de tu perfil, necesitas recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda.</p>
+          <p style="margin: 16px 0 0; color: #4E4F52"><strong style="color: #020E2E">Ten en cuenta:</strong> para solicitar el crédito no debes tener reportes negativos en centrales de riesgo, necesitas una actividad económica demostrable, ingresos de al menos 2 SMLV, solo o con tu grupo familiar, y recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda.</p>
         </div>
       </div>
     </section>
@@ -427,6 +440,7 @@ html.js .menu.abierto{display:flex}
             </li>
           </ol>
         </div>
+        <p class="as-cta"><span>¿Quieres que te acompañemos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -476,6 +490,7 @@ html.js .menu.abierto{display:flex}
           </div>
         </div>
         <p style="margin: 30px 0 0; font-size: 15px; color: #4E4F52">La promesa de compraventa es un acuerdo entre comprador y vendedor. Te orientamos sobre ella, pero no la revisamos.</p>
+        <p class="as-cta"><span>¿No sabes en qué etapa estás?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -567,6 +582,7 @@ html.js .menu.abierto{display:flex}
             </ul>
           </details>
         </div>
+        <p class="as-cta"><span>¿Tienes dudas con tus documentos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -621,6 +637,7 @@ html.js .menu.abierto{display:flex}
             </tbody>
           </table>
         </div>
+        <p class="as-cta"><span>¿Tienes dudas con los gastos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -681,6 +698,7 @@ html.js .menu.abierto{display:flex}
             <p style="margin: 2px 0 0; font-size: 15px; line-height: 1.4; color: #FFFFFF">costo de asesoría para el cliente</p>
           </div>
         </div>
+        <p class="as-cta"><span>¿Hablamos de tu caso?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -701,6 +719,10 @@ html.js .menu.abierto{display:flex}
           <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
             <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Cuánto me financian?</summary>
             <p style="margin: 0 0 16px; color: #4E4F52">Depende de la entidad y del tipo de vivienda. En crédito hipotecario, la vivienda VIS puede financiarse hasta el 80 % y la no VIS hasta el 70 %, sobre el menor valor entre el avalúo y la promesa de compraventa.</p>
+          </details>
+          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
+            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué debo cumplir para solicitar el crédito?</summary>
+            <p style="margin: 0 0 16px; color: #4E4F52">No tener reportes negativos en centrales de riesgo, tener una actividad económica demostrable, ganar o reunir con tu grupo familiar al menos 2 SMLV, y contar con la cuota inicial o estar pagándola en un proyecto de vivienda.</p>
           </details>
           <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
             <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Necesito tener la cuota inicial?</summary>
@@ -743,6 +765,7 @@ html.js .menu.abierto{display:flex}
             <p style="margin: 0 0 16px; color: #4E4F52">Existen subsidios del Gobierno y de las cajas de compensación para vivienda VIS. Sus requisitos y su disponibilidad cambian, así que revisamos tu caso.</p>
           </details>
         </div>
+        <p class="as-cta"><span>¿Tienes otra pregunta?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
       </div>
     </section>
 
@@ -787,6 +810,19 @@ html.js .menu.abierto{display:flex}
       <label class="as-f">Nombre Completo<input id="as-name" type="text" autocomplete="name"></label>
       <label class="as-f">Celular<input id="as-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567"></label>
       <label class="as-f">Correo Electrónico<input id="as-mail" type="email" autocomplete="email"></label>
+      <fieldset class="as-ci">
+        <legend>¿Tienes Reportes Negativos En Centrales De Riesgo?</legend>
+        <div class="as-sn"><label class="as-o"><input type="radio" name="as-rep" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-rep" value="no"><span>No</span></label></div>
+      </fieldset>
+      <fieldset class="as-ci">
+        <legend>¿Puedes Demostrar Tus Ingresos Con Documentos?</legend>
+        <div class="as-sn"><label class="as-o"><input type="radio" name="as-dem" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-dem" value="no"><span>No</span></label></div>
+      </fieldset>
+      <fieldset class="as-ci">
+        <legend>¿Tus Ingresos, Solos O Con Tu Grupo Familiar, Suman Al Menos $3.501.810 Al Mes?</legend>
+        <div class="as-sn"><label class="as-o"><input type="radio" name="as-ing" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-ing" value="no"><span>No</span></label></div>
+      </fieldset>
+      <p id="as-nr" class="as-n" hidden style="margin: 0 0 14px">Este requisito es necesario para solicitar el crédito. Déjanos tus datos y te orientamos.</p>
       <fieldset class="as-ci">
         <legend>¿Cuentas Con La Cuota Inicial?</legend>
         <label class="as-o"><input type="radio" name="as-ci" value="total"><span>Sí, tengo los recursos completos</span></label>

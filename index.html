@@ -19,6 +19,17 @@ html{scroll-behavior:smooth}
 a{color:#1800AD}a:hover{color:#FD4C0B}
 summary{cursor:pointer}
 section{scroll-margin-top:96px}
+.ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px 40px;grid-template-areas:"intro intro" "foto etapas";align-items:stretch}
+.ac-foto{grid-area:foto;min-width:0;min-height:100%;border-radius:20px;overflow:hidden;position:relative}
+.ac-foto img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.ac-intro{grid-area:intro;min-width:0}
+.ac-et{grid-area:etapas;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.ac-et li{position:relative;display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:14px;align-items:center;border-radius:16px;padding:13px 18px;box-shadow:0 4px 14px rgba(2,14,46,.06)}
+.ac-et li:not(:last-child)::after{content:"";position:absolute;left:33px;bottom:-14px;width:2px;height:14px;background:#FD4C0B}
+@media (max-width:900px){
+.ac{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "foto" "etapas"}
+.ac-foto{min-height:0;aspect-ratio:5/4}
+}
 .about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:30px 60px;grid-template-areas:"foto intro" "foto dif" "foto fund"}
 .a-foto{grid-area:foto;align-self:start;position:sticky;top:120px;margin:0}
 .a-intro{grid-area:intro;min-width:0}
@@ -313,33 +324,49 @@ section{scroll-margin-top:96px}
     <!-- Acompañamiento -->
     <section id="acompanamiento" style="background: #FFFFFF">
       <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div style="display: flex; flex-wrap: wrap; gap: 40px 56px; align-items: center; margin-bottom: 64px">
-          <div class="zoomimg" style="flex: 1 1 400px; min-width: 0; border-radius: 24px; height: 460px">
-            <img loading="lazy" src="img/asesora-pareja.jpg" alt="Asesora conversando con una pareja en una vivienda" style="display: block; width: 100%; height: 100%; object-fit: cover">
+        <div class="ac">
+          <div class="ac-foto">
+            <img loading="lazy" src="img/asesoria-marla.jpg" alt="Marla López asesorando a clientes en una reunión de trabajo">
           </div>
-          <div style="flex: 1 1 500px; min-width: 0">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #1800AD; color: #FFFFFF; font-size: 14px; font-weight: 600">Acompañamiento</p>
-            <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #1800AD">Te Acompañamos <span style="color: #FD4C0B">Hasta El Desembolso</span></h2>
-            <p style="margin: 0 0 22px; color: #4E4F52">No solo revisamos documentos. Los radicamos en la entidad y seguimos contigo durante todo el proceso, para que sepas qué sigue y qué debes hacer en cada momento.</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 14px">
-              <div style="background: #F3F2FA; border-radius: 18px; padding: 20px">
-                <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 600; color: #1800AD">Revisamos Tu Perfil</h3>
-                <p style="margin: 0; font-size: 15px; color: #4E4F52">Partimos de tu resultado en Agile Match y de tu situación real.</p>
-              </div>
-              <div style="background: #FFF4EC; border-radius: 18px; padding: 20px">
-                <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 600; color: #1800AD">Comparamos Opciones</h3>
-                <p style="margin: 0; font-size: 15px; color: #4E4F52">Te explicamos las alternativas para que elijas con información.</p>
-              </div>
-              <div style="background: #FFF4EC; border-radius: 18px; padding: 20px">
-                <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 600; color: #1800AD">Organizamos Tus Documentos</h3>
-                <p style="margin: 0; font-size: 15px; color: #4E4F52">Te decimos qué falta antes de presentar la solicitud.</p>
-              </div>
-              <div style="background: #F3F2FA; border-radius: 18px; padding: 20px">
-                <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 600; color: #1800AD">Radicamos Y Hacemos Seguimiento</h3>
-                <p style="margin: 0; font-size: 15px; color: #4E4F52">Presentamos tu solicitud y seguimos contigo hasta el desembolso.</p>
-              </div>
-            </div>
+          <div class="ac-intro">
+            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Acompañamiento</p>
+            <h2 style="margin: 0 0 12px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Te Acompañamos Hasta El <span style="color: #FD4C0B">Desembolso</span></h2>
+            <p style="margin: 0; max-width: 980px; color: #4A4A4A">Analizamos tu perfil, identificamos alternativas de financiación y gestionamos contigo cada etapa del proceso. No estás solo frente a los bancos: te acompañamos desde la evaluación inicial hasta el desembolso de tu crédito.</p>
           </div>
+          <ol class="ac-et">
+            <li style="background: #FFFFFF">
+              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">01</span>
+              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="5"></circle><path d="M2 21a8 8 0 0 1 10.434-7.62"></path><circle cx="18" cy="18" r="3"></circle><path d="m22 22-1.9-1.9"></path></svg>
+              <div>
+                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Evaluamos Tu Perfil</h3>
+                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Analizamos tu capacidad de pago, ingresos y condiciones para identificar tus posibilidades de financiación.</p>
+              </div>
+            </li>
+            <li style="background: #F5F5F7">
+              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">02</span>
+              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg>
+              <div>
+                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Comparamos Alternativas</h3>
+                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Evaluamos las opciones disponibles en nuestras entidades aliadas y te explicamos sus condiciones.</p>
+              </div>
+            </li>
+            <li style="background: #F1F0FA">
+              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">03</span>
+              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path><path d="m9 13 2 2 4-4"></path></svg>
+              <div>
+                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Preparamos Tu Solicitud</h3>
+                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Te orientamos sobre los documentos requeridos y verificamos que tu expediente esté completo.</p>
+              </div>
+            </li>
+            <li style="background: #FFFFFF">
+              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">04</span>
+              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg>
+              <div>
+                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Radicamos Y Hacemos Seguimiento</h3>
+                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Gestionamos la presentación de tu solicitud y te acompañamos durante el estudio, aprobación y desembolso.</p>
+              </div>
+            </li>
+          </ol>
         </div>
       </div>
     </section>

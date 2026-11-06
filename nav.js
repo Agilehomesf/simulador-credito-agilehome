@@ -61,3 +61,65 @@
   window.addEventListener('load', actualizar);
   document.addEventListener('DOMContentLoaded', actualizar);
 })();
+
+/* Formulario "Quiero Asesoría": usa el mismo destino y las mismas validaciones de Agile Match. */
+(function () {
+  var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
+  var TEXTO = 'Quiero Mi Asesoría Gratuita';
+  var NIVEL = {
+    total: ['Tiene los recursos completos', 'Calificado'],
+    proyecto: ['La está pagando en un proyecto', 'Calificado'],
+    parcial: ['Tiene una parte', 'Calificado parcial'],
+    no: ['Aún no tiene recursos', 'No calificado']
+  };
+  var enVivo = /(^|\.)agilehomesf\.(com|github\.io)$/.test(location.hostname);
+
+  function $(id) { return document.getElementById(id); }
+  function error(m) { var e = $('as-err'); e.textContent = m; e.hidden = !m; }
+  function reiniciar() {
+    var f = $('as-form');
+    f.reset(); f.hidden = false; $('as-ok').hidden = true; $('as-n').hidden = true; error('');
+    $('as-send').disabled = false; $('as-send').textContent = TEXTO;
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target, d = $('asesoria');
+    if (!d || !t || !t.closest) return;
+    if (t.closest('[data-asesoria]')) { reiniciar(); d.showModal(); return; }
+    if (t.closest('.as-x') || t === d) d.close();
+  });
+
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.name === 'as-ci') $('as-n').hidden = e.target.value !== 'no';
+  });
+
+  document.addEventListener('submit', function (e) {
+    if (!e.target || e.target.id !== 'as-form') return;
+    e.preventDefault(); error('');
+    if ($('as-hp').value) return;
+    var nombre = $('as-name').value.trim(), correo = $('as-mail').value.trim();
+    var celular = $('as-tel').value.replace(/[^\d+]/g, '').replace(/^\+?57/, '');
+    if (nombre.length < 3 || nombre.indexOf(' ') < 0) { error('Escribe tu nombre y apellido.'); return; }
+    if (!/^3\d{9}$/.test(celular)) { error('Escribe un celular colombiano de 10 dígitos, por ejemplo 300 123 4567.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)) { error('Revisa tu correo electrónico.'); return; }
+    var ci = e.target.querySelector('input[name="as-ci"]:checked');
+    if (!ci) { error('Cuéntanos si cuentas con la cuota inicial.'); return; }
+    var dato = NIVEL[ci.value];
+    if (!$('as-acepta').checked) { error('Debes autorizar el tratamiento de tus datos para continuar.'); return; }
+    var btn = $('as-send');
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    var listo = function () { e.target.hidden = true; $('as-ok').hidden = false; };
+    if (!enVivo) { listo(); return; }
+    fetch(DESTINO, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        fecha: new Date().toISOString(), nombre: nombre, celular: celular, correo: correo,
+        autorizacion: 'Sí', version_politica: '1.0', origen: location.href.split('#')[0] + ' | ' + dato[1] + ': ' + dato[0], producto: 'Asesoría desde la página web', top3: '[]', cuota_inicial: dato[0], calificacion: dato[1]
+      })
+    }).then(listo).catch(function () {
+      btn.disabled = false; btn.textContent = TEXTO;
+      error('No pudimos enviar tus datos. Intenta de nuevo o escríbenos a comercial@agilehomesf.com.');
+    });
+  });
+})();

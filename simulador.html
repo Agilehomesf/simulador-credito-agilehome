@@ -456,6 +456,12 @@ a,.link{color:var(--orange-ink)}
 .visb.is{background:var(--good-bg);border-color:#B9E1CB}.visb.is .i{background:var(--good);color:#fff}.visb.is b{color:var(--good)}
 .visb.not{background:#FFF4EC;border-color:#FFD9BF}.visb.not .i{background:var(--orange);color:#fff}
 
+.lead .ci{border:0;margin:14px 0 0;padding:0;min-width:0}
+.lead .ci legend{padding:0;font-size:15px;font-weight:700;color:var(--ink)}
+.lead .ci-v{margin:4px 0 8px;font-size:14px;color:#555}
+.lead .ci-o{display:flex;gap:10px;align-items:center;min-height:40px;font-size:14px;color:var(--ink);cursor:pointer}
+.lead .ci-o input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--orange)}
+.lead .ci-n{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#FFF0E5;font-size:13.5px;color:#555}
 .lead{border-top:4px solid var(--orange)}
 .lead .chk{display:flex;gap:10px;align-items:flex-start;margin:14px 0;font-size:13px;color:#555;line-height:1.5}
 .lead .chk input{margin-top:3px;flex:none}
@@ -1237,6 +1243,7 @@ function shell(){
   '<form id="lead-f" novalidate><div class="grid-f"><div class="field"><label for="l-name">Nombre completo</label><div class="inwrap"><input id="l-name" type="text" autocomplete="name"></div></div>'+
   '<div class="field"><label for="l-tel">Celular</label><div class="inwrap"><input id="l-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567"></div></div>'+
   '<div class="field"><label for="l-mail">Correo electrónico</label><div class="inwrap"><input id="l-mail" type="email" autocomplete="email"></div></div></div>'+
+  '<fieldset class="ci" id="l-ci"><legend>¿Cuentas con la cuota inicial?</legend><p class="ci-v" id="l-ci-v" hidden></p><label class="ci-o"><input type="radio" name="l-ci" value="total"><span>Sí, tengo los recursos completos</span></label><label class="ci-o"><input type="radio" name="l-ci" value="proyecto"><span>Sí, la estoy pagando en un proyecto de vivienda</span></label><label class="ci-o"><input type="radio" name="l-ci" value="parcial"><span>Tengo una parte</span></label><label class="ci-o"><input type="radio" name="l-ci" value="no"><span>Aún no tengo recursos</span></label><p class="ci-n" id="l-ci-n" hidden>Para solicitar el crédito necesitas recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda. Déjanos tus datos y te orientamos.</p></fieldset>'+
   '<label class="chk"><input type="checkbox" id="l-ok"><span>Autorizo a Agile Home S.A.S. para tratar mis datos personales y los de mi simulación con el fin de contactarme, asesorarme y compartir mi información con las entidades financieras que yo escoja, según la '+(S.privacyUrl?'<a href="'+esc(S.privacyUrl)+'" target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>':'Política de Tratamiento de Datos Personales')+'. Puedo conocer, actualizar o suprimir mis datos escribiendo a comercial@agilehomesf.com.</span></label>'+
   '<input id="l-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">'+
   '<p class="warnline" id="l-err" role="alert" hidden></p><div class="actions"><button type="submit" class="btn" id="l-send">Quiero mi asesoría gratuita</button></div></form>'+
@@ -1593,7 +1600,7 @@ function renderSim(inp){
       const top=pool.slice(0,3).map(function(o){return {banco:o.bank.name,producto:(o.label||o.key||''),cuota:Math.round(o.cuota||0),monto:Math.round(o.amount||0),tasa:o.rate,plazo:o.best&&o.best.t};});
       LEADCTX={producto:PROD[inp.prod].n,actividades:inp.acts.map(function(k){return ACT[k].n;}).join(' + '),ingresos_titular:inp.ingTit,ingresos_familiares:inp.ing2+inp.ing3,ingresos_totales:inp.ingresos,deudas:inp.deudas,edad:inp.age,ciudad:inp.city,exterior:inp.exterior,valor_inmueble:inp.valor,valor_credito:inp.credito,plazo_solicitado:inp.term,vis:inp.vis,mejor_banco:top[0]?top[0].banco:'',top3:top};
       COMM={prod:PROD[inp.prod].n,ingresos:inp.ingresos,valor:inp.valor,items:pool.slice(0,3).map(function(o){return {banco:o.bank.name,linea:(LBL[o.key]||o.key),cuota:Math.round(o.cuota||0),monto:Math.round(isCar?inp.credito:(o.amount||0)),tasa:o.rate,uvr:isUvrOpt(o),plazo:o.best&&o.best.t};})};
-      const ld=$('#lead');if(ld&&!LEADSENT)ld.hidden=false;
+      leadCi(inp);const ld=$('#lead');if(ld&&!LEADSENT)ld.hidden=false;
     }
   }
   else if(hipoOver(inp)){best.textContent=inp.vis?'El crédito solicitado supera el 80% del valor del inmueble, que es el máximo en vivienda VIS. No aplica para crédito hipotecario; baja el valor del crédito para simular.':'El crédito solicitado supera el 70% del valor del inmueble. No aplica para crédito hipotecario y el leasing habitacional solo financia hasta el 90%; ajusta el valor del crédito para simular.';}
@@ -1883,10 +1890,22 @@ function renderLegal(inp){
   accBind(out);
 }
 
-let LEADCTX=null,LEADSENT=false;
+let LEADCTX=null,LEADSENT=false,LEADCI=false;
+const CI_NIVEL={total:['Tiene los recursos completos','Calificado'],proyecto:['La está pagando en un proyecto','Calificado'],parcial:['Tiene una parte','Calificado parcial'],no:['Aún no tiene recursos','No calificado']};
+function leadCi(inp){
+  LEADCI=['hipo','leasing','comer'].indexOf(inp.prod)>=0;
+  const box=$('#l-ci'),v=$('#l-ci-v');if(!box)return;
+  box.hidden=!LEADCI;
+  const falta=Math.round((inp.valor||0)-(inp.credito||0));
+  v.hidden=!(LEADCI&&falta>0);
+  v.textContent=falta>0?'Para este inmueble necesitas cerca de '+money(falta)+', más los gastos de escrituración.':'';
+}
 function leadInit(){
   const f=$('#lead-f');if(!f)return;
   const err=function(m){const e=$('#l-err');e.textContent=m;e.hidden=!m;};
+  f.addEventListener('change',function(ev){
+    if(ev.target&&ev.target.name==='l-ci')$('#l-ci-n').hidden=ev.target.value!=='no';
+  });
   f.addEventListener('submit',function(ev){
     ev.preventDefault();err('');
     if($('#l-hp').value)return;
@@ -1895,15 +1914,18 @@ function leadInit(){
     if(nombre.length<3||nombre.indexOf(' ')<0){err('Escribe tu nombre y apellido.');return;}
     if(!/^3\d{9}$/.test(tel)){err('Escribe un celular colombiano de 10 dígitos, por ejemplo 300 123 4567.');return;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)){err('Revisa tu correo electrónico.');return;}
+    const ciSel=f.querySelector('input[name="l-ci"]:checked');
+    if(LEADCI&&!ciSel){err('Cuéntanos si cuentas con la cuota inicial.');return;}
+    const ciDato=LEADCI?CI_NIVEL[ciSel.value]:['No aplica','No aplica'];
     if(!$('#l-ok').checked){err('Debes autorizar el tratamiento de tus datos para continuar.');return;}
     const payload=Object.assign({fecha:new Date().toISOString(),nombre:nombre,celular:tel,correo:mail,autorizacion:'Sí',version_politica:'1.0',origen:(function(){try{return location.href.split('#')[0];}catch(e){return '';}})()},LEADCTX||{});
-    payload.top3=JSON.stringify(payload.top3||[]);
+    payload.top3=JSON.stringify(payload.top3||[]);payload.cuota_inicial=ciDato[0];payload.calificacion=ciDato[1];payload.origen=payload.origen+' | '+ciDato[1]+': '+ciDato[0];
     const btn=$('#l-send');btn.disabled=true;btn.textContent='Enviando…';
     const done=function(){LEADSENT=true;f.hidden=true;$('#l-done').hidden=false;};
     if(S.leadUrl){
       fetch(S.leadUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(done).catch(function(){btn.disabled=false;btn.textContent='Quiero mi asesoría gratuita';err('No pudimos enviar tus datos. Intenta de nuevo o escríbenos a comercial@agilehomesf.com.');});
     }else{
-      const body='Nombre: '+nombre+'\nCelular: '+tel+'\nCorreo: '+mail+'\nProducto: '+(payload.producto||'')+'\nValor inmueble: '+(payload.valor_inmueble||'')+'\nMejor banco: '+(payload.mejor_banco||'')+'\nAutorizo el tratamiento de mis datos según la política de Agile Home.';
+      const body='Nombre: '+nombre+'\nCelular: '+tel+'\nCorreo: '+mail+'\nProducto: '+(payload.producto||'')+'\nValor inmueble: '+(payload.valor_inmueble||'')+'\nMejor banco: '+(payload.mejor_banco||'')+'\nCuota inicial: '+ciDato[0]+'\nCalificación: '+ciDato[1]+'\nAutorizo el tratamiento de mis datos según la política de Agile Home.';
       try{location.href='mailto:comercial@agilehomesf.com?subject='+encodeURIComponent('Quiero asesoría - Agile Match')+'&body='+encodeURIComponent(body);}catch(e){}
       done();
     }

@@ -19,6 +19,7 @@ html{scroll-behavior:smooth}
 a{color:#020E2E}a:hover{color:#FD4C0B}
 summary{cursor:pointer}
 section{scroll-margin-top:96px}
+#inicio{scroll-margin-top:220px}
 .ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px 40px;grid-template-areas:"intro intro" "foto etapas";align-items:stretch}
 .ac-foto{grid-area:foto;min-width:0;min-height:100%;border-radius:20px;overflow:hidden;position:relative}
 .ac-foto img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
@@ -54,7 +55,38 @@ section{scroll-margin-top:96px}
 .fl summary::after{content:"+";margin-left:auto;padding-left:6px;color:#FD4C0B;font-size:20px;font-weight:700}
 .fl details[open] summary::after{content:"\2013"}
 .fl details p{margin:6px 0 2px 52px;font-size:14px;line-height:1.5;color:#4E4F52}
-@media (min-width:900px){.top{position:sticky;top:0;z-index:30}}
+.top{position:sticky;top:0;z-index:30}
+.barra{background:#FFFFFF;box-shadow:0 1px 0 #E3E1EF}
+.barra-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:12px 22px}
+.logo-a{margin-right:auto;min-height:44px;display:flex;align-items:center;text-decoration:none}
+.menu{display:flex;align-items:center;gap:4px 16px;font-size:15px;font-weight:500}
+.nl{text-decoration:none;color:#2A2B30;padding:10px 0;white-space:nowrap}
+.nl.on{color:#020E2E;box-shadow:inset 0 -3px 0 #FD4C0B}
+.cta,.cta:hover{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#020E2E;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap}
+.m-btn{display:none;flex:none;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:10px;background:#FFF4EC;color:#020E2E;cursor:pointer}
+.m-btn .m-c,.m-btn[aria-expanded="true"] .m-a,.m-btn[aria-expanded="true"] .m-b{display:none}
+.m-btn[aria-expanded="true"] .m-c{display:inline}
+.arriba,.arriba:hover{position:fixed;right:20px;bottom:20px;z-index:25;width:48px;height:48px;border-radius:50%;background:#FD4C0B;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25);text-decoration:none}
+html.js .arriba{opacity:0;visibility:hidden;transition:opacity .2s}
+html.js .arriba.ver{opacity:1;visibility:visible}
+@media (max-width:1279px){
+.top{display:contents}
+.barra{position:sticky;top:0;z-index:30}
+.barra-in{position:relative;padding:10px 16px;gap:8px}
+.logo-a img{height:38px !important}
+.cta,.cta:hover{padding:0 14px;font-size:14px}
+.m-btn{display:flex}
+.menu{flex-direction:column;align-items:stretch;gap:0;order:5;width:100%}
+.barra-in{flex-wrap:wrap}
+html.js .barra-in{flex-wrap:nowrap}
+html.js .menu{display:none;position:absolute;top:100%;left:0;right:0;width:auto;background:#FFFFFF;padding:6px 16px 12px;box-shadow:0 14px 26px rgba(2,14,46,.16);max-height:calc(100vh - 70px);overflow:auto}
+html.js .menu.abierto{display:flex}
+.nl{display:flex;align-items:center;min-height:46px;padding:0 12px;border-bottom:1px solid #E3E1EF}
+.nl:last-child{border-bottom:0}
+.nl.on{box-shadow:inset 3px 0 0 #FD4C0B;font-weight:600}
+}
+@media (max-width:340px){.cta,.cta:hover{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .arriba{transition:none}}
 @media (max-width:760px){
 .hero-img{position:static;display:block;height:240px;object-position:right center}
 .hero-scrim{display:none}
@@ -69,31 +101,35 @@ section{scroll-margin-top:96px}
 .zoomimg:hover img{transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){.prod,.prod:hover,.zoom svg,.zoomimg img{transition:none;transform:none}}
 </style>
+<script src="nav.js"></script>
 </head>
 <body>
 <div style="font-family: Poppins, Arial, sans-serif; color: #2A2B30; background: #FFFFFF; font-size: 17px; line-height: 1.65">
 
   <!-- Encabezado -->
-  <header class="top" style="background: #FFFFFF; box-shadow: 0 1px 0 #E3E1EF">
+  <header class="top">
     <div style="background: #020E2E">
       <div style="max-width: 1240px; margin: 0 auto; padding: 4px 24px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 24px; font-size: 14px; font-weight: 500">
         <a href="https://wa.me/message/PMWO6BQHZCRSD1" style="text-decoration: none; color: #FFFFFF; padding: 6px 0">WhatsApp 312 310 9099</a>
         <a href="mailto:comercial@agilehomesf.com" style="text-decoration: none; color: #FFFFFF; padding: 6px 0">comercial@agilehomesf.com</a>
       </div>
     </div>
-    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
-      <a href="#inicio" style="text-decoration: none; min-height: 44px; display: flex; align-items: center"><img src="img/logo-agile-home.png" alt="Agile Home, broker financiero" style="height: 50px; width: auto; display: block"></a>
-      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-size: 15px; font-weight: 500">
-        <a href="#servicios" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Productos</a>
-        <a href="#agile-match" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Agile Match</a>
-        <a href="#acompanamiento" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Acompañamiento</a>
-        <a href="#etapas" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Etapas</a>
-        <a href="#documentos" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Documentos</a>
-        <a href="#nosotros" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Nosotros</a>
-        <a href="#preguntas" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Preguntas</a>
-        <a href="#contacto" style="text-decoration: none; color: #2A2B30; padding: 10px 0">Contacto</a>
-        <a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-weight: 600; text-decoration: none">Evalúa Tu Perfil</a>
-      </nav>
+    <div class="barra">
+      <div class="barra-in">
+        <a class="logo-a" href="#inicio"><img src="img/logo-agile-home.png" alt="Agile Home, broker financiero" style="height: 50px; width: auto; display: block"></a>
+        <nav id="menu" class="menu" aria-label="Principal">
+          <a class="nl" href="#servicios">Productos</a>
+          <a class="nl" href="#agile-match">Agile Match</a>
+          <a class="nl" href="#acompanamiento">Acompañamiento</a>
+          <a class="nl" href="#etapas">Etapas</a>
+          <a class="nl" href="#documentos">Documentos Y Gastos</a>
+          <a class="nl" href="#nosotros">Nosotros</a>
+          <a class="nl" href="#preguntas">Preguntas</a>
+          <a class="nl" href="#contacto">Contacto</a>
+        </nav>
+        <a class="cta" href="simulador.html">Evalúa Tu Perfil</a>
+        <button class="m-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="m-a" d="M4 7h16M4 17h16"></path><path class="m-b" d="M4 12h16"></path><path class="m-c" d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
     </div>
   </header>
 
@@ -715,6 +751,7 @@ section{scroll-margin-top:96px}
       <p style="margin: 0"><a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link">Política De Tratamiento De Datos Personales</a><br>Cajicá, Colombia · Cobertura nacional<br>© 2026 Agile Home S.A.S.</p>
     </div>
   </footer>
+  <a class="arriba" href="#inicio" aria-label="Volver arriba"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"></path></svg></a>
 </div>
 </body>
 </html>

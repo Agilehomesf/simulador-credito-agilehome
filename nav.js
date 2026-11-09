@@ -182,3 +182,39 @@
   window.addEventListener('scroll', ver, { passive: true });
   ver();
 })();
+
+/* Sección "Tu financiación en 3 pasos": cada tarjeta abre su detalle debajo; "Volver a los 3 pasos" lo cierra. */
+(function () {
+  var cards = document.querySelectorAll('.p5-card');
+  if (!cards.length) return;
+  var suave = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function link(n) { return document.querySelector('.p5-mas[href="#paso-' + n + '"]'); }
+  function abrir(n, mover) {
+    document.querySelectorAll('.p5-det').forEach(function (d) { d.classList.toggle('abierto', d.id === 'paso-' + n); });
+    cards.forEach(function (c) {
+      var on = c.getAttribute('data-paso') === String(n);
+      c.classList.toggle('activa', on);
+      var a = c.querySelector('.p5-mas'); if (a) a.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+    var d = document.getElementById('paso-' + n);
+    if (d && mover) { d.scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'start' }); d.focus({ preventScroll: true }); }
+    try { history.replaceState(null, '', '#paso-' + n); } catch (e) {}
+  }
+  function cerrar(d) {
+    var n = d.id.replace('paso-', '');
+    d.classList.remove('abierto');
+    cards.forEach(function (c) { c.classList.remove('activa'); var a = c.querySelector('.p5-mas'); if (a) a.setAttribute('aria-expanded', 'false'); });
+    var a = link(n);
+    if (a) { a.closest('.p5-card').scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'center' }); a.focus({ preventScroll: true }); }
+    try { history.replaceState(null, '', '#pasos'); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target; if (!t || !t.closest) return;
+    var card = t.closest('.p5-card');
+    if (card) { e.preventDefault(); abrir(card.getAttribute('data-paso'), true); return; }
+    var x = t.closest('.p5-cerrar');
+    if (x) cerrar(x.closest('.p5-det'));
+  });
+  var m = /^#paso-([123])$/.exec(location.hash);
+  if (m) abrir(m[1], true);
+})();

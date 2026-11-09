@@ -259,3 +259,90 @@
   var m = /[?&]q=([^&]+)/.exec(location.search);
   if (m) { q.value = decodeURIComponent(m[1].replace(/\+/g, ' ')); filtrar(); }
 })();
+
+/* Formulario de contacto (sección 8): mismo destino de registro que Agile Match y "Habla con un asesor". */
+(function () {
+  var f = document.getElementById('c8-form');
+  if (!f) return;
+  var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
+  var TEXTO_AUT = 'Autorizo a Agile Home para tratar mis datos personales con el fin de gestionar mi solicitud de asesoría y contactarme, de acuerdo con su Política de Tratamiento de Datos Personales.';
+  var WA_BASE = 'https://wa.me/573123109099?text=';
+  var enVivo = /(^|\.)agilehomesf\.(com|github\.io)$/.test(location.hostname) || window.AGILE_PRUEBA_ENVIO === true;
+  var inicio = Date.now(), enviando = false;
+  function $(id) { return document.getElementById(id); }
+  function limpio(t, max) { return String(t || '').replace(/[<>]/g, '').replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max); }
+  function marcar(id, msg) {
+    var e = $(id + '-e'), campo = $(id), caja = campo && campo.closest('.c8-in');
+    if (e) { e.textContent = msg || ''; e.hidden = !msg; }
+    if (campo) campo.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (caja) caja.classList.toggle('mal', !!msg);
+    return !msg;
+  }
+  function telefono() {
+    var raw = $('c8-tel').value.replace(/[\s().-]/g, '');
+    if (/^3\d{9}$/.test(raw)) raw = '+57' + raw;
+    if (/^57 ?3\d{9}$/.test(raw)) raw = '+' + raw;
+    if (!/^\+\d{7,15}$/.test(raw)) return null;
+    if (/^\+57/.test(raw) && !/^\+57[36]\d{9}$/.test(raw)) return null;
+    return raw;
+  }
+  var reglas = {
+    'c8-nombre': function () { var v = limpio($('c8-nombre').value, 80); return v.length >= 5 && v.indexOf(' ') > 0 && /^[\p{L}\s'.-]+$/u.test(v) ? '' : 'Escribe tu nombre y apellido.'; },
+    'c8-tel': function () { return telefono() ? '' : 'Escribe un número de WhatsApp válido, por ejemplo +57 300 123 4567.'; },
+    'c8-mail': function () { return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]{2,}$/.test($('c8-mail').value.trim()) ? '' : 'Escribe un correo válido, por ejemplo tunombre@correo.com.'; },
+    'c8-prod': function () { return $('c8-prod').value ? '' : 'Selecciona qué necesitas financiar.'; },
+    'c8-acepta': function () { return $('c8-acepta').checked ? '' : 'Para enviar tu solicitud debes autorizar el tratamiento de tus datos.'; }
+  };
+  Object.keys(reglas).forEach(function (id) {
+    var el = $(id);
+    el.addEventListener(id === 'c8-acepta' || id === 'c8-prod' ? 'change' : 'blur', function () { marcar(id, reglas[id]()); });
+    el.addEventListener('input', function () { if (el.getAttribute('aria-invalid') === 'true') marcar(id, reglas[id]()); });
+  });
+  $('c8-prod').addEventListener('change', function () {
+    var p = $('c8-prod').value, t = 'Hola, quiero recibir asesoría sobre financiación de vivienda con Agile Home.';
+    if (p) t = 'Hola, quiero recibir asesoría sobre financiación de vivienda con Agile Home. Me interesa: ' + p + '.';
+    $('c8-wa').href = WA_BASE + encodeURIComponent(t);
+  });
+  function estado(cargando) {
+    var b = $('c8-send');
+    b.disabled = cargando; b.setAttribute('aria-busy', cargando ? 'true' : 'false');
+    b.querySelector('span').textContent = cargando ? 'Enviando…' : 'Enviar solicitud';
+  }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (enviando) return;
+    $('c8-err').hidden = true; $('c8-prev').hidden = true;
+    var primero = null;
+    Object.keys(reglas).forEach(function (id) { if (!marcar(id, reglas[id]()) && !primero) primero = $(id); });
+    if (primero) { primero.focus(); return; }
+    if ($('c8-hp').value || Date.now() - inicio < 2500) return;
+    var ultimo = 0; try { ultimo = +localStorage.getItem('ah_c8_ultimo') || 0; } catch (x) {}
+    if (Date.now() - ultimo < 60000) { $('c8-err').hidden = false; return; }
+    if (!enVivo) { $('c8-prev').hidden = false; return; }
+    enviando = true; estado(true);
+    var datos = {
+      fecha: new Date().toISOString(), nombre: limpio($('c8-nombre').value, 80), celular: telefono().replace(/^\+57(?=[36]\d{9}$)/, ''), correo: limpio($('c8-mail').value, 100).toLowerCase(),
+      producto: limpio($('c8-prod').value, 80), mensaje: limpio($('c8-msg').value, 500),
+      autorizacion: 'Sí', version_politica: '1.0', texto_autorizacion: TEXTO_AUT,
+      origen: 'Formulario de contacto del sitio web · ' + location.href.split('#')[0].split('?')[0],
+      top3: '[]', calificacion: 'C: Por perfilar', que_falta: 'Simular en Agile Match'
+    };
+    var control = window.AbortController ? new AbortController() : null;
+    var espera = setTimeout(function () { if (control) control.abort(); }, 25000);
+    function fallo() { clearTimeout(espera); enviando = false; estado(false); $('c8-err').hidden = false; }
+    fetch(DESTINO, { signal: control ? control.signal : undefined, method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) })
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        clearTimeout(espera);
+        if (String(t).trim() !== 'ok') { fallo(); return; }
+        try { localStorage.setItem('ah_c8_ultimo', String(Date.now())); } catch (x) {}
+        f.hidden = true; $('c8-ok').hidden = false; $('c8-ok').focus();
+      })
+      .catch(fallo);
+  });
+  /* El botón flotante de WhatsApp y la barra para subir se ocultan mientras el formulario está en pantalla, para no tapar los campos ni el botón de envío (el formulario tiene su propio botón de WhatsApp). */
+  if ('IntersectionObserver' in window && window.matchMedia) {
+    var mq = { matches: true };
+    new IntersectionObserver(function (en) { document.body.classList.toggle('form-visible', mq.matches && en[0].isIntersecting); }, { threshold: 0.05 }).observe(document.querySelector('.c8-card'));
+  }
+})();

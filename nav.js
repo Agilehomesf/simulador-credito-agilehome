@@ -65,7 +65,7 @@
 /* Formulario "Quiero Asesoría": usa el mismo destino y las mismas validaciones de Agile Match. */
 (function () {
   var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
-  var TEXTO = 'Quiero Mi Asesoría Gratuita';
+  var TEXTO = 'Quiero mi asesoría gratuita';
   var NIVEL = {
     total: ['Tiene los recursos completos'],
     proyecto: ['La está pagando en un proyecto'],

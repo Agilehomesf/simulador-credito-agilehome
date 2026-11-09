@@ -3,587 +3,217 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Agile Home | Especialistas En Crédito De Vivienda En Colombia</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="canonical" href="https://agilehomesf.com/">
-<meta property="og:url" content="https://agilehomesf.com/">
+<title>Agile Home | Especialistas en crédito de vivienda en Colombia</title>
 <meta name="description" content="Especialistas en crédito de vivienda en Cajicá, con cobertura nacional. Comparamos 7 entidades financieras, radicamos tu solicitud y te acompañamos hasta el desembolso, sin costo para ti.">
+<link rel="canonical" href="https://agilehomesf.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Agile Home | Especialistas En Crédito De Vivienda">
-<meta property="og:description" content="Tu vivienda empieza con una buena decisión financiera. Te acompañamos hasta el desembolso, sin costo para ti.">
+<meta property="og:url" content="https://agilehomesf.com/">
+<meta property="og:title" content="Agile Home | Especialistas en crédito de vivienda en Colombia">
+<meta property="og:description" content="Especialistas en crédito de vivienda en Cajicá, con cobertura nacional. Comparamos 7 entidades financieras, radicamos tu solicitud y te acompañamos hasta el desembolso, sin costo para ti.">
 <meta property="og:image" content="https://agilehomesf.com/img/hero-casa-atardecer.jpg">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/hero-casa-atardecer.jpg">
-<style>
-/* Layout: banda azul con foto real a la derecha, luego bandas blancas y lila alternas; cada sección cierra con una acción concreta. */
-:root{
-  color-scheme:light;
-  --azul:#020E2E; --azul-2:#0B1D4A; --naranja:#FD4C0B; --naranja-tx:#C93400;
-  --lila:#F3F2FA; --blanco:#FFFFFF; --tinta:#1D2233; --gris:#4E5163; --linea:#E3E1EF;
-  --display:"Poppins","Segoe UI",system-ui,sans-serif;
-  --texto:"Nunito Sans","Segoe UI",system-ui,sans-serif;
-  --r:20px; --sombra:0 18px 40px rgba(2,14,46,.10);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--blanco);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.6}
-img{max-width:100%;display:block}
-a{color:var(--naranja-tx)}
-h1,h2,h3{font-family:var(--display);color:var(--azul);text-wrap:balance;margin:0}
-h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;font-weight:700}
-h3{font-size:19px;line-height:1.3;font-weight:600}
-p{margin:0}
-.envuelve{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-section{scroll-margin-top:90px}
-.banda{padding-block:88px}
-.banda.lila{background:var(--lila)}
-.ceja{display:inline-block;font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--naranja-tx);margin-bottom:12px}
-.intro{max-width:640px;color:var(--gris);margin-top:14px}
-.cabeza{margin-bottom:44px}
-:focus-visible{outline:3px solid var(--naranja);outline-offset:3px}
-
-/* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;font-family:var(--display);font-size:16px;font-weight:600;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
-.btn-n{background:var(--naranja);color:#fff;box-shadow:0 12px 26px rgba(253,76,11,.32)}
-.btn-n:hover{transform:translateY(-1px);box-shadow:0 16px 32px rgba(253,76,11,.4)}
-.btn-a{background:var(--azul);color:#fff}
-.btn-a:hover{background:var(--azul-2)}
-.btn-b{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
-.btn-b:hover{background:rgba(255,255,255,.1)}
-.btn-c{background:transparent;color:var(--azul);border-color:var(--azul)}
-.btn-c:hover{background:var(--azul);color:#fff}
-.acciones{display:flex;flex-wrap:wrap;gap:12px}
-.enlace{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--azul);text-decoration:underline;text-decoration-color:var(--naranja);text-decoration-thickness:2px;text-underline-offset:6px;min-height:44px}
-
-/* Encabezado */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--blanco)}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--blanco);box-shadow:0 1px 0 var(--linea)}
-.barra-in{max-width:1200px;margin:0 auto;padding-block:12px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:12px 24px}
-.logo-a{margin-right:auto;display:flex;align-items:center;min-height:44px}
-.logo-a img{height:46px;width:auto}
-.menu{display:flex;align-items:center;gap:4px 18px;font-family:var(--display);font-size:15px;font-weight:500}
-.nl{color:var(--tinta);text-decoration:none;padding:10px 0;white-space:nowrap}
-.nl:hover{color:var(--naranja-tx)}
-.nl.on{color:var(--azul);box-shadow:inset 0 -3px 0 var(--naranja)}
-.cta{min-height:46px;padding:0 20px;font-size:15px;white-space:nowrap}
-.m-btn{display:none;flex:none;width:46px;height:46px;align-items:center;justify-content:center;border:0;border-radius:12px;background:var(--lila);color:var(--azul);cursor:pointer}
-.m-btn .m-c,.m-btn[aria-expanded="true"] .m-a,.m-btn[aria-expanded="true"] .m-b{display:none}
-.m-btn[aria-expanded="true"] .m-c{display:inline}
-@media (max-width:1260px){
-  .barra-in{position:relative;gap:8px}
-  .logo-a img{height:38px}
-  .m-btn{display:flex}
-  .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--blanco);padding:6px max(20px,env(safe-area-inset-right,0px)) 14px max(20px,env(safe-area-inset-left,0px));box-shadow:0 18px 30px rgba(2,14,46,.16);max-height:calc(100vh - 80px);overflow:auto}
-  .menu.abierto{display:flex}
-  .nl{display:flex;align-items:center;min-height:50px;padding:0 6px;border-bottom:1px solid var(--linea)}
-  .nl:last-child{border-bottom:0}
-  .nl.on{box-shadow:inset 3px 0 0 var(--naranja)}
-}
-@media (max-width:420px){.cta{padding:0 14px;font-size:14px}.cta .larga{display:none}}
-@media (min-width:421px){.cta .corta{display:none}}
-
-/* Portada */
-.hero{position:relative;background:var(--azul);color:#fff;overflow:hidden}
-.hero-foto{position:absolute;inset:0 0 0 38%;background:url("img/hero-casa-atardecer.jpg") center/cover no-repeat}
-.hero-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--azul) 0%,rgba(2,14,46,.86) 18%,rgba(2,14,46,.25) 55%,rgba(2,14,46,0) 80%)}
-.hero-in{position:relative;padding-block:96px 104px}
-.hero-txt{max-width:620px}
-.hero h1{color:#fff;font-size:clamp(36px,5.2vw,62px);line-height:1.06;font-weight:700;letter-spacing:-.01em}
-.hero h1 em{font-style:normal;color:var(--naranja);position:relative;white-space:nowrap}
-.hero h1 em::after{content:"";position:absolute;left:2%;right:4%;bottom:-.08em;height:.12em;border-radius:99px;background:var(--naranja);opacity:.9;transform:rotate(-1.2deg)}
-.hero p.lead{margin-top:24px;font-size:19px;color:#E4E7F0;max-width:540px}
-.hero .acciones{margin-top:34px}
-.sellos{display:flex;flex-wrap:wrap;gap:10px 22px;margin:34px 0 0;padding:0;list-style:none;font-size:15px;color:#E4E7F0}
-.sellos li{display:flex;align-items:center;gap:8px}
-.sellos svg{flex:none;color:var(--naranja)}
-@media (max-width:860px){
-  .hero-foto{position:relative;inset:auto;height:240px}
-  .hero-foto::after{background:linear-gradient(0deg,var(--azul) 0%,rgba(2,14,46,0) 55%)}
-  .hero-in{padding-block:8px 64px}
-  .hero .acciones .btn{flex:1 1 100%}
-}
-
-/* Selector de financiación */
-.selector{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:start}
-.opciones{display:grid;gap:10px}
-.opcion{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:12px 16px;border:1.5px solid var(--linea);border-radius:16px;background:var(--blanco);color:var(--tinta);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.opcion:hover{border-color:#B9BED0}
-.opcion[aria-pressed="true"]{border-color:var(--azul);box-shadow:0 0 0 1px var(--azul),var(--sombra)}
-.opcion .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--lila);color:var(--azul)}
-.opcion[aria-pressed="true"] .ic{background:var(--azul);color:#fff}
-.opcion[aria-pressed="true"] .ic [stroke="#020E2E"]{stroke:#fff}
-.opcion b{display:block;font-family:var(--display);font-weight:600;font-size:16px;color:var(--azul)}
-.opcion small{display:block;color:var(--gris);font-size:14px;line-height:1.35}
-.detalle{position:sticky;top:96px;background:var(--azul);color:#E4E7F0;border-radius:24px;padding:34px;display:grid;gap:18px}
-.detalle h3{color:#fff;font-size:26px}
-.detalle dl{display:grid;gap:14px;margin:0}
-.detalle dt{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#FF9A6B}
-.detalle dd{margin:2px 0 0}
-.detalle .acciones{margin-top:4px}
-@media (max-width:860px){.selector{grid-template-columns:1fr}.detalle{position:static;padding:26px}}
-
-/* Beneficios */
-.beneficios{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.beneficio{background:var(--blanco);border-radius:var(--r);padding:28px 24px;display:grid;gap:12px;align-content:start}
-.beneficio .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--lila)}
-.beneficio p{color:var(--gris);font-size:16px}
-.pie-seccion{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;color:var(--gris)}
-@media (max-width:980px){.beneficios{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.beneficios{grid-template-columns:1fr}}
-
-/* Agile Match */
-.am{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
-.am h2 .m{color:var(--naranja)}
-.am-foto{border-radius:28px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
-.am-foto img{width:100%;height:100%;object-fit:cover}
-.am-pasos{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.am-pasos li{background:var(--lila);border-radius:16px;padding:16px 18px}
-.am-pasos b{display:block;font-family:var(--display);color:var(--azul);font-size:16px}
-.am-pasos span{font-size:15px;color:var(--gris);line-height:1.45;display:block;margin-top:2px}
-.entidades{margin-top:22px;font-size:15px;color:var(--gris)}
-.aviso{margin-top:22px;padding:16px 18px;border-radius:14px;background:#FFF4EC;font-size:15px;color:var(--tinta)}
-.aviso strong{color:var(--azul)}
-.am .acciones{margin-top:26px}
-@media (max-width:900px){.am{grid-template-columns:1fr;gap:32px}.am-foto{aspect-ratio:16/10}}
-@media (max-width:480px){.am-pasos{grid-template-columns:1fr}}
-
-/* Tres pasos */
-.pasos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:48px;align-items:center}
-.lista-pasos{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:p}
-.lista-pasos li{counter-increment:p;display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;align-items:start;background:var(--blanco);border-radius:var(--r);padding:24px}
-.lista-pasos li::before{content:counter(p);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--naranja);color:#fff;font-family:var(--display);font-weight:700;font-size:22px}
-.lista-pasos p{color:var(--gris);font-size:16px;margin-top:6px}
-.pasos-foto{border-radius:28px;overflow:hidden;aspect-ratio:2/3;max-height:620px}
-.pasos-foto img{width:100%;height:100%;object-fit:cover}
-@media (max-width:900px){.pasos{grid-template-columns:1fr}.pasos-foto{aspect-ratio:4/3;order:-1}}
-
-/* Experiencia */
-.exp{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px}
-.fundadora{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:var(--azul);color:#E4E7F0;border-radius:28px;overflow:hidden}
-.fundadora img{width:100%;height:100%;object-fit:cover;object-position:center 20%;min-height:340px}
-.fundadora .tx{padding:34px;display:grid;gap:14px;align-content:center}
-.fundadora h3{color:#fff;font-size:24px}
-.cifra{font-family:var(--display);font-size:54px;line-height:1;font-weight:700;color:var(--naranja)}
-.cifra small{display:block;font-size:15px;font-weight:500;color:#E4E7F0;margin-top:8px;line-height:1.4}
-.empresa{background:var(--lila);border-radius:28px;padding:34px;display:grid;gap:14px;align-content:center}
-.desde{font-family:var(--display);font-size:34px;font-weight:700;color:var(--azul);line-height:1.1}
-.porconfirmar{display:inline-block;background:#FFE3D4;color:var(--naranja-tx);border:1.5px dashed var(--naranja);border-radius:10px;padding:2px 10px;font-size:22px}
-.empresa ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--gris);font-size:16px}
-.empresa li{display:flex;gap:10px}
-.empresa li svg{flex:none;margin-top:4px;color:var(--naranja)}
-blockquote{margin:0;font-style:italic;color:#fff;border-left:3px solid var(--naranja);padding-left:14px}
-@media (max-width:980px){.exp{grid-template-columns:1fr}}
-@media (max-width:620px){.fundadora{grid-template-columns:1fr}.fundadora img{min-height:0;aspect-ratio:1/1}}
-
-/* Preguntas */
-.faq-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:40px;align-items:start}
-.faq{display:grid;gap:10px}
-.faq details{background:var(--blanco);border:1px solid var(--linea);border-radius:16px;padding:0 20px}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:60px;font-family:var(--display);font-weight:600;color:var(--azul);font-size:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--lila);color:var(--naranja-tx);font-size:20px}
-.faq details[open] summary::after{content:"–"}
-.faq details p{padding:0 0 18px;color:var(--gris);font-size:16px}
-.recursos{position:sticky;top:96px;background:var(--azul);border-radius:24px;padding:28px;color:#E4E7F0;display:grid;gap:14px}
-.recursos h3{color:#fff}
-.recursos a.rc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-family:var(--display);font-weight:500;font-size:15px}
-.recursos a.rc:hover{background:rgba(255,255,255,.14)}
-.recursos a.rc svg{flex:none;color:var(--naranja)}
-@media (max-width:900px){.faq-wrap{grid-template-columns:1fr}.recursos{position:static}}
-
-/* Contacto */
-.contacto{background:var(--azul);color:#E4E7F0;border-radius:32px;padding:56px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center;position:relative;overflow:hidden}
-.contacto::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;border:56px solid rgba(253,76,11,.16);pointer-events:none}
-.contacto h2{color:#fff}
-.contacto .intro{color:#C9CFE0}
-.contacto .acciones{margin-top:28px}
-.datos{display:grid;gap:12px;position:relative;z-index:1}
-.dato{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.07);color:#fff;text-decoration:none}
-.dato:hover{background:rgba(255,255,255,.13)}
-.dato .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--naranja);color:#fff}
-.dato small{display:block;color:#AEB6CC;font-size:13px}
-.dato b{font-family:var(--display);font-weight:600;font-size:16px;word-break:break-word}
-@media (max-width:900px){.contacto{grid-template-columns:1fr;padding:36px 24px;border-radius:24px}.contacto .acciones .btn{flex:1 1 100%}}
-
-/* Pie */
-footer{background:var(--blanco);border-top:1px solid var(--linea);padding-block:44px 110px;font-size:15px;color:var(--gris)}
-.pie{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
-.pie img{height:44px;width:auto;margin-bottom:14px}
-.pie h4{margin:0 0 10px;font-family:var(--display);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--azul)}
-.pie ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.pie a{color:var(--tinta);text-decoration:none}
-.pie a:hover{color:var(--naranja-tx);text-decoration:underline}
-.redes{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.red{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--lila);color:var(--azul)!important;font-family:var(--display);font-weight:500;font-size:14px}
-.red:hover{background:var(--azul);color:#fff!important;text-decoration:none!important}
-.legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--linea);font-size:14px}
-@media (max-width:860px){.pie{grid-template-columns:1fr}}
-
-/* Flotantes y formulario existente */
-.wa-flot,.wa-flot:hover{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:26;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 16px;border-radius:999px;background:#0F7A3E;color:#FFFFFF;font-family:var(--display);font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 10px 24px rgba(2,14,46,.28)}
-.wa-flot:hover{background:#0B6633}
-.arriba,.arriba:hover{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:25;width:48px;height:48px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25)}
-html.js .arriba{opacity:0;visibility:hidden;transition:opacity .2s}
-html.js .arriba.ver{opacity:1;visibility:visible}
-@media (max-width:760px){.arriba,.arriba:hover{right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px))}.wa-flot,.wa-flot:hover{right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;padding:0;justify-content:center}.wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
-.as-d{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);box-sizing:border-box;padding:30px;border:0;border-top:5px solid #FD4C0B;border-radius:20px;color:#2A2B30;font-size:15px;line-height:1.5;overflow:auto}
-.as-d::backdrop{background:rgba(2,14,46,.62)}
-.as-x{position:absolute;top:12px;right:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:#F3F2FA;color:#020E2E;cursor:pointer}
-.as-d h2{margin:0 44px 8px 0;font-size:25px;line-height:1.2;font-weight:700;color:#020E2E}
-.as-d p{margin:0 0 18px;color:#4E4F52}
-.as-f{display:block;margin:0 0 14px;font-weight:600;color:#020E2E}
-.as-f input{display:block;box-sizing:border-box;width:100%;min-height:48px;margin-top:6px;padding:0 14px;border:1px solid #C9C7D6;border-radius:12px;background:#FFFFFF;color:#2A2B30;font:inherit;font-weight:400}
-.as-f input:focus{outline:2px solid #FD4C0B;outline-offset:1px}
-.as-ci{border:0;margin:0 0 14px;padding:0;min-width:0}
-.as-ci legend{padding:0;margin-bottom:4px;font-weight:600;color:#020E2E}
-.as-o{display:flex;gap:10px;align-items:center;min-height:42px;cursor:pointer}
-.as-o input{flex:none;width:20px;height:20px;margin:0;accent-color:#FD4C0B}
-.as-d .as-n{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#FFF4EC;font-size:13.5px}
-.as-sn{display:flex;gap:24px}
-.as-chk{display:flex;gap:10px;align-items:flex-start;margin:0 0 16px;font-size:13.5px;color:#4E4F52}
-.as-chk input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#FD4C0B}
-.as-chk a{color:#C93400}
-.as-d .as-err{margin:0 0 12px;font-weight:600;color:#B42318}
-.as-send{width:100%;min-height:52px;border:0;border-radius:999px;background:#020E2E;color:#FFFFFF;font:inherit;font-weight:600;cursor:pointer}
-.as-send:disabled{opacity:.7;cursor:default}
-.as-d [hidden]{display:none}
-.detalle{scroll-margin-top:90px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-</style>
-<script src="nav.js"></script>
+<link rel="stylesheet" href="css/premium.css">
 </head>
 <body>
-<header class="top">
-  <div class="barra">
-    <div class="barra-in">
-      <a class="logo-a" href="#inicio"><img src="img/logo-agile-home.png" alt="Agile Home, especialistas en crédito de vivienda" width="162" height="48"></a>
-      <nav id="menu" class="menu" aria-label="Principal">
-        <a class="nl" href="#financiar">Financiación</a>
-        <a class="nl" href="#beneficios">Por Qué Agile Home</a>
-        <a class="nl" href="#agile-match">Agile Match</a>
-        <a class="nl" href="#pasos">Cómo Funciona</a>
-        <a class="nl" href="#experiencia">Nosotros</a>
-        <a class="nl" href="#preguntas">Preguntas</a>
-        <a class="nl" href="recursos.html">Recursos</a>
-      </nav>
-      <button class="btn btn-a cta" type="button" data-asesoria aria-haspopup="dialog"><span class="larga">Habla Con Un Asesor</span><span class="corta">Asesor</span></button>
-      <button class="m-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="m-a" d="M4 7h16M4 17h16"></path><path class="m-b" d="M4 12h16"></path><path class="m-c" d="M6 6l12 12M18 6L6 18"></path></svg></button>
-    </div>
+<header class="hdr barra-sup">
+  <div class="w">
+    <a class="logo" href="index.html"><img src="img/logo-agile-home.png" alt="Agile Home, especialistas en crédito de vivienda" width="155" height="46"></a>
+    <nav class="nav" id="menu" aria-label="Principal">
+      <a href="index.html" class="on" aria-current="page">Inicio</a>
+      <div class="dd"><a href="comprar-vivienda.html">Soluciones</a><div class="dd-m"><a href="comprar-vivienda.html">Comprar vivienda</a><a href="mejorar-credito.html">Mejorar mi crédito</a><a href="remodelar-ampliar.html">Remodelar o ampliar</a><a href="mas-opciones.html">Más opciones</a></div></div>
+      <a href="simulador.html">Agile Match</a>
+      <a href="acompanamiento.html">Acompañamiento</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="recursos.html">Recursos</a>
+    </nav>
+    <button class="btn btn-a ocultar-m" type="button" data-asesoria aria-haspopup="dialog" style="min-height:46px;padding:0 20px;font-size:15px">Habla con un asesor</button>
+    <button class="m-btn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#020E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
-
 <main>
-<section id="inicio" class="hero">
-  <div class="hero-foto" role="img" aria-label="Casa moderna iluminada al atardecer"></div>
-  <div class="envuelve hero-in">
+<section style="background:#020E2E;color:#FFFFFF">
+  <div class="hero-grid">
     <div class="hero-txt">
-      <span class="ceja" style="color:#FF9A6B">Especialistas en crédito de vivienda</span>
-      <h1>Tu vivienda empieza con una buena decisión <em>financiera</em></h1>
-      <p class="lead">Analizamos tu perfil, comparamos opciones en 7 entidades financieras y te acompañamos hasta el desembolso de tu crédito.</p>
-      <div class="acciones">
-        <a class="btn btn-n" href="simulador.html">Descubre Tus Opciones De Financiación</a>
-        <button class="btn btn-b" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button>
-      </div>
-      <ul class="sellos">
-        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Asesoría sin costo para ti</li>
-        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>7 entidades comparadas</li>
-        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Cobertura nacional</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="financiar" class="banda">
-  <div class="envuelve">
-    <div class="cabeza">
-      <span class="ceja">Financiación</span>
-      <h2>¿Qué Necesitas Financiar?</h2>
-      <p class="intro">Elige tu caso y te mostramos cómo funciona. Desde aquí abres Agile Match para ver tus opciones.</p>
-    </div>
-    <div class="selector">
-      <div class="opciones" id="opciones" role="group" aria-label="Tipo de financiación"></div>
-      <div class="detalle" id="detalle" aria-live="polite"></div>
-    </div>
-  </div>
-</section>
-
-<section id="beneficios" class="banda lila">
-  <div class="envuelve">
-    <div class="cabeza">
-      <span class="ceja">Por qué Agile Home</span>
-      <h2>¿Por Qué Elegir Agile Home?</h2>
-      <p class="intro">No tienes que recorrer banco por banco. Revisamos tu caso, te mostramos tus opciones y hacemos el trámite contigo.</p>
-    </div>
-    <div class="beneficios">
-      <article class="beneficio">
-        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5z" stroke="#020E2E"></path><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7" stroke="#FD4C0B"></path><path d="M3 20h18" stroke="#020E2E"></path></svg></span>
-        <h3>Varias Entidades, Una Sola Asesoría</h3>
-        <p>Comparamos opciones en 7 entidades financieras para que elijas con información.</p>
-      </article>
-      <article class="beneficio">
-        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" stroke="#020E2E"></circle><path d="M14.5 9.3c-.5-.8-1.5-1.3-2.5-1.3-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.3M12 6.5V8M12 16v1.5" stroke="#FD4C0B"></path></svg></span>
-        <h3>Sin Costo Para Ti</h3>
-        <p>Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como avalúo y notaría, se pagan aparte.</p>
-      </article>
-      <article class="beneficio">
-        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke="#020E2E"></path><path d="M14 3v5h5" stroke="#020E2E"></path><path d="M9 14l2 2 4-4" stroke="#FD4C0B"></path></svg></span>
-        <h3>Radicamos Tu Solicitud</h3>
-        <p>Te decimos qué documentos entregar según tu actividad y los radicamos en la entidad que elijas.</p>
-      </article>
-      <article class="beneficio">
-        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="7" r="3" stroke="#020E2E"></circle><path d="M3 19.5c.6-3.6 2.7-5.5 5.5-5.5s4.9 1.9 5.5 5.5" stroke="#020E2E"></path><path d="M15 11.5l2 2 4-4.5" stroke="#FD4C0B"></path></svg></span>
-        <h3>Te Acompañamos Hasta El Desembolso</h3>
-        <p>Seguimos contigo en el avalúo, el estudio de títulos, la firma y el desembolso de tu crédito.</p>
-      </article>
-    </div>
-    <div class="pie-seccion">
-      <span>¿Quieres ver qué hacemos en cada etapa?</span>
-      <a class="enlace" href="recursos.html#acompanamiento">Así te acompañamos</a>
-    </div>
-  </div>
-</section>
-
-<section id="agile-match" class="banda">
-  <div class="envuelve am">
-    <div>
-      <span class="ceja">Perfilador inteligente</span>
-      <h2>Conoce Tus Opciones Con Agile <span class="m">Match</span></h2>
-      <p class="intro">Es gratis, funciona 100 % en línea y te ayuda a entender tus opciones antes de presentar una solicitud.</p>
-      <ol class="am-pasos">
-        <li><b>Perfil</b><span>Respondes preguntas sobre tu actividad e ingresos.</span></li>
-        <li><b>Simulación</b><span>Comparas cuotas por entidad.</span></li>
-        <li><b>Documentos</b><span>Recibes la lista según tu actividad y la entidad.</span></li>
-        <li><b>Legalización</b><span>Revisas gastos aproximados y etapas.</span></li>
-      </ol>
-      <p class="entidades">Entidades en Agile Match: Banco de Bogotá, Av Villas, BBVA, Banco de Occidente, Hipocredit, Credifamilia y Caja Social.</p>
-      <p class="aviso"><strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud. El resultado es orientativo: la tasa, el monto y la aprobación dependen del estudio de cada entidad.</p>
-      <div class="acciones">
-        <a class="btn btn-n" href="simulador.html">Descubre Tus Opciones De Financiación</a>
+      <h1 class="hero-h1">Tu vivienda empieza con una buena decisión <span style="color:#FD4C0B;font-style:italic">financiera.</span></h1>
+      <p style="font-size:19px;color:#DCE1EE;max-width:520px">Comparamos alternativas de financiación por ti, en varias entidades financieras, con acompañamiento experto y sin costo para ti.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn btn-n" href="simulador.html">Descubre tus opciones de financiación</a>
+        <button class="btn btn-b" type="button" data-asesoria aria-haspopup="dialog"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.4-1.6-1-2-2l1-1-1-2z"/></svg> Habla con un asesor</button>
       </div>
     </div>
-    <div class="am-foto"><img src="img/llaves-casita.jpg" alt="Casa a escala, llaves y calculadora sobre un escritorio" loading="lazy" width="1200" height="800"></div>
+    <div class="hero-foto"><img src="img/hero-casa-atardecer.jpg" alt="Casa moderna iluminada al atardecer" width="1672" height="941"></div>
+  </div>
+  <div style="background:#FFFFFF;color:#1D2233;box-shadow:0 1px 0 #E3E1EF">
+    <div class="w stats4">
+      <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg><p><b>+20 años</b><br>de experiencia de nuestra fundadora</p></div>
+      <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5z"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 20h18"/></svg><p><b>7 entidades</b><br>comparadas en Agile Match</p></div>
+      <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><p><b>Asesoría experta</b><br>sin costo para ti</p></div>
+      <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l4-3 5 2 4-1 5 3"/><path d="M7 10l5 5 2-1M3 13v5h4M21 14v4h-4"/></svg><p><b>Acompañamiento</b><br>hasta el desembolso</p></div>
+    </div>
   </div>
 </section>
 
-<section id="pasos" class="banda lila">
-  <div class="envuelve pasos">
-    <div>
-      <div class="cabeza">
-        <span class="ceja">Cómo funciona</span>
-        <h2>Tu Financiación En 3 Pasos</h2>
+<section id="soluciones" style="padding:88px 0;background:#F3F2FA">
+  <div class="w">
+    <div style="text-align:center;display:grid;gap:10px;justify-items:center;margin-bottom:44px">
+      <h2 class="h2">¿Qué necesitas <em>financiar</em>?</h2>
+      <p style="color:#4E5163;font-size:18px">Elige tu objetivo y te mostramos cómo funciona, qué necesitas y cuánto podrías financiar.</p>
+    </div>
+    <div class="cards4">
+      <a class="card-sol" href="comprar-vivienda.html"><img src="img/pareja-llaves.jpg" alt="Pareja feliz con las llaves de su nueva vivienda" loading="lazy" width="1600" height="1068"><div><h3>Comprar vivienda</h3><p>Crédito hipotecario o leasing habitacional para vivienda nueva o usada.</p><span class="ver">Ver opciones →</span></div></a>
+      <a class="card-sol" href="mejorar-credito.html"><img src="img/asesoria-marla.jpg" alt="Asesora revisando un crédito con un cliente" loading="lazy" width="1402" height="1122"><div><h3>Mejorar mi crédito</h3><p>Revisa si otra entidad te ofrece mejores condiciones para tu crédito actual.</p><span class="ver">Ver opciones →</span></div></a>
+      <a class="card-sol" href="remodelar-ampliar.html"><img src="img/familia-techo.jpg" alt="Familia en su vivienda bajo un techo de cartón" loading="lazy" width="1600" height="1068"><div><h3>Remodelar o ampliar</h3><p>Financia mejoras en la vivienda que ya es tuya.</p><span class="ver">Ver opciones →</span></div></a>
+      <a class="card-sol" href="mas-opciones.html"><img src="img/casa-firma.jpg" alt="Casa a escala sobre un escritorio mientras se firman documentos" loading="lazy" width="1600" height="1011"><div><h3>Más opciones</h3><p>Libre inversión con garantía, construcción en sitio propio e inmueble comercial.</p><span class="ver">Ver opciones →</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0 0 88px;background:#F3F2FA">
+  <div class="w">
+    <div style="background:#020E2E;border-radius:26px;padding:40px;display:grid;gap:28px">
+      <h2 class="h2" style="color:#FFFFFF;font-size:32px">¿Por qué elegir <em>Agile Home</em>?</h2>
+      <div class="why4">
+        <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5z"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 20h18"/></svg><h3>Más opciones de financiación</h3><p>Comparamos alternativas en varias entidades, no solo en una.</p></div>
+        <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg><h3>Acompañamiento personalizado</h3><p>Radicamos tu solicitud y seguimos contigo hasta el desembolso.</p></div>
+        <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><h3>Decisiones informadas</h3><p>Te explicamos cuotas, plazos, gastos y documentos antes de decidir.</p></div>
+        <div><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h3>Seguridad y confianza</h3><p>Tus datos se tratan según nuestra política, y la asesoría no tiene costo para ti.</p></div>
       </div>
-      <ol class="lista-pasos">
-        <li><div><h3>Perfilamiento</h3><p>Revisamos tu actividad, tus ingresos y lo que quieres financiar, con Agile Match y con un asesor.</p></div></li>
-        <li><div><h3>Documentación</h3><p>Te decimos qué documentos entregar según tu actividad y la entidad, y los revisamos contigo.</p></div></li>
-        <li><div><h3>Radicación Hasta El Desembolso</h3><p>Radicamos tu solicitud en la entidad que elijas o que aplique a tu perfil, y te acompañamos hasta el desembolso.</p></div></li>
-      </ol>
-      <div class="pie-seccion">
-        <a class="enlace" href="recursos.html#etapas">Ver todas las etapas de una compra de vivienda</a>
-      </div>
-    </div>
-    <div class="pasos-foto"><img src="img/asesoria-pareja.jpg" alt="Asesora explicando opciones de crédito a una pareja" loading="lazy" width="900" height="1350"></div>
-  </div>
-</section>
-
-<section id="experiencia" class="banda">
-  <div class="envuelve">
-    <div class="cabeza">
-      <span class="ceja">Nosotros</span>
-      <h2>Nuestra Experiencia, Tu Tranquilidad</h2>
-    </div>
-    <div class="exp">
-      <article class="fundadora">
-        <img src="img/marla-lopez.jpg" alt="Marla López, fundadora de Agile Home" width="968" height="1098">
-        <div class="tx">
-          <span class="ceja" style="color:#FF9A6B;margin:0">Fundadora</span>
-          <h3>Marla López</h3>
-          <p class="cifra">20+<small>años de experiencia en el sector financiero, más de 15 de ellos en crédito de vivienda</small></p>
-          <p>Administradora de Empresas, con formación en Alta Gerencia y Gestión Comercial Especializada. Ha liderado equipos comerciales especializados en vivienda multibanco.</p>
-          <blockquote>Acceder a financiación de vivienda puede ser un proceso más claro, sencillo y acompañado.</blockquote>
-        </div>
-      </article>
-      <article class="empresa">
-        <span class="ceja" style="margin:0">La empresa</span>
-        <h3>Agile Home S.A.S.</h3>
-        <p class="desde">Desde <span class="porconfirmar">[año por confirmar]</span></p>
-        <ul>
-          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Especialistas en crédito de vivienda</li>
-          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Trabajamos con varias entidades financieras</li>
-          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Tecnología propia: Agile Match</li>
-          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>En Cajicá, con cobertura nacional</li>
-        </ul>
-      </article>
     </div>
   </div>
 </section>
 
-<section id="preguntas" class="banda lila">
-  <div class="envuelve">
-    <div class="cabeza">
-      <span class="ceja">Preguntas frecuentes</span>
-      <h2>Resolvemos Tus Dudas</h2>
+<section id="agile-match" style="padding:88px 0">
+  <div class="w am-grid">
+    <div style="display:grid;gap:18px">
+      <span class="ceja">Tu simulador inteligente de financiación</span>
+      <h2 class="h2">Agile <em>Match</em></h2>
+      <p style="font-size:19px;color:#020E2E;font-weight:600">Conoce en minutos tus opciones de financiación.</p>
+      <p style="color:#4E5163">Evalúa tu perfil, compara cuotas en 7 entidades y da el primer paso hacia tu vivienda. Es gratis y 100 % en línea.</p>
+      <ul class="lista-v"><li>Evaluación rápida y sencilla</li><li>Comparación en varias entidades</li><li>Resultados según tu perfil</li><li>Lista de documentos y gastos aproximados</li></ul>
+      <p class="aviso"><b>Agile Match no consulta centrales de riesgo.</b> El resultado es orientativo; la aprobación depende del estudio de cada entidad.</p>
+      <div><a class="btn btn-n" href="simulador.html">Descubre tus opciones ahora</a></div>
     </div>
-    <div class="faq-wrap">
-      <div class="faq">
-        <details><summary>¿Cuánto cuesta la asesoría?</summary><p>Para ti no tiene costo. Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como el avalúo, la notaría y el registro, sí se pagan aparte.</p></details>
-        <details><summary>¿Agile Match me aprueba el crédito?</summary><p>No. Agile Match te orienta según tu perfil. La aprobación final depende de las políticas de riesgo de cada entidad. <strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p></details>
-        <details><summary>¿Cuánto me financian?</summary><p>Depende de la entidad y del tipo de vivienda. En crédito hipotecario, la vivienda VIS puede financiarse hasta el 80 % y la no VIS hasta el 70 %, sobre el menor valor entre el avalúo y la promesa de compraventa.</p></details>
-        <details><summary>¿Qué debo cumplir para solicitar el crédito?</summary><p>No tener reportes negativos en centrales de riesgo, tener una actividad económica demostrable, ganar o reunir con tu grupo familiar al menos 2 SMLV, y contar con la cuota inicial o estar pagándola en un proyecto de vivienda. <strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p></details>
-        <details><summary>¿Necesito tener la cuota inicial?</summary><p>Sí. Además de un perfil que cumpla, debes contar con recursos propios para la parte que no financia la entidad, o estar pagándola en un proyecto de vivienda. También debes prever los gastos de escrituración. Si aún no la tienes completa, te orientamos para prepararte.</p></details>
-        <details><summary>¿Qué parte de mis ingresos puede ir a la cuota?</summary><p>En crédito de vivienda, la primera cuota puede llegar hasta el 40 % de los ingresos del hogar, tanto en VIS como en no VIS. Cada entidad también revisa tus demás deudas.</p></details>
-        <details><summary>¿Qué diferencia hay entre crédito hipotecario y leasing?</summary><p>Con el crédito hipotecario eres propietario desde la compra y el inmueble queda como garantía. En el leasing, la entidad compra el inmueble y te lo entrega en arriendo; eres propietario cuando ejerces la opción de compra.</p></details>
-        <details><summary>¿Qué diferencia hay entre pesos y UVR?</summary><p>En pesos, la cuota se mantiene fija. En UVR la tasa suele ser menor, pero el saldo y la cuota se ajustan con la inflación, así que la cuota sube con los años.</p></details>
-        <details><summary>¿Puedo sumar los ingresos de mi pareja o de un familiar?</summary><p>Sí, varias entidades lo permiten con familiares directos, como cónyuge, padres, hijos o hermanos. Cada una define cuántas personas pueden sumar y qué documentos debe entregar cada una.</p></details>
-        <details><summary>Soy independiente, ¿puedo aplicar?</summary><p>Sí. Debes demostrar tus ingresos con los documentos de tu actividad. Algunas entidades reconocen solo un porcentaje de ellos, según la actividad, por lo que el monto puede ser menor.</p></details>
-        <details><summary>¿Qué pasa si tengo reportes negativos?</summary><p>Con reportes vigentes, normalmente el crédito no se tramita. Algunas entidades estudian casos con obligaciones castigadas ya pagadas, según el puntaje y el tiempo transcurrido.</p></details>
-        <details><summary>¿Y si el avalúo sale por debajo del precio pactado?</summary><p>La entidad presta sobre el valor del avalúo. Debes cubrir la diferencia con recursos propios o renegociar el precio.</p></details>
-        <details><summary>¿Cuánto tarda el proceso?</summary><p>El estudio de crédito suele responder en pocos días hábiles. Después siguen el avalúo, el estudio de títulos, la firma y el desembolso. Los tiempos dependen de la entidad, de la notaría y de que los documentos estén completos.</p></details>
-        <details><summary>¿Hay subsidios de vivienda?</summary><p>Existen subsidios del Gobierno y de las cajas de compensación para vivienda VIS. Sus requisitos y su disponibilidad cambian, así que revisamos tu caso.</p></details>
-      </div>
-      <aside class="recursos" aria-label="Recursos">
-        <h3>Recursos Para Tu Crédito</h3>
-        <p>Guías detalladas para preparar tu solicitud.</p>
-        <a class="rc" href="recursos.html#acompanamiento">Cómo te acompañamos <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-        <a class="rc" href="recursos.html#etapas">Etapas de una compra de vivienda <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-        <a class="rc" href="recursos.html#documentos">Documentos según tu actividad <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-        <a class="rc" href="recursos.html#gastos">Gastos de escrituración <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-      </aside>
-    </div>
+    <img src="img/llaves-casita.jpg" alt="Casa a escala, llaves y calculadora sobre un escritorio" loading="lazy" width="1200" height="800" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:26px">
   </div>
 </section>
 
-<section id="contacto" class="banda">
-  <div class="envuelve">
-    <div class="contacto">
+<section style="padding:72px 0;background:#F3F2FA">
+  <div class="w" style="display:grid;gap:32px">
+    <h2 class="h2">Tu financiación en <em>3 pasos</em></h2>
+    <div class="pasos3">
+      <div><span class="num">1</span><h3>Cuéntanos tu objetivo</h3><p>Haz tu perfil en Agile Match o déjanos tus datos para que un asesor lo revise contigo.</p></div>
+      <div><span class="num">2</span><h3>Conoce tus opciones</h3><p>Comparamos alternativas en varias entidades y te decimos qué documentos entregar.</p></div>
+      <div><span class="num">3</span><h3>Avanza con acompañamiento</h3><p>Radicamos tu solicitud en la entidad que elijas y te acompañamos hasta el desembolso.</p></div>
+    </div>
+    <p><a class="lnk" href="recursos.html#etapas">Ver todas las etapas de una compra de vivienda →</a></p>
+  </div>
+</section>
+
+<section id="nosotros" style="padding:88px 0">
+  <div class="w">
+    <div class="exp-grid">
       <div>
-        <span class="ceja" style="color:#FF9A6B">Contacto</span>
-        <h2>Hablemos De Tu Vivienda</h2>
-        <p class="intro">Déjanos tus datos y un asesor revisa tu caso. Si ya hiciste tu perfil en Agile Match, tenlo a la mano para avanzar más rápido.</p>
-        <div class="acciones">
-          <button class="btn btn-n" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button>
-          <a class="btn btn-b" href="simulador.html">Descubre Tus Opciones</a>
+        <h2 class="h2" style="color:#FFFFFF">Nuestra experiencia, <em>tu tranquilidad.</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px">
+          <div style="display:grid;gap:6px"><p class="cifra" style="color:#FD4C0B">+20 años</p><p style="color:#DCE1EE;font-size:15px">De experiencia de Marla López, fundadora, en el sector financiero; más de 15 en crédito de vivienda.</p></div>
+          <div style="display:grid;gap:6px"><p class="cifra" style="color:#FFFFFF">Desde <span style="color:#FD4C0B">2024</span></p><p style="color:#DCE1EE;font-size:15px">Agile Home S.A.S., constituida el 1 de abril de 2024.</p></div>
+        </div>
+        <div style="display:grid;gap:8px;border-top:1px solid rgba(255,255,255,.15);padding-top:22px">
+          <span class="ceja" style="color:#FF9A6B">Conoce a nuestra fundadora</span>
+          <h3 style="color:#FFFFFF;font-size:26px">Marla López</h3>
+          <p style="color:#DCE1EE">Administradora de Empresas, con formación en Alta Gerencia y Gestión Comercial Especializada. Agile Home nace para acompañar a las personas a tomar decisiones informadas sobre la financiación de su vivienda.</p>
         </div>
       </div>
-      <div class="datos">
-        <a class="dato" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path></svg></span><span><small>WhatsApp</small><b>312 310 9099</b></span></a>
-        <a class="dato" href="mailto:comercial@agilehomesf.com"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><span><small>Correo</small><b>comercial@agilehomesf.com</b></span></a>
-        <div class="dato"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><span><small>Ubicación</small><b>Cajicá · Cobertura nacional</b></span></div>
+      <img src="img/marla-lopez.jpg" alt="Marla López, fundadora de Agile Home" loading="lazy" width="968" height="1098">
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="padding:0 0 96px">
+  <div class="w cierre-grid">
+    <div style="background:#F3F2FA;border-radius:24px;padding:32px;display:grid;gap:14px">
+      <h2 class="h2" style="font-size:30px">Preguntas <em>frecuentes</em></h2>
+      <p style="color:#4E5163">Resuelve aquí las dudas más comunes.</p>
+      <div class="faq" style="display:grid;gap:10px">
+        <details><summary>¿Cuánto cuesta la asesoría?</summary><p>Para ti no tiene costo. Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como avalúo, notaría y registro, se pagan aparte.</p></details>
+        <details><summary>¿Con qué entidades trabajan?</summary><p>En Agile Match comparamos Banco de Bogotá, Av Villas, BBVA, Banco de Occidente, Hipocredit, Credifamilia y Caja Social.</p></details>
+        <details><summary>¿Qué debo cumplir para solicitar el crédito?</summary><p>No tener reportes negativos, tener una actividad económica demostrable, ingresos de al menos 2 SMLV, solo o con tu grupo familiar, y la cuota inicial o estar pagándola en un proyecto.</p></details>
+        <details><summary>¿Qué documentos necesito?</summary><p>Depende de tu actividad económica y de la entidad. En <a href="recursos.html#documentos">Recursos</a> encuentras la guía completa.</p></details>
+      </div>
+      <a class="lnk" href="recursos.html#preguntas">Ver todas las preguntas →</a>
+    </div>
+    <div style="border-radius:24px;padding:32px;display:grid;gap:18px;box-shadow:0 18px 40px rgba(2,14,46,.10);background:#FFFFFF">
+      <h2 class="h2" style="font-size:30px">Hablemos de <em>tu proyecto</em></h2>
+      <p style="color:#4E5163">Estamos listos para acompañarte en la financiación de tu vivienda.</p>
+      <div class="canales">
+        <a href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        <button type="button" data-asesoria aria-haspopup="dialog">Solicita una asesoría</button>
+        <a href="mailto:comercial@agilehomesf.com">Envíanos un correo</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;border-top:1px solid #E3E1EF;padding-top:18px;font-size:15px">
+        <p><b style="color:#020E2E">Atención 100 % virtual</b> en toda Colombia. Presencial en Cajicá, Chía y Zipaquirá.</p>
+        <p><b style="color:#020E2E">Horarios de atención:</b><br>Lunes a viernes: 8:00 a. m. a 6:00 p. m.<br>Sábados: 8:00 a. m. a 12:00 m.</p>
       </div>
     </div>
   </div>
 </section>
 </main>
-
-<footer>
-  <div class="envuelve">
-    <div class="pie">
-      <div>
-        <img src="img/logo-agile-home.png" alt="Agile Home" width="149" height="44" loading="lazy">
-        <p>Especialistas en crédito de vivienda. Te acompañamos desde tu perfil hasta el desembolso de tu crédito.</p>
-      </div>
-      <div>
-        <h4>Navega</h4>
-        <ul>
-          <li><a href="simulador.html">Agile Match</a></li>
-          <li><a href="recursos.html">Recursos</a></li>
-          <li><a href="#preguntas">Preguntas frecuentes</a></li>
-          <li><a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link" target="_blank" rel="noopener">Política de tratamiento de datos personales</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Síguenos</h4>
-        <div class="redes">
-          <a class="red" href="https://www.instagram.com/agilehomesf" target="_blank" rel="noopener">Instagram</a>
-          <a class="red" href="https://www.linkedin.com/company/agile-home/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="red" href="https://www.facebook.com/share/1EF232yFGf/" target="_blank" rel="noopener">Facebook</a>
-        </div>
-      </div>
+<footer class="pie">
+  <div class="w">
+    <div class="pie-cols">
+      <div style="max-width:320px"><p class="marca">Agile <span>Home</span></p><p>Especialistas en crédito de vivienda. Te acompañamos hasta el desembolso.</p><p>WhatsApp <a href="https://wa.me/message/PMWO6BQHZCRSD1">312 310 9099</a><br><a href="mailto:comercial@agilehomesf.com">comercial@agilehomesf.com</a></p></div>
+      <div><p class="tit">Soluciones</p><a href="comprar-vivienda.html">Comprar vivienda</a><a href="mejorar-credito.html">Mejorar mi crédito</a><a href="remodelar-ampliar.html">Remodelar o ampliar</a><a href="mas-opciones.html">Más opciones</a></div>
+      <div><p class="tit">Enlaces rápidos</p><a href="index.html">Inicio</a><a href="simulador.html">Agile Match</a><a href="acompanamiento.html">Acompañamiento</a><a href="recursos.html">Recursos</a><a href="acompanamiento.html#formulario">Contáctanos</a></div>
+      <div><p class="tit">Síguenos</p><div class="redes"><a href="https://www.instagram.com/agilehomesf" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/agile-home/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/share/1EF232yFGf/" target="_blank" rel="noopener">Facebook</a></div><p style="margin-top:8px">Lunes a viernes: 8:00 a. m. a 6:00 p. m.<br>Sábados: 8:00 a. m. a 12:00 m.</p></div>
     </div>
-    <p class="legal">Agile Home S.A.S. actúa como broker financiero: no es una entidad financiera ni otorga créditos. La aprobación final depende de las políticas de riesgo de cada entidad. Agile Match entrega un resultado orientativo y las tasas están sujetas a confirmación. © 2026 Agile Home S.A.S. · Cajicá, Colombia.</p>
+    <p class="legal">Agile Home S.A.S. actúa como broker financiero: no es una entidad financiera ni otorga créditos. La aprobación final depende de las políticas de riesgo de cada entidad. Agile Match entrega un resultado orientativo y no consulta centrales de riesgo. © 2026 Agile Home S.A.S. · Cajicá, Colombia. <a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link" target="_blank" rel="noopener">Política de tratamiento de datos personales</a></p>
   </div>
 </footer>
-
-<a class="wa-flot" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"></path></svg><span>WhatsApp</span></a>
-<a class="arriba" href="#inicio" aria-label="Volver arriba"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"></path></svg></a>
-  <dialog id="asesoria" class="as-d" aria-labelledby="as-titulo">
+<a class="wa-flot" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.4-1.6-1-2-2l1-1-1-2z"/></svg><span>WhatsApp</span></a>
+<dialog id="asesoria" class="as-d" aria-labelledby="as-titulo">
     <button class="as-x" type="button" aria-label="Cerrar"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
     <form id="as-form" novalidate>
-      <h2 id="as-titulo">¿Quieres Que Un Asesor Te Acompañe?</h2>
+      <h2 id="as-titulo">¿Quieres que un asesor <em>te acompañe</em>?</h2>
       <p>Es gratis. Déjanos tus datos y te contactamos para revisar tu caso.</p>
-      <label class="as-f">Nombre Completo<input id="as-name" type="text" autocomplete="name"></label>
+      <label class="as-f">Nombre completo<input id="as-name" type="text" autocomplete="name"></label>
       <label class="as-f">Celular<input id="as-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567"></label>
-      <label class="as-f">Correo Electrónico<input id="as-mail" type="email" autocomplete="email"></label>
+      <label class="as-f">Correo electrónico<input id="as-mail" type="email" autocomplete="email"></label>
       <fieldset class="as-ci">
-        <legend>¿Tienes Reportes Negativos En Centrales De Riesgo?</legend>
+        <legend>¿Tienes reportes negativos en centrales de riesgo?</legend>
         <p style="margin: 0 0 4px; font-size: 13.5px"><strong style="color: #020E2E">Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p>
         <div class="as-sn"><label class="as-o"><input type="radio" name="as-rep" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-rep" value="no"><span>No</span></label></div>
       </fieldset>
       <fieldset class="as-ci">
-        <legend>¿Puedes Demostrar Tus Ingresos Con Documentos?</legend>
+        <legend>¿Puedes demostrar tus ingresos con documentos?</legend>
         <div class="as-sn"><label class="as-o"><input type="radio" name="as-dem" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-dem" value="no"><span>No</span></label></div>
       </fieldset>
       <fieldset class="as-ci">
-        <legend>¿Tus Ingresos, Solos O Con Tu Grupo Familiar, Suman Al Menos $3.501.810 Al Mes?</legend>
+        <legend>¿Tus ingresos, solos o con tu grupo familiar, suman al menos $3.501.810 al mes (2 SMLV)?</legend>
         <div class="as-sn"><label class="as-o"><input type="radio" name="as-ing" value="si"><span>Sí</span></label><label class="as-o"><input type="radio" name="as-ing" value="no"><span>No</span></label></div>
       </fieldset>
       <p id="as-nr" class="as-n" hidden style="margin: 0 0 14px">Este requisito es necesario para solicitar el crédito. Déjanos tus datos y te orientamos.</p>
       <fieldset class="as-ci">
-        <legend>¿Cuentas Con La Cuota Inicial?</legend>
+        <legend>¿Cuentas con la cuota inicial?</legend>
         <label class="as-o"><input type="radio" name="as-ci" value="total"><span>Sí, tengo los recursos completos</span></label>
         <label class="as-o"><input type="radio" name="as-ci" value="proyecto"><span>Sí, la estoy pagando en un proyecto de vivienda</span></label>
         <label class="as-o"><input type="radio" name="as-ci" value="parcial"><span>Tengo una parte</span></label>
         <label class="as-o"><input type="radio" name="as-ci" value="no"><span>Aún no tengo recursos</span></label>
         <p id="as-n" class="as-n" hidden>Para solicitar el crédito necesitas recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda. Déjanos tus datos y te orientamos.</p>
       </fieldset>
-      <label class="as-chk"><input id="as-acepta" type="checkbox"><span>Autorizo a Agile Home S.A.S. para tratar mis datos personales con el fin de contactarme, asesorarme y compartir mi información con las entidades financieras que yo escoja, según la <a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link" target="_blank" rel="noopener">Política De Tratamiento De Datos Personales</a>. Puedo conocer, actualizar o suprimir mis datos escribiendo a comercial@agilehomesf.com.</span></label>
+      <label class="as-chk"><input id="as-acepta" type="checkbox"><span>Autorizo a Agile Home S.A.S. para tratar mis datos personales con el fin de contactarme, asesorarme y compartir mi información con las entidades financieras que yo escoja, según la <a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link" target="_blank" rel="noopener">Política de tratamiento de datos personales</a>. Puedo conocer, actualizar o suprimir mis datos escribiendo a comercial@agilehomesf.com.</span></label>
       <input id="as-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 0; height: 0; opacity: 0">
       <p id="as-err" class="as-err" role="alert" hidden></p>
-      <button id="as-send" class="as-send" type="submit">Quiero Mi Asesoría Gratuita</button>
+      <button id="as-send" class="as-send" type="submit">Quiero mi asesoría gratuita</button>
     </form>
     <div id="as-ok" hidden>
-      <h2>¡Listo! Recibimos Tus Datos</h2>
+      <h2>¡Listo! Recibimos tus datos</h2>
       <p style="margin: 0">Un asesor de Agile Home te contactará pronto.</p>
     </div>
   </dialog>
-
-<script>
-(function(){
-  var P=[
-    {k:'hipo',t:'Compra De Vivienda',s:'Nueva o usada, VIS o no VIS',i:'<path d="M3 11l9-8 9 8" stroke="#020E2E"/><path d="M5 10v10h14V10" stroke="#020E2E"/><path d="M10 20v-6h4v6" stroke="#FD4C0B"/>',
-     q:'Para quien quiere comprar vivienda y puede aportar una cuota inicial.',c:'La entidad presta una parte del valor y el inmueble queda hipotecado como garantía. Eres propietario desde la compra. Puede financiar hasta el 80 % en VIS y el 70 % en no VIS, sobre el menor valor entre avalúo y promesa.',a:'En pesos la cuota se mantiene fija; en UVR se ajusta con la inflación. Debes prever los seguros y los gastos de legalización.'},
-    {k:'leasing',t:'Leasing Habitacional',s:'Vives en la vivienda mientras la pagas',i:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke="#020E2E"/><path d="M14 3v5h5" stroke="#020E2E"/><path d="M9 13h6M9 17h4" stroke="#FD4C0B"/>',
-     q:'Para quien busca vivienda no VIS y quiere revisar una alternativa al crédito hipotecario.',c:'La entidad compra el inmueble, que queda a su nombre durante el contrato. Tú lo habitas, pagas un canon mensual y al final ejerces la opción de compra.',a:'La opción de compra se pacta desde el inicio y cambia el valor del canon. Al ejercerla se firma una escritura, con sus gastos.'},
-    {k:'cartera',t:'Compra De Cartera',s:'Pasa tu crédito a otra entidad',i:'<path d="M17 2l4 4-4 4" stroke="#FD4C0B"/><path d="M3 11V9a3 3 0 0 1 3-3h15" stroke="#020E2E"/><path d="M7 22l-4-4 4-4" stroke="#FD4C0B"/><path d="M21 13v2a3 3 0 0 1-3 3H3" stroke="#020E2E"/>',
-     q:'Para quien ya tiene un crédito de vivienda y quiere mejorar su tasa o su plazo.',c:'La nueva entidad compra el 100 % del saldo de tu deuda. No se puede trasladar solo una parte.',a:'Conviene si la nueva tasa baja la cuota lo suficiente para cubrir el avalúo y el estudio de títulos.'},
-    {k:'remo',t:'Remodelación',s:'Mejora la vivienda que ya es tuya',i:'<path d="M14 6l4 4" stroke="#FD4C0B"/><path d="M3 21l9-9" stroke="#020E2E"/><path d="M13 3l8 8-3 3-8-8z" stroke="#020E2E"/>',
-     q:'Para propietarios que quieren mejorar su vivienda.',c:'La entidad estudia tu solicitud y puede pedir presupuesto o cotizaciones, además del avalúo del inmueble.',a:'Pueden aplicar avalúo, estudio de títulos, hipoteca, beneficencia y registro. Los requisitos cambian entre entidades.'},
-    {k:'libre',t:'Libre Inversión Con Garantía',s:'Dinero para cualquier uso con tu inmueble',i:'<path d="M3 7a2 2 0 0 1 2-2h13v4" stroke="#020E2E"/><path d="M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2z" stroke="#020E2E"/><circle cx="16.5" cy="14.5" r="1" stroke="#FD4C0B"/>',
-     q:'Para propietarios que necesitan recursos y quieren una alternativa al crédito de consumo.',c:'Pagas en cuotas mensuales y tu inmueble respalda la deuda. Suele tener una tasa menor que un crédito de consumo.',a:'Tu vivienda queda como garantía, así que conviene revisar bien tu capacidad de pago.'},
-    {k:'constr',t:'Construcción En Sitio Propio',s:'En tu lote dentro de un conjunto cerrado',i:'<rect x="5" y="3" width="14" height="18" rx="1.5" stroke="#020E2E"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2" stroke="#FD4C0B"/>',
-     q:'Para quien ya tiene un lote dentro de un condominio o conjunto cerrado urbanizado.',c:'La entidad financia parte de los costos directos de la obra y desembolsa por etapas, según el avance.',a:'Se piden documentos adicionales de la obra. La disponibilidad cambia entre entidades.'},
-    {k:'comer',t:'Inmueble Comercial',s:'Locales, bodegas, oficinas y consultorios',i:'<path d="M3 9l1.5-5h15L21 9" stroke="#020E2E"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" stroke="#FD4C0B"/><path d="M5 12v8h14v-8" stroke="#020E2E"/>',
-     q:'Para quien quiere comprar un inmueble para su negocio o su actividad profesional.',c:'La entidad estudia tu capacidad de pago y el inmueble, que queda como garantía del crédito.',a:'No sigue las reglas del crédito de vivienda: la financiación, el plazo y el monto mínimo cambian entre entidades.'}
-  ];
-  var box=document.getElementById('opciones'),det=document.getElementById('detalle');
-  if(!box||!det)return;
-  function svg(p,s){return '<svg aria-hidden="true" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';}
-  function mostrar(ix){
-    var p=P[ix];
-    [].forEach.call(box.children,function(b,j){b.setAttribute('aria-pressed',j===ix?'true':'false');});
-    det.innerHTML='<h3>'+p.t+'</h3><dl><div><dt>Para quién es</dt><dd>'+p.q+'</dd></div><div><dt>Cómo funciona</dt><dd>'+p.c+'</dd></div><div><dt>Ten en cuenta</dt><dd>'+p.a+'</dd></div></dl>'+
-      '<div class="acciones"><a class="btn btn-n" href="simulador.html?producto='+p.k+'">Simula '+p.t+'</a><button class="btn btn-b" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button></div>';
-  }
-  P.forEach(function(p,ix){
-    var b=document.createElement('button');b.type='button';b.className='opcion';
-    b.innerHTML='<span class="ic">'+svg(p.i,22)+'</span><span><b>'+p.t+'</b><small>'+p.s+'</small></span>';
-    b.addEventListener('click',function(){mostrar(ix);if(window.matchMedia('(max-width:860px)').matches)det.scrollIntoView({behavior:'smooth',block:'start'});});
-    box.appendChild(b);
-  });
-  mostrar(0);
-})();
-</script>
+<script src="nav.js"></script>
 </body>
 </html>

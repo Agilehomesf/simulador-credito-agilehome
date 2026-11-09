@@ -515,3 +515,4 @@ svg{flex:none}
 .p5-mas{margin-top:auto;padding-top:12px}
 @media (max-width:900px){.p5-num{left:0;width:68px;height:68px}}
 .p5-mas{display:inline-block}
+.p5-foto img{aspect-ratio:4/3}

@@ -218,3 +218,44 @@
   var m = /^#paso-([123])$/.exec(location.hash);
   if (m) abrir(m[1], true);
 })();
+
+/* Preguntas frecuentes del inicio: acordeón con botones, se puede abrir y cerrar cada pregunta. */
+(function () {
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('.f7-q') : null;
+    if (!b) return;
+    var abierta = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', abierta ? 'false' : 'true');
+    var r = document.getElementById(b.getAttribute('aria-controls'));
+    if (r) r.classList.toggle('abierta', !abierta);
+  });
+})();
+
+/* Centro de ayuda: buscador que filtra las preguntas por palabras, sin servicios externos. */
+(function () {
+  var q = document.getElementById('ay-q');
+  if (!q) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.ay-q'));
+  var cats = document.querySelectorAll('.ay-cat');
+  var estado = document.getElementById('ay-estado'), vacio = document.getElementById('ay-vacio');
+  var total = items.length;
+  function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  items.forEach(function (d) { d._txt = norm(d.textContent); d._abierto = d.open; });
+  function filtrar() {
+    var palabras = norm(q.value).split(/\s+/).filter(function (w) { return w.length > 1; });
+    var n = 0;
+    items.forEach(function (d) {
+      var ok = palabras.every(function (w) { return d._txt.indexOf(w) >= 0; });
+      d.hidden = !ok;
+      if (ok) n++;
+      if (palabras.length) d.open = ok && n <= 3; else d.open = false;
+    });
+    cats.forEach(function (c) { c.hidden = !c.querySelector('.ay-q:not([hidden])'); });
+    vacio.hidden = n > 0;
+    estado.textContent = palabras.length ? (n === 1 ? '1 pregunta coincide con tu búsqueda.' : n + ' preguntas coinciden con tu búsqueda.') : total + ' preguntas en 5 categorías.';
+  }
+  var t;
+  q.addEventListener('input', function () { clearTimeout(t); t = setTimeout(filtrar, 120); });
+  var m = /[?&]q=([^&]+)/.exec(location.search);
+  if (m) { q.value = decodeURIComponent(m[1].replace(/\+/g, ' ')); filtrar(); }
+})();

@@ -2,73 +2,233 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Agile Home | Especialistas En Crédito De Vivienda En Colombia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="canonical" href="https://agilehomesf.com/">
 <meta property="og:url" content="https://agilehomesf.com/">
-<meta name="description" content="Conoce si aplicas a tu crédito de vivienda. Especialistas en crédito de vivienda en Cajicá, con cobertura nacional: comparamos 7 alternativas de financiación, radicamos tu solicitud y te acompañamos hasta el desembolso, sin costo para ti.">
+<meta name="description" content="Especialistas en crédito de vivienda en Cajicá, con cobertura nacional. Comparamos 7 entidades financieras, radicamos tu solicitud y te acompañamos hasta el desembolso, sin costo para ti.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Agile Home | Especialistas En Crédito De Vivienda">
-<meta property="og:description" content="Conoce si aplicas a tu crédito de vivienda y te acompañamos hasta el desembolso, sin costo para ti.">
-<meta property="og:image" content="https://agilehomesf.com/img/pareja-llaves.jpg">
+<meta property="og:description" content="Tu vivienda empieza con una buena decisión financiera. Te acompañamos hasta el desembolso, sin costo para ti.">
+<meta property="og:image" content="https://agilehomesf.com/img/hero-casa-atardecer.jpg">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-casa-atardecer.jpg">
 <style>
-body{margin:0;background:#FFFFFF}
+/* Layout: banda azul con foto real a la derecha, luego bandas blancas y lila alternas; cada sección cierra con una acción concreta. */
+:root{
+  color-scheme:light;
+  --azul:#020E2E; --azul-2:#0B1D4A; --naranja:#FD4C0B; --naranja-tx:#C93400;
+  --lila:#F3F2FA; --blanco:#FFFFFF; --tinta:#1D2233; --gris:#4E5163; --linea:#E3E1EF;
+  --display:"Poppins","Segoe UI",system-ui,sans-serif;
+  --texto:"Nunito Sans","Segoe UI",system-ui,sans-serif;
+  --r:20px; --sombra:0 18px 40px rgba(2,14,46,.10);
+}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-a{color:#020E2E}a:hover{color:#FD4C0B}
-summary{cursor:pointer}
-section{scroll-margin-top:96px}
-#inicio{scroll-margin-top:220px}
-.ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px 40px;grid-template-areas:"intro intro" "foto etapas";align-items:stretch}
-.ac-foto{grid-area:foto;min-width:0;min-height:100%;border-radius:20px;overflow:hidden;position:relative}
-.ac-foto img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.ac-intro{grid-area:intro;min-width:0}
-.ac-et{grid-area:etapas;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.ac-et li{position:relative;display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:14px;align-items:center;border-radius:16px;padding:13px 18px;box-shadow:0 4px 14px rgba(2,14,46,.06)}
-.ac-et li:not(:last-child)::after{content:"";position:absolute;left:33px;bottom:-14px;width:2px;height:14px;background:#FD4C0B}
-@media (max-width:900px){
-.ac{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "foto" "etapas"}
-.ac-foto{min-height:0;aspect-ratio:5/4}
+body{margin:0;background:var(--blanco);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--naranja-tx)}
+h1,h2,h3{font-family:var(--display);color:var(--azul);text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;font-weight:700}
+h3{font-size:19px;line-height:1.3;font-weight:600}
+p{margin:0}
+.envuelve{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{scroll-margin-top:90px}
+.banda{padding-block:88px}
+.banda.lila{background:var(--lila)}
+.ceja{display:inline-block;font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--naranja-tx);margin-bottom:12px}
+.intro{max-width:640px;color:var(--gris);margin-top:14px}
+.cabeza{margin-bottom:44px}
+:focus-visible{outline:3px solid var(--naranja);outline-offset:3px}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;font-family:var(--display);font-size:16px;font-weight:600;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-n{background:var(--naranja);color:#fff;box-shadow:0 12px 26px rgba(253,76,11,.32)}
+.btn-n:hover{transform:translateY(-1px);box-shadow:0 16px 32px rgba(253,76,11,.4)}
+.btn-a{background:var(--azul);color:#fff}
+.btn-a:hover{background:var(--azul-2)}
+.btn-b{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn-b:hover{background:rgba(255,255,255,.1)}
+.btn-c{background:transparent;color:var(--azul);border-color:var(--azul)}
+.btn-c:hover{background:var(--azul);color:#fff}
+.acciones{display:flex;flex-wrap:wrap;gap:12px}
+.enlace{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--azul);text-decoration:underline;text-decoration-color:var(--naranja);text-decoration-thickness:2px;text-underline-offset:6px;min-height:44px}
+
+/* Encabezado */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--blanco)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--blanco);box-shadow:0 1px 0 var(--linea)}
+.barra-in{max-width:1200px;margin:0 auto;padding-block:12px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:12px 24px}
+.logo-a{margin-right:auto;display:flex;align-items:center;min-height:44px}
+.logo-a img{height:46px;width:auto}
+.menu{display:flex;align-items:center;gap:4px 18px;font-family:var(--display);font-size:15px;font-weight:500}
+.nl{color:var(--tinta);text-decoration:none;padding:10px 0;white-space:nowrap}
+.nl:hover{color:var(--naranja-tx)}
+.nl.on{color:var(--azul);box-shadow:inset 0 -3px 0 var(--naranja)}
+.cta{min-height:46px;padding:0 20px;font-size:15px;white-space:nowrap}
+.m-btn{display:none;flex:none;width:46px;height:46px;align-items:center;justify-content:center;border:0;border-radius:12px;background:var(--lila);color:var(--azul);cursor:pointer}
+.m-btn .m-c,.m-btn[aria-expanded="true"] .m-a,.m-btn[aria-expanded="true"] .m-b{display:none}
+.m-btn[aria-expanded="true"] .m-c{display:inline}
+@media (max-width:1260px){
+  .barra-in{position:relative;gap:8px}
+  .logo-a img{height:38px}
+  .m-btn{display:flex}
+  .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--blanco);padding:6px max(20px,env(safe-area-inset-right,0px)) 14px max(20px,env(safe-area-inset-left,0px));box-shadow:0 18px 30px rgba(2,14,46,.16);max-height:calc(100vh - 80px);overflow:auto}
+  .menu.abierto{display:flex}
+  .nl{display:flex;align-items:center;min-height:50px;padding:0 6px;border-bottom:1px solid var(--linea)}
+  .nl:last-child{border-bottom:0}
+  .nl.on{box-shadow:inset 3px 0 0 var(--naranja)}
 }
-.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:30px 60px;grid-template-areas:"foto intro" "foto dif" "foto fund"}
-.a-foto{grid-area:foto;align-self:start;position:sticky;top:120px;margin:0}
-.a-intro{grid-area:intro;min-width:0}
-.a-dif{grid-area:dif;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.a-fund{grid-area:fund;min-width:0}
-.a-ind{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 24px}
-@media (max-width:900px){
-.about{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "foto" "dif" "fund"}
-.a-foto{position:static}
-.a-dif,.a-ind{grid-template-columns:minmax(0,1fr)}
+@media (max-width:420px){.cta{padding:0 14px;font-size:14px}.cta .larga{display:none}}
+@media (min-width:421px){.cta .corta{display:none}}
+
+/* Portada */
+.hero{position:relative;background:var(--azul);color:#fff;overflow:hidden}
+.hero-foto{position:absolute;inset:0 0 0 38%;background:url("img/hero-casa-atardecer.jpg") center/cover no-repeat}
+.hero-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--azul) 0%,rgba(2,14,46,.86) 18%,rgba(2,14,46,.25) 55%,rgba(2,14,46,0) 80%)}
+.hero-in{position:relative;padding-block:96px 104px}
+.hero-txt{max-width:620px}
+.hero h1{color:#fff;font-size:clamp(36px,5.2vw,62px);line-height:1.06;font-weight:700;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--naranja);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:2%;right:4%;bottom:-.08em;height:.12em;border-radius:99px;background:var(--naranja);opacity:.9;transform:rotate(-1.2deg)}
+.hero p.lead{margin-top:24px;font-size:19px;color:#E4E7F0;max-width:540px}
+.hero .acciones{margin-top:34px}
+.sellos{display:flex;flex-wrap:wrap;gap:10px 22px;margin:34px 0 0;padding:0;list-style:none;font-size:15px;color:#E4E7F0}
+.sellos li{display:flex;align-items:center;gap:8px}
+.sellos svg{flex:none;color:var(--naranja)}
+@media (max-width:860px){
+  .hero-foto{position:relative;inset:auto;height:240px}
+  .hero-foto::after{background:linear-gradient(0deg,var(--azul) 0%,rgba(2,14,46,0) 55%)}
+  .hero-in{padding-block:8px 64px}
+  .hero .acciones .btn{flex:1 1 100%}
 }
-.hero{position:relative;overflow:hidden;background:#031335}
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
-.hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,19,53,.92) 0%,rgba(3,19,53,.8) 40%,rgba(3,19,53,0) 66%)}
-.hero-in{position:relative;max-width:1240px;margin:0 auto;padding:22px 24px 20px;box-sizing:border-box}
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:26px 6px;align-items:start}
-.fh{margin:0 0 18px;padding:13px 30px;color:#FFFFFF;font-size:19px;font-weight:700;line-height:1.2;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)}
-.fl{list-style:none;margin:0;padding:0 10px;position:relative;display:flex;flex-direction:column;gap:12px}
-.fl::before{content:"";position:absolute;left:30px;top:12px;bottom:12px;width:2px;background:#B9B3E6}
-.fl summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:44px;position:relative;color:#020E2E;font-size:15.5px;font-weight:600;line-height:1.25}
-.fl summary::-webkit-details-marker{display:none}
-.fl summary::after{content:"+";margin-left:auto;padding-left:6px;color:#FD4C0B;font-size:20px;font-weight:700}
-.fl details[open] summary::after{content:"\2013"}
-.fl details p{margin:6px 0 2px 52px;font-size:14px;line-height:1.5;color:#4E4F52}
-.as-btn{display:inline-flex;align-items:center;min-height:54px;padding:0 30px;border:2px solid #020E2E;border-radius:999px;background:transparent;color:#020E2E;font:inherit;font-weight:600;cursor:pointer}
-.as-btn:hover{background:#020E2E;color:#FFFFFF}
-.as-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:0 12px;margin:30px 0 0;font-size:15px;color:#4E4F52}
-.as-lnk{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;border:0;background:none;color:#020E2E;font:inherit;font-weight:600;cursor:pointer;text-decoration:underline;text-decoration-color:#FD4C0B;text-decoration-thickness:2px;text-underline-offset:5px}
-.as-lnk svg{flex:none;transition:transform .2s}
-.as-lnk:hover svg{transform:translateX(3px)}
-.as-lnk:focus-visible{outline:2px solid #FD4C0B;outline-offset:3px;border-radius:4px}
-.as-claro{justify-content:flex-start;margin:2px 0 0;color:#FFFFFF}
-.as-claro .as-lnk{color:#FFFFFF}
-@media (min-width:761px){.as-claro .as-lnk{min-height:38px}}
-@media (max-width:760px){.as-cta{justify-content:flex-start}}
-@media (prefers-reduced-motion:reduce){.as-lnk svg{transition:none}}
+
+/* Selector de financiación */
+.selector{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:start}
+.opciones{display:grid;gap:10px}
+.opcion{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:12px 16px;border:1.5px solid var(--linea);border-radius:16px;background:var(--blanco);color:var(--tinta);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.opcion:hover{border-color:#B9BED0}
+.opcion[aria-pressed="true"]{border-color:var(--azul);box-shadow:0 0 0 1px var(--azul),var(--sombra)}
+.opcion .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--lila);color:var(--azul)}
+.opcion[aria-pressed="true"] .ic{background:var(--azul);color:#fff}
+.opcion[aria-pressed="true"] .ic [stroke="#020E2E"]{stroke:#fff}
+.opcion b{display:block;font-family:var(--display);font-weight:600;font-size:16px;color:var(--azul)}
+.opcion small{display:block;color:var(--gris);font-size:14px;line-height:1.35}
+.detalle{position:sticky;top:96px;background:var(--azul);color:#E4E7F0;border-radius:24px;padding:34px;display:grid;gap:18px}
+.detalle h3{color:#fff;font-size:26px}
+.detalle dl{display:grid;gap:14px;margin:0}
+.detalle dt{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#FF9A6B}
+.detalle dd{margin:2px 0 0}
+.detalle .acciones{margin-top:4px}
+@media (max-width:860px){.selector{grid-template-columns:1fr}.detalle{position:static;padding:26px}}
+
+/* Beneficios */
+.beneficios{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.beneficio{background:var(--blanco);border-radius:var(--r);padding:28px 24px;display:grid;gap:12px;align-content:start}
+.beneficio .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--lila)}
+.beneficio p{color:var(--gris);font-size:16px}
+.pie-seccion{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;color:var(--gris)}
+@media (max-width:980px){.beneficios{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.beneficios{grid-template-columns:1fr}}
+
+/* Agile Match */
+.am{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
+.am h2 .m{color:var(--naranja)}
+.am-foto{border-radius:28px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.am-foto img{width:100%;height:100%;object-fit:cover}
+.am-pasos{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.am-pasos li{background:var(--lila);border-radius:16px;padding:16px 18px}
+.am-pasos b{display:block;font-family:var(--display);color:var(--azul);font-size:16px}
+.am-pasos span{font-size:15px;color:var(--gris);line-height:1.45;display:block;margin-top:2px}
+.entidades{margin-top:22px;font-size:15px;color:var(--gris)}
+.aviso{margin-top:22px;padding:16px 18px;border-radius:14px;background:#FFF4EC;font-size:15px;color:var(--tinta)}
+.aviso strong{color:var(--azul)}
+.am .acciones{margin-top:26px}
+@media (max-width:900px){.am{grid-template-columns:1fr;gap:32px}.am-foto{aspect-ratio:16/10}}
+@media (max-width:480px){.am-pasos{grid-template-columns:1fr}}
+
+/* Tres pasos */
+.pasos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:48px;align-items:center}
+.lista-pasos{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:p}
+.lista-pasos li{counter-increment:p;display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;align-items:start;background:var(--blanco);border-radius:var(--r);padding:24px}
+.lista-pasos li::before{content:counter(p);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--naranja);color:#fff;font-family:var(--display);font-weight:700;font-size:22px}
+.lista-pasos p{color:var(--gris);font-size:16px;margin-top:6px}
+.pasos-foto{border-radius:28px;overflow:hidden;aspect-ratio:2/3;max-height:620px}
+.pasos-foto img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.pasos{grid-template-columns:1fr}.pasos-foto{aspect-ratio:4/3;order:-1}}
+
+/* Experiencia */
+.exp{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px}
+.fundadora{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:var(--azul);color:#E4E7F0;border-radius:28px;overflow:hidden}
+.fundadora img{width:100%;height:100%;object-fit:cover;object-position:center 20%;min-height:340px}
+.fundadora .tx{padding:34px;display:grid;gap:14px;align-content:center}
+.fundadora h3{color:#fff;font-size:24px}
+.cifra{font-family:var(--display);font-size:54px;line-height:1;font-weight:700;color:var(--naranja)}
+.cifra small{display:block;font-size:15px;font-weight:500;color:#E4E7F0;margin-top:8px;line-height:1.4}
+.empresa{background:var(--lila);border-radius:28px;padding:34px;display:grid;gap:14px;align-content:center}
+.desde{font-family:var(--display);font-size:34px;font-weight:700;color:var(--azul);line-height:1.1}
+.porconfirmar{display:inline-block;background:#FFE3D4;color:var(--naranja-tx);border:1.5px dashed var(--naranja);border-radius:10px;padding:2px 10px;font-size:22px}
+.empresa ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--gris);font-size:16px}
+.empresa li{display:flex;gap:10px}
+.empresa li svg{flex:none;margin-top:4px;color:var(--naranja)}
+blockquote{margin:0;font-style:italic;color:#fff;border-left:3px solid var(--naranja);padding-left:14px}
+@media (max-width:980px){.exp{grid-template-columns:1fr}}
+@media (max-width:620px){.fundadora{grid-template-columns:1fr}.fundadora img{min-height:0;aspect-ratio:1/1}}
+
+/* Preguntas */
+.faq-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:40px;align-items:start}
+.faq{display:grid;gap:10px}
+.faq details{background:var(--blanco);border:1px solid var(--linea);border-radius:16px;padding:0 20px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:60px;font-family:var(--display);font-weight:600;color:var(--azul);font-size:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--lila);color:var(--naranja-tx);font-size:20px}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 18px;color:var(--gris);font-size:16px}
+.recursos{position:sticky;top:96px;background:var(--azul);border-radius:24px;padding:28px;color:#E4E7F0;display:grid;gap:14px}
+.recursos h3{color:#fff}
+.recursos a.rc{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-family:var(--display);font-weight:500;font-size:15px}
+.recursos a.rc:hover{background:rgba(255,255,255,.14)}
+.recursos a.rc svg{flex:none;color:var(--naranja)}
+@media (max-width:900px){.faq-wrap{grid-template-columns:1fr}.recursos{position:static}}
+
+/* Contacto */
+.contacto{background:var(--azul);color:#E4E7F0;border-radius:32px;padding:56px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center;position:relative;overflow:hidden}
+.contacto::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;border:56px solid rgba(253,76,11,.16);pointer-events:none}
+.contacto h2{color:#fff}
+.contacto .intro{color:#C9CFE0}
+.contacto .acciones{margin-top:28px}
+.datos{display:grid;gap:12px;position:relative;z-index:1}
+.dato{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.07);color:#fff;text-decoration:none}
+.dato:hover{background:rgba(255,255,255,.13)}
+.dato .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--naranja);color:#fff}
+.dato small{display:block;color:#AEB6CC;font-size:13px}
+.dato b{font-family:var(--display);font-weight:600;font-size:16px;word-break:break-word}
+@media (max-width:900px){.contacto{grid-template-columns:1fr;padding:36px 24px;border-radius:24px}.contacto .acciones .btn{flex:1 1 100%}}
+
+/* Pie */
+footer{background:var(--blanco);border-top:1px solid var(--linea);padding-block:44px 110px;font-size:15px;color:var(--gris)}
+.pie{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
+.pie img{height:44px;width:auto;margin-bottom:14px}
+.pie h4{margin:0 0 10px;font-family:var(--display);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--azul)}
+.pie ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.pie a{color:var(--tinta);text-decoration:none}
+.pie a:hover{color:var(--naranja-tx);text-decoration:underline}
+.redes{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.red{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--lila);color:var(--azul)!important;font-family:var(--display);font-weight:500;font-size:14px}
+.red:hover{background:var(--azul);color:#fff!important;text-decoration:none!important}
+.legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--linea);font-size:14px}
+@media (max-width:860px){.pie{grid-template-columns:1fr}}
+
+/* Flotantes y formulario existente */
+.wa-flot,.wa-flot:hover{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:26;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 16px;border-radius:999px;background:#0F7A3E;color:#FFFFFF;font-family:var(--display);font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 10px 24px rgba(2,14,46,.28)}
+.wa-flot:hover{background:#0B6633}
+.arriba,.arriba:hover{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:25;width:48px;height:48px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25)}
+html.js .arriba{opacity:0;visibility:hidden;transition:opacity .2s}
+html.js .arriba.ver{opacity:1;visibility:visible}
+@media (max-width:760px){.arriba,.arriba:hover{right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px))}.wa-flot,.wa-flot:hover{right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;padding:0;justify-content:center}.wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .as-d{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);box-sizing:border-box;padding:30px;border:0;border-top:5px solid #FD4C0B;border-radius:20px;color:#2A2B30;font-size:15px;line-height:1.5;overflow:auto}
 .as-d::backdrop{background:rgba(2,14,46,.62)}
 .as-x{position:absolute;top:12px;right:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:#F3F2FA;color:#020E2E;cursor:pointer}
@@ -90,726 +250,264 @@ section{scroll-margin-top:96px}
 .as-send{width:100%;min-height:52px;border:0;border-radius:999px;background:#020E2E;color:#FFFFFF;font:inherit;font-weight:600;cursor:pointer}
 .as-send:disabled{opacity:.7;cursor:default}
 .as-d [hidden]{display:none}
-.top{position:sticky;top:0;z-index:30}
-.barra{background:#FFFFFF;box-shadow:0 1px 0 #E3E1EF}
-.barra-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:12px 22px}
-.logo-a{margin-right:auto;min-height:44px;display:flex;align-items:center;text-decoration:none}
-.menu{display:flex;align-items:center;gap:4px 16px;font-size:15px;font-weight:500}
-.nl{text-decoration:none;color:#2A2B30;padding:10px 0;white-space:nowrap}
-.nl.on{color:#020E2E;box-shadow:inset 0 -3px 0 #FD4C0B}
-.cta,.cta:hover{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#020E2E;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap}
-.m-btn{display:none;flex:none;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:10px;background:#FFF4EC;color:#020E2E;cursor:pointer}
-.m-btn .m-c,.m-btn[aria-expanded="true"] .m-a,.m-btn[aria-expanded="true"] .m-b{display:none}
-.m-btn[aria-expanded="true"] .m-c{display:inline}
-.wa-flot,.wa-flot:hover{position:fixed;right:20px;bottom:20px;z-index:26;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 16px;border-radius:999px;background:#0F7A3E;color:#FFFFFF;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 10px 24px rgba(2,14,46,.28)}
-.wa-flot:hover{background:#0B6633}
-.wa-flot:focus-visible{outline:3px solid #FD4C0B;outline-offset:3px}
-.wa-flot svg{flex:none}
-@media (max-width:760px){.arriba,.arriba:hover{right:20px;bottom:84px}.wa-flot,.wa-flot:hover{right:16px;bottom:16px;width:56px;padding:0;justify-content:center}.wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
-.arriba,.arriba:hover{position:fixed;right:24px;bottom:88px;z-index:25;width:48px;height:48px;border-radius:50%;background:#FD4C0B;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25);text-decoration:none}
-html.js .arriba{opacity:0;visibility:hidden;transition:opacity .2s}
-html.js .arriba.ver{opacity:1;visibility:visible}
-@media (max-width:1279px){
-.top{display:contents}
-.barra{position:sticky;top:0;z-index:30}
-.barra-in{position:relative;padding:10px 16px;gap:8px}
-.logo-a img{height:38px !important}
-.cta,.cta:hover{padding:0 14px;font-size:14px}
-.m-btn{display:flex}
-.menu{flex-direction:column;align-items:stretch;gap:0;order:5;width:100%}
-.barra-in{flex-wrap:wrap}
-html.js .barra-in{flex-wrap:nowrap}
-html.js .menu{display:none;position:absolute;top:100%;left:0;right:0;width:auto;background:#FFFFFF;padding:6px 16px 12px;box-shadow:0 14px 26px rgba(2,14,46,.16);max-height:calc(100vh - 70px);overflow:auto}
-html.js .menu.abierto{display:flex}
-.nl{display:flex;align-items:center;min-height:46px;padding:0 12px;border-bottom:1px solid #E3E1EF}
-.nl:last-child{border-bottom:0}
-.nl.on{box-shadow:inset 3px 0 0 #FD4C0B;font-weight:600}
-}
-@media (max-width:340px){.cta,.cta:hover{display:none}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .arriba{transition:none}}
-@media (max-width:760px){
-.hero-img{position:static;display:block;height:240px;object-position:right center}
-.hero-scrim{display:none}
-.hero-in{padding:36px 24px 44px}
-.fh{clip-path:none;border-radius:12px;padding:12px 18px}
-}
-.prod{transition:box-shadow .2s,transform .2s}
-.prod:hover{box-shadow:0 14px 34px rgba(2,14,46,.14);transform:translateY(-4px)}
-.zoom svg,.zoomimg img{transition:transform .35s}
-.prod:hover .zoom svg{transform:scale(1.22)}
-.zoomimg{overflow:hidden}
-.zoomimg:hover img{transform:scale(1.06)}
-@media (prefers-reduced-motion:reduce){.prod,.prod:hover,.zoom svg,.zoomimg img{transition:none;transform:none}}
+.detalle{scroll-margin-top:90px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 <script src="nav.js"></script>
 </head>
 <body>
-<div style="font-family: Poppins, Arial, sans-serif; color: #2A2B30; background: #FFFFFF; font-size: 17px; line-height: 1.65">
+<header class="top">
+  <div class="barra">
+    <div class="barra-in">
+      <a class="logo-a" href="#inicio"><img src="img/logo-agile-home.png" alt="Agile Home, especialistas en crédito de vivienda" width="162" height="48"></a>
+      <nav id="menu" class="menu" aria-label="Principal">
+        <a class="nl" href="#financiar">Financiación</a>
+        <a class="nl" href="#beneficios">Por Qué Agile Home</a>
+        <a class="nl" href="#agile-match">Agile Match</a>
+        <a class="nl" href="#pasos">Cómo Funciona</a>
+        <a class="nl" href="#experiencia">Nosotros</a>
+        <a class="nl" href="#preguntas">Preguntas</a>
+        <a class="nl" href="recursos.html">Recursos</a>
+      </nav>
+      <button class="btn btn-a cta" type="button" data-asesoria aria-haspopup="dialog"><span class="larga">Habla Con Un Asesor</span><span class="corta">Asesor</span></button>
+      <button class="m-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="m-a" d="M4 7h16M4 17h16"></path><path class="m-b" d="M4 12h16"></path><path class="m-c" d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    </div>
+  </div>
+</header>
 
-  <!-- Encabezado -->
-  <header class="top">
-    <div style="background: #020E2E">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 4px 24px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 24px; font-size: 14px; font-weight: 500">
-        <a href="https://wa.me/message/PMWO6BQHZCRSD1" style="text-decoration: none; color: #FFFFFF; padding: 6px 0">WhatsApp 312 310 9099</a>
-        <a href="mailto:comercial@agilehomesf.com" style="text-decoration: none; color: #FFFFFF; padding: 6px 0">comercial@agilehomesf.com</a>
+<main>
+<section id="inicio" class="hero">
+  <div class="hero-foto" role="img" aria-label="Casa moderna iluminada al atardecer"></div>
+  <div class="envuelve hero-in">
+    <div class="hero-txt">
+      <span class="ceja" style="color:#FF9A6B">Especialistas en crédito de vivienda</span>
+      <h1>Tu vivienda empieza con una buena decisión <em>financiera</em></h1>
+      <p class="lead">Analizamos tu perfil, comparamos opciones en 7 entidades financieras y te acompañamos hasta el desembolso de tu crédito.</p>
+      <div class="acciones">
+        <a class="btn btn-n" href="simulador.html">Descubre Tus Opciones De Financiación</a>
+        <button class="btn btn-b" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button>
+      </div>
+      <ul class="sellos">
+        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Asesoría sin costo para ti</li>
+        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>7 entidades comparadas</li>
+        <li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Cobertura nacional</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="financiar" class="banda">
+  <div class="envuelve">
+    <div class="cabeza">
+      <span class="ceja">Financiación</span>
+      <h2>¿Qué Necesitas Financiar?</h2>
+      <p class="intro">Elige tu caso y te mostramos cómo funciona. Desde aquí abres Agile Match para ver tus opciones.</p>
+    </div>
+    <div class="selector">
+      <div class="opciones" id="opciones" role="group" aria-label="Tipo de financiación"></div>
+      <div class="detalle" id="detalle" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="beneficios" class="banda lila">
+  <div class="envuelve">
+    <div class="cabeza">
+      <span class="ceja">Por qué Agile Home</span>
+      <h2>¿Por Qué Elegir Agile Home?</h2>
+      <p class="intro">No tienes que recorrer banco por banco. Revisamos tu caso, te mostramos tus opciones y hacemos el trámite contigo.</p>
+    </div>
+    <div class="beneficios">
+      <article class="beneficio">
+        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5z" stroke="#020E2E"></path><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7" stroke="#FD4C0B"></path><path d="M3 20h18" stroke="#020E2E"></path></svg></span>
+        <h3>Varias Entidades, Una Sola Asesoría</h3>
+        <p>Comparamos opciones en 7 entidades financieras para que elijas con información.</p>
+      </article>
+      <article class="beneficio">
+        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" stroke="#020E2E"></circle><path d="M14.5 9.3c-.5-.8-1.5-1.3-2.5-1.3-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.3M12 6.5V8M12 16v1.5" stroke="#FD4C0B"></path></svg></span>
+        <h3>Sin Costo Para Ti</h3>
+        <p>Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como avalúo y notaría, se pagan aparte.</p>
+      </article>
+      <article class="beneficio">
+        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke="#020E2E"></path><path d="M14 3v5h5" stroke="#020E2E"></path><path d="M9 14l2 2 4-4" stroke="#FD4C0B"></path></svg></span>
+        <h3>Radicamos Tu Solicitud</h3>
+        <p>Te decimos qué documentos entregar según tu actividad y los radicamos en la entidad que elijas.</p>
+      </article>
+      <article class="beneficio">
+        <span class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="7" r="3" stroke="#020E2E"></circle><path d="M3 19.5c.6-3.6 2.7-5.5 5.5-5.5s4.9 1.9 5.5 5.5" stroke="#020E2E"></path><path d="M15 11.5l2 2 4-4.5" stroke="#FD4C0B"></path></svg></span>
+        <h3>Te Acompañamos Hasta El Desembolso</h3>
+        <p>Seguimos contigo en el avalúo, el estudio de títulos, la firma y el desembolso de tu crédito.</p>
+      </article>
+    </div>
+    <div class="pie-seccion">
+      <span>¿Quieres ver qué hacemos en cada etapa?</span>
+      <a class="enlace" href="recursos.html#acompanamiento">Así te acompañamos</a>
+    </div>
+  </div>
+</section>
+
+<section id="agile-match" class="banda">
+  <div class="envuelve am">
+    <div>
+      <span class="ceja">Perfilador inteligente</span>
+      <h2>Conoce Tus Opciones Con Agile <span class="m">Match</span></h2>
+      <p class="intro">Es gratis, funciona 100 % en línea y te ayuda a entender tus opciones antes de presentar una solicitud.</p>
+      <ol class="am-pasos">
+        <li><b>Perfil</b><span>Respondes preguntas sobre tu actividad e ingresos.</span></li>
+        <li><b>Simulación</b><span>Comparas cuotas por entidad.</span></li>
+        <li><b>Documentos</b><span>Recibes la lista según tu actividad y la entidad.</span></li>
+        <li><b>Legalización</b><span>Revisas gastos aproximados y etapas.</span></li>
+      </ol>
+      <p class="entidades">Entidades en Agile Match: Banco de Bogotá, Av Villas, BBVA, Banco de Occidente, Hipocredit, Credifamilia y Caja Social.</p>
+      <p class="aviso"><strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud. El resultado es orientativo: la tasa, el monto y la aprobación dependen del estudio de cada entidad.</p>
+      <div class="acciones">
+        <a class="btn btn-n" href="simulador.html">Descubre Tus Opciones De Financiación</a>
       </div>
     </div>
-    <div class="barra">
-      <div class="barra-in">
-        <a class="logo-a" href="#inicio"><img src="img/logo-agile-home.png" alt="Agile Home, especialistas en crédito de vivienda" style="height: 50px; width: auto; display: block"></a>
-        <nav id="menu" class="menu" aria-label="Principal">
-          <a class="nl" href="#servicios">Productos</a>
-          <a class="nl" href="#agile-match">Agile Match</a>
-          <a class="nl" href="#acompanamiento">Acompañamiento</a>
-          <a class="nl" href="#etapas">Etapas</a>
-          <a class="nl" href="#documentos">Documentos Y Gastos</a>
-          <a class="nl" href="#nosotros">Nosotros</a>
-          <a class="nl" href="#preguntas">Preguntas</a>
-          <a class="nl" href="#contacto">Contacto</a>
-        </nav>
-        <a class="cta" href="simulador.html">Evalúa Tu Perfil</a>
-        <button class="m-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="m-a" d="M4 7h16M4 17h16"></path><path class="m-b" d="M4 12h16"></path><path class="m-c" d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <div class="am-foto"><img src="img/llaves-casita.jpg" alt="Casa a escala, llaves y calculadora sobre un escritorio" loading="lazy" width="1200" height="800"></div>
+  </div>
+</section>
+
+<section id="pasos" class="banda lila">
+  <div class="envuelve pasos">
+    <div>
+      <div class="cabeza">
+        <span class="ceja">Cómo funciona</span>
+        <h2>Tu Financiación En 3 Pasos</h2>
+      </div>
+      <ol class="lista-pasos">
+        <li><div><h3>Perfilamiento</h3><p>Revisamos tu actividad, tus ingresos y lo que quieres financiar, con Agile Match y con un asesor.</p></div></li>
+        <li><div><h3>Documentación</h3><p>Te decimos qué documentos entregar según tu actividad y la entidad, y los revisamos contigo.</p></div></li>
+        <li><div><h3>Radicación Hasta El Desembolso</h3><p>Radicamos tu solicitud en la entidad que elijas o que aplique a tu perfil, y te acompañamos hasta el desembolso.</p></div></li>
+      </ol>
+      <div class="pie-seccion">
+        <a class="enlace" href="recursos.html#etapas">Ver todas las etapas de una compra de vivienda</a>
       </div>
     </div>
-  </header>
+    <div class="pasos-foto"><img src="img/asesoria-pareja.jpg" alt="Asesora explicando opciones de crédito a una pareja" loading="lazy" width="900" height="1350"></div>
+  </div>
+</section>
 
-  <main>
-    <!-- Portada -->
-    <section id="inicio" class="hero">
-      <img class="hero-img" src="img/portada-casa-mano.jpg" alt="Mano sosteniendo una vivienda moderna con íconos de cálculo y tasas, frente a una ciudad iluminada">
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="hero-in">
-        <div style="max-width: 620px">
-          <p style="display: inline-block; margin: 0 0 14px; padding: 6px 16px; border-radius: 999px; background: #FD4C0B; color: #FFFFFF; font-size: 14px; font-weight: 600">Especialistas En Crédito De Vivienda</p>
-          <h1 style="margin: 0 0 14px; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.12; font-weight: 700; color: #FFFFFF">Descubre Qué Opciones Tienes Para <span style="color: #FD4C0B">Financiar Tu Vivienda</span></h1>
-          <p style="margin: 0 0 12px; font-size: 17px; line-height: 1.55; color: #FFFFFF; max-width: 590px">Comprar vivienda comienza con una buena decisión financiera. Analizamos tu perfil, comparamos 7 alternativas de financiación y te acompañamos desde la evaluación inicial hasta el desembolso de tu crédito.</p>
-          <p style="margin: 0 0 16px; font-size: 17px; font-weight: 600; color: #FFFFFF; max-width: 590px">Nuestra asesoría y gestión son 100 % gratuitas.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 14px">
-            <a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #FFFFFF; color: #020E2E; font-weight: 600; text-decoration: none">Evalúa Tu Perfil Ahora</a>
-            <a href="https://wa.me/message/PMWO6BQHZCRSD1" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: transparent; color: #FFFFFF; border: 1px solid #FFFFFF; font-weight: 600; text-decoration: none">Escríbenos Por WhatsApp</a>
-          </div>
-          <p class="as-cta as-claro"><span>¿Prefieres que te contactemos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Datos -->
-    <section aria-label="Agile Home en cifras" style="background: #FFFFFF">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 18px">
-        <div style="background: #020E2E; border-radius: 22px; padding: 26px 28px">
-          <p style="margin: 0; font-size: 36px; font-weight: 700; line-height: 1.2; color: #FFFFFF">Más De 20 Años</p>
-          <p style="margin: 0; color: #FFFFFF">de experiencia en el sector financiero</p>
-        </div>
-        <div style="background: #FD4C0B; border-radius: 22px; padding: 26px 28px">
-          <p style="margin: 0; font-size: 36px; font-weight: 700; line-height: 1.2; color: #FFFFFF">7 Alternativas</p>
-          <p style="margin: 0; color: #FFFFFF">de financiación comparadas en Agile Match</p>
-        </div>
-        <div style="background: #E8E5FA; border-radius: 22px; padding: 26px 28px">
-          <p style="margin: 0; font-size: 36px; font-weight: 700; line-height: 1.2; color: #020E2E">Sin Costo</p>
-          <p style="margin: 0; color: #2A2B30">para ti, desde el perfil hasta el desembolso</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Productos -->
-    <section id="servicios" style="background: #FFFFFF">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 88px">
-        <div style="display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; margin-bottom: 40px">
-          <div style="flex: 1 1 460px; min-width: 0">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Productos</p>
-            <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Te Ayudamos A <span style="color: #FD4C0B">Financiar Tu Proyecto</span></h2>
-            <p style="margin: 0; color: #4E4F52">Cada persona llega con una necesidad distinta. Abre cada producto para conocer cómo funciona, para quién es y qué debes tener en cuenta.</p>
-          </div>
-          <div class="zoomimg" style="flex: 1 1 400px; min-width: 0; height: 280px; border-radius: 24px">
-            <img loading="lazy" src="img/pareja-llaves.jpg" alt="Pareja feliz mostrando las llaves de su vivienda" style="display: block; width: 100%; height: 100%; object-fit: cover">
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 22px; align-items: start">
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #020E2E; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g stroke="#FFFFFF"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></g><path stroke="#FD4C0B" d="M10 19.5v-5h4v5"></path></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Compra De Vivienda</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Crédito hipotecario en pesos o en UVR para vivienda nueva o usada, VIS o no VIS.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para quien quiere comprar vivienda y puede aportar una cuota inicial.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la entidad presta una parte del valor y el inmueble queda hipotecado como garantía. Eres propietario desde la compra. Puede financiar hasta el 80 % en VIS y el 70 % en no VIS, sobre el menor valor entre avalúo y promesa.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> en pesos la cuota se mantiene fija; en UVR se ajusta con la inflación. Debes tener seguro de vida y de incendio y terremoto, además de prever los gastos de legalización.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #FD4C0B; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15.5" r="4.5"></circle><path d="M11.3 12.2 19.5 4"></path><path d="M16.2 7.3l2.5 2.5M13.9 9.6l1.6 1.6"></path></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Leasing Habitacional</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Vives en la vivienda mientras la pagas, con opción de compra al final del contrato.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para quien busca vivienda no VIS y quiere revisar una alternativa al crédito hipotecario.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la entidad compra el inmueble, que queda a su nombre durante el contrato. Tú lo habitas y pagas un canon mensual. Al final ejerces la opción de compra y pasa a tu nombre.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> la opción de compra se pacta desde el inicio y cambia el valor del canon. Al ejercerla se firma una escritura, con sus gastos. Puede dar beneficios tributarios según la norma vigente.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #E8E5FA; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle stroke="#020E2E" cx="12" cy="12" r="9"></circle><g stroke="#FD4C0B"><path d="M15 9l-6 6"></path><circle cx="9.3" cy="9.3" r="1.2"></circle><circle cx="14.7" cy="14.7" r="1.2"></circle></g></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Compra De Cartera</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Pasa tu crédito de vivienda a otra entidad para buscar una mejor tasa o plazo.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para quien ya tiene un crédito de vivienda y quiere mejorar sus condiciones.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la nueva entidad compra el 100 % del saldo de tu deuda. No se puede trasladar solo una parte.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> conviene si la nueva tasa baja la cuota lo suficiente para cubrir el avalúo y el estudio de títulos. No requiere una nueva escritura de compraventa.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #FFE3D6; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect stroke="#020E2E" x="3.5" y="4" width="15" height="6" rx="1.5"></rect><path stroke="#FD4C0B" d="M18.5 7h2v5H12v3"></path><rect stroke="#020E2E" x="10.5" y="15" width="3" height="5.5" rx="1"></rect></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Remodelación</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Financia mejoras en el inmueble que ya es tuyo.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para propietarios que quieren mejorar su vivienda.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la entidad estudia tu solicitud y puede pedir presupuesto o cotizaciones, además del avalúo del inmueble.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> no hay nueva escritura de compraventa, pero sí pueden aplicar avalúo, estudio de títulos, hipoteca, beneficencia y registro. Los requisitos cambian entre entidades.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #020E2E; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect stroke="#FFFFFF" x="3" y="6" width="18" height="12" rx="2"></rect><g stroke="#FD4C0B"><circle cx="12" cy="12" r="2.5"></circle><path d="M6.5 9.5v5M17.5 9.5v5"></path></g></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Libre Inversión Con Garantía</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Dinero para cualquier uso, con tu inmueble como garantía.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para propietarios que necesitan recursos y quieren revisar una alternativa al crédito de consumo.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> pagas en cuotas mensuales y tu inmueble respalda la deuda. Suele tener una tasa menor que un crédito de consumo.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> tu vivienda queda como garantía, así que conviene revisar bien tu capacidad de pago. También aplican gastos de avalúo, estudio de títulos, hipoteca, beneficencia y registro.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #FD4C0B; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"></path><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0A2.7 2.7 0 0 0 20 9"></path><path d="M5.5 12.5V20h13v-7.5"></path><path d="M10 20v-4.5h4V20"></path></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Inmueble Comercial</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Financiación para locales, bodegas, oficinas y consultorios.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para quien quiere comprar un inmueble para su negocio o su actividad profesional.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la entidad estudia tu capacidad de pago y el inmueble, que queda como garantía del crédito.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> no sigue las mismas reglas del crédito de vivienda. La financiación, el plazo y el monto mínimo cambian entre entidades.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-
-          <article class="prod" style="background: #FFFFFF; border: 1px solid #E3E1EF; border-radius: 22px; overflow: hidden">
-            <div class="zoom" style="height: 132px; background: #E8E5FA; display: flex; align-items: center; justify-content: center">
-              <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="#020E2E" d="M4 16a8 8 0 0 1 16 0"></path><path stroke="#020E2E" d="M3 16h18v2.5H3z"></path><path stroke="#FD4C0B" d="M10 8.5V5h4v3.5"></path></svg>
-            </div>
-            <div style="padding: 22px 24px 8px">
-              <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #020E2E">Construcción En Sitio Propio</h3>
-              <p style="margin: 0 0 8px; font-size: 16px; color: #4E4F52">Para construir tu vivienda en un lote tuyo dentro de un conjunto cerrado.</p>
-              <details>
-                <summary style="font-weight: 600; color: #020E2E; padding: 10px 0; font-size: 16px">Ver Más</summary>
-                <div style="font-size: 15px; color: #4E4F52; padding-bottom: 12px">
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Para quién es:</strong> para quien ya tiene un lote dentro de un condominio o conjunto cerrado urbanizado.</p>
-                  <p style="margin: 0 0 10px"><strong style="font-weight: 600; color: #2A2B30">Cómo funciona:</strong> la entidad financia parte de los costos directos de la obra y desembolsa por etapas, según el avance.</p>
-                  <p style="margin: 0"><strong style="font-weight: 600; color: #2A2B30">Ten en cuenta:</strong> se piden documentos adicionales de la obra. La disponibilidad y las condiciones cambian entre entidades.</p>
-                </div>
-              </details>
-            </div>
-          </article>
-        </div>
-        <p class="as-cta"><span>¿No sabes cuál te conviene?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Agile Match -->
-    <section id="agile-match" style="background: #FFF4EC">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div style="display: flex; flex-wrap: wrap; gap: 36px 52px; align-items: center; margin-bottom: 44px">
-          <div style="flex: 1 1 440px; min-width: 0">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 16px; border-radius: 999px; background: #FFFFFF; font-size: 16px; font-weight: 700"><span style="color: #020E2E">Agile</span> <span style="color: #FD4C0B">Match</span></p>
-            <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">En Cuatro Pasos Sabes <span style="color: #FD4C0B">Cómo Avanzar</span></h2>
-            <p style="margin: 0; color: #4E4F52">Agile Match es nuestro perfilador inteligente de crédito hipotecario. Es gratis, funciona 100 % en línea y te ayuda a entender tus opciones antes de presentar una solicitud. Cuando quieras asesoría, dejas tus datos, autorizas su tratamiento y seguimos contigo.</p>
-          </div>
-          <div class="zoomimg" style="flex: 1 1 520px; min-width: 0; border-radius: 22px; border: 8px solid #FFFFFF; box-shadow: 0 16px 40px rgba(2,14,46,.14)">
-            <img loading="lazy" src="img/agile-match-perfil.jpg" alt="Pantalla de Agile Match con el formulario para conocer tu perfil" style="display: block; width: 100%; height: auto">
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 20px">
-          <div style="background: #FFFFFF; border-radius: 20px; padding: 26px">
-            <p style="margin: 0 0 12px; width: 48px; height: 48px; border-radius: 50%; background: #020E2E; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center">1</p>
-            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #020E2E">Perfil</h3>
-            <p style="margin: 0; font-size: 16px; color: #4E4F52">Respondes preguntas sencillas sobre tu actividad económica, tus ingresos y lo que quieres financiar.</p>
-          </div>
-          <div style="background: #FFFFFF; border-radius: 20px; padding: 26px">
-            <p style="margin: 0 0 12px; width: 48px; height: 48px; border-radius: 50%; background: #FD4C0B; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center">2</p>
-            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #020E2E">Simulación</h3>
-            <p style="margin: 0; font-size: 16px; color: #4E4F52">Comparas cuotas por entidad y ves las opciones que cumplen o que se pueden ajustar.</p>
-          </div>
-          <div style="background: #FFFFFF; border-radius: 20px; padding: 26px">
-            <p style="margin: 0 0 12px; width: 48px; height: 48px; border-radius: 50%; background: #020E2E; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center">3</p>
-            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #020E2E">Documentos</h3>
-            <p style="margin: 0; font-size: 16px; color: #4E4F52">Recibes la lista que corresponde a tu actividad económica y a la entidad.</p>
-          </div>
-          <div style="background: #FFFFFF; border-radius: 20px; padding: 26px">
-            <p style="margin: 0 0 12px; width: 48px; height: 48px; border-radius: 50%; background: #FD4C0B; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center">4</p>
-            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #020E2E">Legalización</h3>
-            <p style="margin: 0; font-size: 16px; color: #4E4F52">Revisas los gastos aproximados y las etapas del trámite hasta el desembolso.</p>
-          </div>
-        </div>
-        <p style="margin: 28px 0 0; color: #4E4F52"><strong style="font-weight: 600; color: #2A2B30">Entidades en Agile Match:</strong> Banco de Bogotá, Av Villas, BBVA, Banco de Occidente, Hipocredit, Credifamilia y Caja Social.</p>
-        <p style="margin: 10px 0 0; color: #4E4F52">El resultado es orientativo. La tasa, el monto y la aprobación final dependen del estudio de cada entidad.</p>
-        <div style="margin-top: 26px">
-          <div style="display: flex; flex-wrap: wrap; gap: 14px"><a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-weight: 600; text-decoration: none">Comenzar Mi Perfil Financiero</a><button class="as-btn" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría</button></div>
-          <p style="margin: 16px 0 0; color: #4E4F52"><strong style="color: #020E2E">Ten en cuenta:</strong> para solicitar el crédito no debes tener reportes negativos en centrales de riesgo, necesitas una actividad económica demostrable, ingresos de al menos 2 SMLV, solo o con tu grupo familiar, y recursos propios para la cuota inicial o estar pagándola en un proyecto de vivienda. <strong style="color: #020E2E">Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Acompañamiento -->
-    <section id="acompanamiento" style="background: #FFFFFF">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div class="ac">
-          <div class="ac-foto">
-            <img loading="lazy" src="img/asesoria-marla.jpg" alt="Marla López asesorando a clientes en una reunión de trabajo">
-          </div>
-          <div class="ac-intro">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Acompañamiento</p>
-            <h2 style="margin: 0 0 12px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Te Acompañamos Hasta El <span style="color: #FD4C0B">Desembolso</span></h2>
-            <p style="margin: 0; max-width: 980px; color: #4A4A4A">Analizamos tu perfil, identificamos alternativas de financiación y gestionamos contigo cada etapa del proceso. No estás solo frente a los bancos: te acompañamos desde la evaluación inicial hasta el desembolso de tu crédito.</p>
-          </div>
-          <ol class="ac-et">
-            <li style="background: #FFFFFF">
-              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">01</span>
-              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="5"></circle><path d="M2 21a8 8 0 0 1 10.434-7.62"></path><circle cx="18" cy="18" r="3"></circle><path d="m22 22-1.9-1.9"></path></svg>
-              <div>
-                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Evaluamos Tu Perfil</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Analizamos tu capacidad de pago, ingresos y condiciones para identificar tus posibilidades de financiación.</p>
-              </div>
-            </li>
-            <li style="background: #F5F5F7">
-              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">02</span>
-              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg>
-              <div>
-                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Comparamos Alternativas</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Evaluamos las opciones disponibles en nuestras entidades aliadas y te explicamos sus condiciones.</p>
-              </div>
-            </li>
-            <li style="background: #F1F0FA">
-              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">03</span>
-              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path><path d="m9 13 2 2 4-4"></path></svg>
-              <div>
-                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Preparamos Tu Solicitud</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Te orientamos sobre los documentos requeridos y verificamos que tu expediente esté completo.</p>
-              </div>
-            </li>
-            <li style="background: #FFFFFF">
-              <span aria-hidden="true" style="width: 32px; text-align: center; font-size: 25px; line-height: 1; font-weight: 700; color: #FD4C0B">04</span>
-              <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg>
-              <div>
-                <h3 style="margin: 0 0 2px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Radicamos Y Hacemos Seguimiento</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Gestionamos la presentación de tu solicitud y te acompañamos durante el estudio, aprobación y desembolso.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-        <p class="as-cta"><span>¿Quieres que te acompañemos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Etapas -->
-    <section id="etapas" style="background: #F3F2FA">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Etapas</p>
-        <h2 style="margin: 0 0 12px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Las Etapas De <span style="color: #FD4C0B">Una Compra De Vivienda</span></h2>
-        <p style="margin: 0 0 36px; max-width: 760px; color: #4E4F52">Así avanza tu compra, paso a paso. Toca cada etapa para ver qué sucede en ella.</p>
-        <div class="flow">
-          <div style="min-width: 0">
-            <h3 class="fh" style="background: #020E2E">Solicitud</h3>
-            <ol class="fl">
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 20 20"></path></g><g stroke="#FD4C0B"><circle cx="10.5" cy="9" r="1.8"></circle><path d="M7.6 13.6c.7-1.3 1.7-2 2.9-2s2.2.7 2.9 2"></path></g></svg></span>Perfilamiento</summary><p>Revisamos tu actividad económica, tus ingresos y tus deudas para identificar las opciones según tu perfil.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="#FFFFFF" d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path stroke="#FD4C0B" d="M8 13.5h8"></path></svg></span>Documentación</summary><p>Te indicamos qué documentos necesitas según tu actividad y la entidad, y los organizamos contigo.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="#FFFFFF" d="M21 3 3 10.5l7 3 3 7z"></path><path stroke="#FD4C0B" d="M21 3 10 13.5"></path></svg></span>Radicación Del Crédito</summary><p>Radicamos tu solicitud en la entidad que escojas o que aplique según tu perfil.</p></details></li>
-            </ol>
-          </div>
-          <div style="min-width: 0">
-            <h3 class="fh" style="background: #FD4C0B">Aprobación</h3>
-            <ol class="fl">
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></g><path stroke="#FD4C0B" d="M9 14l2 2 4-4"></path></svg></span>Aprobación Del Crédito</summary><p>La entidad emite la carta de aprobación con el valor, el plazo y la vigencia.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><circle cx="8.5" cy="7" r="3"></circle><path d="M3 19.5c.6-3.6 2.7-5.8 5.5-5.8s4.9 2.2 5.5 5.8"></path></g><g stroke="#FD4C0B"><circle cx="17" cy="10" r="2.3"></circle><path d="M14.6 19.5c.4-2.6 1.3-4.3 2.4-4.3s2.6 1.7 3 4.3"></path></g></svg></span>Promesa De Compraventa</summary><p>Comprador y vendedor la firman con el precio, las arras y la fecha de escrituración.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><rect x="5" y="3" width="14" height="18" rx="1.5"></rect><path d="M10.5 21v-3.5h3V21"></path></g><path stroke="#FD4C0B" d="M8.5 7h1.5M14 7h1.5M8.5 10.5h1.5M14 10.5h1.5M8.5 14h1.5M14 14h1.5"></path></svg></span>Documentos Del Inmueble</summary><p>Se radican los documentos del inmueble, del vendedor y del comprador.</p></details></li>
-            </ol>
-          </div>
-          <div style="min-width: 0">
-            <h3 class="fh" style="background: #020E2E">Revisión</h3>
-            <ol class="fl">
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></g><path stroke="#FD4C0B" d="M10 19.5v-5h4v5"></path></svg></span>Avalúo Del Inmueble</summary><p>Un perito valora el inmueble. La entidad financia sobre el menor valor entre avalúo y promesa.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="#FFFFFF" d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"></path><path stroke="#FD4C0B" d="M9 12l2 2 4-4"></path></svg></span>Estudio De Títulos</summary><p>Un abogado revisa que el vendedor pueda vender y que el inmueble no tenga problemas legales.</p></details></li>
-            </ol>
-          </div>
-          <div style="min-width: 0">
-            <h3 class="fh" style="background: #FD4C0B">Firma</h3>
-            <ol class="fl">
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><path d="M3 9.5 12 4l9 5.5z"></path><path d="M4 20h16M5 17h14"></path></g><path stroke="#FD4C0B" d="M7.5 11v4M12 11v4M16.5 11v4"></path></svg></span>Minuta De Escritura</summary><p>La entidad envía la minuta de hipoteca y la notaría prepara la escritura de compraventa.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M8.5 11h5"></path></g><path stroke="#FD4C0B" d="M8.5 16.5c1-1.5 2-1.5 2.5 0s1.5 1.5 2.5 0 1.5-1 2.5 0"></path></svg></span>Firma De La Escritura</summary><p>Las partes firman en la notaría y se pagan los gastos notariales.</p></details></li>
-            </ol>
-          </div>
-          <div style="min-width: 0">
-            <h3 class="fh" style="background: #020E2E">Cierre</h3>
-            <ol class="fl">
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle stroke="#FFFFFF" cx="12" cy="12" r="9"></circle><path stroke="#FD4C0B" d="M8 12.2l2.8 2.8L16 9.5"></path></svg></span>Registro Y Beneficencia</summary><p>Se paga el impuesto de beneficencia y se registra la escritura en la Oficina de Registro.</p></details></li>
-              <li><details><summary><span aria-hidden="true" style="flex: none; display: flex; width: 42px; height: 42px; border-radius: 50%; background: #FD4C0B; align-items: center; justify-content: center; position: relative; z-index: 1"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#FFFFFF"><circle cx="8" cy="15.5" r="4.5"></circle><path d="M11.3 12.2 19.5 4"></path></g><path stroke="#FFFFFF" d="M16.2 7.3l2.5 2.5M13.9 9.6l1.6 1.6"></path></svg></span>Desembolso Y Entrega</summary><p>La entidad desembolsa al vendedor y recibes tu inmueble.</p></details></li>
-            </ol>
-          </div>
-        </div>
-        <p style="margin: 30px 0 0; font-size: 15px; color: #4E4F52">La promesa de compraventa es un acuerdo entre comprador y vendedor. Te orientamos sobre ella, pero no la revisamos.</p>
-        <p class="as-cta"><span>¿No sabes en qué etapa estás?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Documentos -->
-    <section id="documentos" style="background: #FFF4EC">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div style="display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; margin-bottom: 36px">
-          <div style="flex: 1 1 460px; min-width: 0">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Documentos</p>
-            <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Documentos Según <span style="color: #FD4C0B">Tu Actividad</span></h2>
-            <p style="margin: 0 0 12px; color: #4E4F52">Esta es una guía general. En Agile Match ves la lista según la entidad, y cada una puede pedir soportes adicionales durante el estudio.</p>
-            <p style="margin: 0; color: #4E4F52"><strong style="font-weight: 600; color: #2A2B30">Para todos:</strong> cédula ampliada al 150 %, formulario de solicitud firmado y declaración de activos y pasivos, que te entregamos nosotros.</p>
-          </div>
-          <div class="zoomimg" style="flex: 1 1 400px; min-width: 0; height: 280px; border-radius: 24px">
-            <img loading="lazy" src="img/casa-firma.jpg" alt="Maqueta de una casa sobre un escritorio mientras se firman documentos" style="display: block; width: 100%; height: 100%; object-fit: cover">
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px; align-items: start">
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Empleado</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Certificación laboral con cargo, tipo de contrato, antigüedad y salario, no mayor a 30 días</li>
-              <li>Desprendibles de pago de los últimos 2 meses</li>
-              <li>Declaración de renta del último año, si declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Pensionado</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Resolución de pensión o certificado del fondo de pensiones</li>
-              <li>Desprendibles o comprobantes de pago de mesada de los últimos 2 meses</li>
-              <li>Declaración de renta del último año, si declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Prestador De Servicios</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Contrato vigente y copia de los anteriores, con mínimo 12 meses de actividad</li>
-              <li>Extractos bancarios y planillas de seguridad social de los últimos 3 meses</li>
-              <li>RUT actualizado</li>
-              <li>Declaración de renta, o certificación de ingresos de contador si no declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Independiente</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>RUT actualizado</li>
-              <li>Extractos bancarios de los últimos 3 a 6 meses</li>
-              <li>Planillas de seguridad social de los últimos 3 meses</li>
-              <li>Declaración de renta, o certificación de ingresos de contador si no declaras</li>
-              <li>Cámara de Comercio, si tienes negocio registrado</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Empresario O Socio</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Cámara de Comercio y RUT de la empresa</li>
-              <li>Estados financieros firmados por contador</li>
-              <li>Extractos de la empresa y personales de los últimos 3 a 6 meses</li>
-              <li>Declaración de renta, o certificación de ingresos de contador si no declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Transportador</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Tarjeta de propiedad del vehículo</li>
-              <li>Certificado de la empresa transportadora, si estás afiliado</li>
-              <li>Extractos bancarios de los últimos 6 meses</li>
-              <li>RUT y planillas de seguridad social de los últimos 3 meses</li>
-              <li>Declaración de renta del último año, si declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Rentista</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Certificados de tradición y libertad de los inmuebles que generan renta</li>
-              <li>Contratos de arrendamiento vigentes</li>
-              <li>Extractos donde recibes los arriendos, de los últimos 6 meses</li>
-              <li>Extractos de inversiones, si aplica</li>
-              <li>Declaración de renta del último año, si declaras</li>
-            </ul>
-          </details>
-          <details style="background: #FFFFFF; border-radius: 16px; padding: 4px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Familiar Que Suma Ingresos</summary>
-            <ul style="margin: 0 0 16px; padding-left: 20px; font-size: 15px; color: #4E4F52">
-              <li>Cédula ampliada</li>
-              <li>Soportes de ingresos según su actividad económica</li>
-              <li>Registro civil o acta de matrimonio que acredite el parentesco</li>
-            </ul>
-          </details>
-        </div>
-        <p class="as-cta"><span>¿Tienes dudas con tus documentos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Gastos -->
-    <section id="gastos" style="background: #FFFFFF">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div style="display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; margin-bottom: 32px">
-          <div class="zoomimg" style="flex: 1 1 400px; min-width: 0; height: 260px; border-radius: 24px">
-            <img loading="lazy" src="img/llave-corazon.jpg" alt="Pareja formando un techo con las manos y sosteniendo unas llaves" style="display: block; width: 100%; height: 100%; object-fit: cover">
-          </div>
-          <div style="flex: 1 1 460px; min-width: 0">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Gastos</p>
-            <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Planea También <span style="color: #FD4C0B">Los Gastos</span></h2>
-            <p style="margin: 0; color: #4E4F52">Además de la cuota inicial, una compra tiene gastos para formalizar el crédito y la escritura. Agile Match te muestra un cálculo aproximado; la entidad, la notaría y la oficina de registro confirman los valores finales.</p>
-          </div>
-        </div>
-        <div style="overflow-x: auto; border-radius: 18px; border: 1px solid #E3E1EF">
-          <table style="width: 100%; min-width: 620px; border-collapse: collapse; font-size: 16px">
-            <thead>
-              <tr>
-                <th scope="col" style="text-align: left; padding: 14px 16px; background: #020E2E; color: #FFFFFF; font-weight: 600">Gasto</th>
-                <th scope="col" style="text-align: left; padding: 14px 16px; background: #020E2E; color: #FFFFFF; font-weight: 600">Para Qué Sirve</th>
-                <th scope="col" style="text-align: left; padding: 14px 16px; background: #020E2E; color: #FFFFFF; font-weight: 600">Quién Lo Paga</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF">Avalúo y estudio de títulos</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; color: #4E4F52">Verifican el valor y la situación legal del inmueble</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF">Comprador</td>
-              </tr>
-              <tr>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA">Derechos y gastos notariales</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA; color: #4E4F52">Cubren la escritura de compraventa en la notaría</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA">Normalmente 50 % y 50 %</td>
-              </tr>
-              <tr>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF">Retención en la fuente</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; color: #4E4F52">Anticipo de renta que se descuenta al escriturar</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF">Vendedor</td>
-              </tr>
-              <tr>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA">Beneficencia y registro</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA; color: #4E4F52">Impuesto departamental e inscripción de la escritura</td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid #E3E1EF; background: #F3F2FA">Normalmente el comprador, según la promesa</td>
-              </tr>
-              <tr>
-                <td style="padding: 12px 16px">Hipoteca y su registro</td>
-                <td style="padding: 12px 16px; color: #4E4F52">Formalizan la garantía a favor de la entidad</td>
-                <td style="padding: 12px 16px">Comprador</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="as-cta"><span>¿Tienes dudas con los gastos?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Nosotros -->
-    <section id="nosotros" style="background: #F7F7F8">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px">
-        <div class="about">
-          <figure class="a-foto">
-            <img loading="lazy" src="img/marla-lopez.jpg" alt="Marla López, fundadora de Agile Home, en su oficina" style="display: block; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 18px 44px rgba(2,14,46,.16)">
-            <figcaption style="margin-top: 12px; font-size: 15px; font-weight: 500; color: #4A4A4A">Marla López – Fundadora</figcaption>
-          </figure>
-          <div class="a-intro">
-            <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Nosotros</p>
-            <h2 style="margin: 0 0 12px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Somos <span style="color: #FD4C0B">Agile Home</span></h2>
-            <p style="margin: 0 0 22px; font-size: 21px; line-height: 1.4; font-weight: 600; color: #020E2E"><span style="color: #FD4C0B">Experiencia financiera</span>, <span style="color: #FD4C0B">tecnología</span> y <span style="color: #FD4C0B">acompañamiento</span> para hacer realidad tu vivienda.</p>
-            <p style="margin: 0 0 14px; color: #4A4A4A">Somos <strong style="font-weight: 600; color: #020E2E">especialistas en crédito de vivienda</strong> y trabajamos con varias entidades financieras. Ayudamos a las personas a encontrar alternativas de crédito que se ajusten a su perfil y a sus posibilidades financieras.</p>
-            <p style="margin: 0 0 14px; color: #4A4A4A">Conectamos la experiencia de más de 20 años en el sector financiero, más de 15 de ellos en crédito de vivienda, con tecnología inteligente. A través de <strong style="font-weight: 600; color: #020E2E">Agile Match</strong>, analizamos cada perfil y comparamos alternativas de financiación en diferentes entidades financieras.</p>
-            <p style="margin: 0 0 20px; color: #4A4A4A">No tienes que recorrer banco por banco. Nosotros te asesoramos, gestionamos la radicación de tus documentos y te acompañamos durante todo el proceso, hasta el desembolso de tu crédito.</p>
-            <div style="background: #FFF1EA; border-radius: 14px; padding: 14px 18px">
-              <p style="margin: 0; font-size: 17px; line-height: 1.4; font-weight: 600; color: #020E2E">Nuestra asesoría y gestión son 100 % gratuitas.</p>
-              <p style="margin: 2px 0 0; font-size: 14.5px; line-height: 1.45; color: #4A4A4A">Nuestro servicio es remunerado por las entidades financieras aliadas.</p>
-            </div>
-          </div>
-          <div class="a-dif">
-              <div style="background: #FFFFFF; border-radius: 16px; padding: 18px; box-shadow: 0 8px 24px rgba(2,14,46,.07)">
-                <span aria-hidden="true" style="display: flex; width: 42px; height: 42px; border-radius: 12px; background: #FFF1EA; align-items: center; justify-content: center; margin-bottom: 10px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#020E2E"><path d="M3 9.5 12 4l9 5.5z"></path><path d="M4 20h16M5 17h14"></path></g><path stroke="#FD4C0B" d="M7.5 11v4M12 11v4M16.5 11v4"></path></svg></span>
-                <h3 style="margin: 0 0 4px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Multibanco</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #4A4A4A">Comparamos alternativas de financiación en diferentes entidades financieras.</p>
-              </div>
-              <div style="background: #FFFFFF; border-radius: 16px; padding: 18px; box-shadow: 0 8px 24px rgba(2,14,46,.07)">
-                <span aria-hidden="true" style="display: flex; width: 42px; height: 42px; border-radius: 12px; background: #FFF1EA; align-items: center; justify-content: center; margin-bottom: 10px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#020E2E"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 20 20"></path></g><g stroke="#FD4C0B"><circle cx="10.5" cy="9" r="1.8"></circle><path d="M7.6 13.6c.7-1.3 1.7-2 2.9-2s2.2.7 2.9 2"></path></g></svg></span>
-                <h3 style="margin: 0 0 4px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E"><span style="color: #020E2E">Agile</span> <span style="color: #FD4C0B">Match</span></h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #4A4A4A">Perfilación inteligente para identificar alternativas de financiación según cada cliente.</p>
-              </div>
-              <div style="background: #FFFFFF; border-radius: 16px; padding: 18px; box-shadow: 0 8px 24px rgba(2,14,46,.07)">
-                <span aria-hidden="true" style="display: flex; width: 42px; height: 42px; border-radius: 12px; background: #FFF1EA; align-items: center; justify-content: center; margin-bottom: 10px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g stroke="#020E2E"><circle cx="8.5" cy="7" r="3"></circle><path d="M3 19.5c.6-3.6 2.7-5.8 5.5-5.8s4.9 2.2 5.5 5.8"></path></g><g stroke="#FD4C0B"><circle cx="17" cy="10" r="2.3"></circle><path d="M14.6 19.5c.4-2.6 1.3-4.3 2.4-4.3s2.6 1.7 3 4.3"></path></g></svg></span>
-                <h3 style="margin: 0 0 4px; font-size: 16.5px; line-height: 1.3; font-weight: 600; color: #020E2E">Acompañamiento</h3>
-                <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #4A4A4A">Te asesoramos y acompañamos desde la evaluación inicial hasta el desembolso.</p>
-              </div>
-          </div>
-          <div class="a-fund" style="background: linear-gradient(135deg, #020E2E, #0A1F52); border-radius: 18px; padding: 26px 28px; box-shadow: 0 14px 34px rgba(2,14,46,.2)">
-            <h3 style="margin: 0 0 8px; font-size: 21px; line-height: 1.3; font-weight: 600; color: #FFFFFF">Marla López <span style="color: #FD4C0B">|</span> Fundadora</h3>
-            <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.55; color: #FFFFFF">Administradora de Empresas con más de 20 años de experiencia en el sector financiero, más de 15 de ellos dedicados al crédito de vivienda. Ha liderado equipos comerciales especializados en financiación de vivienda multibanco y cuenta con formación en Alta Gerencia y Gestión Comercial Especializada.</p>
-            <blockquote style="margin: 0; font-size: 15.5px; line-height: 1.55; font-weight: 500; color: #FFFFFF"><span style="color: #FD4C0B; font-weight: 700">«</span>Agile Home nace de la experiencia, el conocimiento del sector y la convicción de que acceder a financiación de vivienda puede ser un proceso más claro, sencillo y acompañado.<span style="color: #FD4C0B; font-weight: 700">»</span></blockquote>
-          </div>
-        </div>
-        <div class="a-ind" style="margin-top: 40px; background: #020E2E; border-radius: 20px; padding: 26px 30px">
-          <div>
-            <p style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 700; color: #FD4C0B">20+</p>
-            <p style="margin: 2px 0 0; font-size: 15px; line-height: 1.4; color: #FFFFFF">años de experiencia</p>
-          </div>
-          <div>
-            <p style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 700; color: #FD4C0B">7</p>
-            <p style="margin: 2px 0 0; font-size: 15px; line-height: 1.4; color: #FFFFFF">alternativas de financiación</p>
-          </div>
-          <div>
-            <p style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 700; color: #FD4C0B">$0</p>
-            <p style="margin: 2px 0 0; font-size: 15px; line-height: 1.4; color: #FFFFFF">costo de asesoría para el cliente</p>
-          </div>
-        </div>
-        <p class="as-cta"><span>¿Hablamos de tu caso?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Preguntas -->
-    <section id="preguntas" style="background: #FFFFFF">
-      <div style="max-width: 900px; margin: 0 auto; padding: 88px 24px">
-        <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Preguntas</p>
-        <h2 style="margin: 0 0 32px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Preguntas <span style="color: #FD4C0B">Frecuentes</span></h2>
-        <div style="display: flex; flex-direction: column; gap: 10px">
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Cuánto cuesta la asesoría?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Para ti no tiene costo. Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como el avalúo, la notaría y el registro, sí se pagan aparte.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Agile Match me aprueba el crédito?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">No. Agile Match te orienta según tu perfil. La aprobación final depende de las políticas de riesgo de cada entidad. <strong style="color: #020E2E">Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Cuánto me financian?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Depende de la entidad y del tipo de vivienda. En crédito hipotecario, la vivienda VIS puede financiarse hasta el 80 % y la no VIS hasta el 70 %, sobre el menor valor entre el avalúo y la promesa de compraventa.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué debo cumplir para solicitar el crédito?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">No tener reportes negativos en centrales de riesgo, tener una actividad económica demostrable, ganar o reunir con tu grupo familiar al menos 2 SMLV, y contar con la cuota inicial o estar pagándola en un proyecto de vivienda. <strong style="color: #020E2E">Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Necesito tener la cuota inicial?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Sí. Además de un perfil que cumpla, debes contar con recursos propios para la parte que no financia la entidad, o estar pagándola en un proyecto de vivienda. También debes prever los gastos de escrituración. Si aún no la tienes completa, te orientamos para prepararte.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué parte de mis ingresos puede ir a la cuota?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">En crédito de vivienda, la primera cuota puede llegar hasta el 40 % de los ingresos del hogar, tanto en VIS como en no VIS. Cada entidad también revisa tus demás deudas.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué diferencia hay entre crédito hipotecario y leasing?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Con el crédito hipotecario eres propietario desde la compra y el inmueble queda como garantía. En el leasing, la entidad compra el inmueble y te lo entrega en arriendo; eres propietario cuando ejerces la opción de compra.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué diferencia hay entre pesos y UVR?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">En pesos, la cuota se mantiene fija. En UVR la tasa suele ser menor, pero el saldo y la cuota se ajustan con la inflación, así que la cuota sube con los años.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Puedo sumar los ingresos de mi pareja o de un familiar?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Sí, varias entidades lo permiten con familiares directos, como cónyuge, padres, hijos o hermanos. Cada una define cuántas personas pueden sumar y qué documentos debe entregar cada una.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">Soy independiente, ¿puedo aplicar?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Sí. Debes demostrar tus ingresos con los documentos de tu actividad. Algunas entidades reconocen solo un porcentaje de ellos, según la actividad, por lo que el monto puede ser menor.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Qué pasa si tengo reportes negativos?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Con reportes vigentes, normalmente el crédito no se tramita. Algunas entidades estudian casos con obligaciones castigadas ya pagadas, según el puntaje y el tiempo transcurrido.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Y si el avalúo sale por debajo del precio pactado?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">La entidad presta sobre el valor del avalúo. Debes cubrir la diferencia con recursos propios o renegociar el precio.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Cuánto tarda el proceso?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">El estudio de crédito suele responder en pocos días hábiles. Después siguen el avalúo, el estudio de títulos, la firma y el desembolso. Los tiempos dependen de la entidad, de la notaría y de que los documentos estén completos.</p>
-          </details>
-          <details style="background: #F3F2FA; border-radius: 16px; padding: 2px 20px">
-            <summary style="font-weight: 600; color: #020E2E; padding: 14px 0">¿Hay subsidios de vivienda?</summary>
-            <p style="margin: 0 0 16px; color: #4E4F52">Existen subsidios del Gobierno y de las cajas de compensación para vivienda VIS. Sus requisitos y su disponibilidad cambian, así que revisamos tu caso.</p>
-          </details>
-        </div>
-        <p class="as-cta"><span>¿Tienes otra pregunta?</span><button class="as-lnk" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD4C0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></p>
-      </div>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" style="background: #FFF4EC">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 36px 56px; align-items: center">
-        <div class="zoomimg" style="flex: 1 1 420px; min-width: 0; height: 460px; border-radius: 24px">
-          <img loading="lazy" src="img/familia-techo.jpg" alt="Familia sonriente bajo un techo de cartón entre cajas de mudanza" style="display: block; width: 100%; height: 100%; object-fit: cover">
-        </div>
-        <div style="flex: 1 1 480px; min-width: 0">
-          <p style="display: inline-block; margin: 0 0 14px; padding: 5px 14px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-size: 14px; font-weight: 600">Contacto</p>
-          <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; font-weight: 700; color: #020E2E">Hablemos De <span style="color: #FD4C0B">Tu Vivienda</span></h2>
-          <p style="margin: 0 0 22px; color: #4E4F52; max-width: 560px">Cuéntanos qué quieres lograr y revisamos tu caso. Estamos en Cajicá y tenemos cobertura nacional. Si ya tienes tu perfil en Agile Match, tenlo a la mano para avanzar más rápido.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 14px"><a href="simulador.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #020E2E; color: #FFFFFF; font-weight: 600; text-decoration: none">Comenzar Mi Perfil Financiero</a><button class="as-btn" type="button" data-asesoria aria-haspopup="dialog">Quiero Asesoría</button></div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px; margin-top: 24px; font-size: 16px; font-weight: 500">
-            <a href="https://wa.me/message/PMWO6BQHZCRSD1" style="display: flex; align-items: center; gap: 12px; min-height: 48px; text-decoration: none"><span aria-hidden="true" style="flex: none; display: flex; width: 44px; height: 44px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H9l-5 4z"></path></svg></span>WhatsApp 312 310 9099</a>
-            <a href="mailto:comercial@agilehomesf.com" style="display: flex; align-items: center; gap: 12px; min-height: 48px; text-decoration: none; overflow-wrap: anywhere"><span aria-hidden="true" style="flex: none; display: flex; width: 44px; height: 44px; border-radius: 50%; background: #FD4C0B; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 7l8.5 6 8.5-6"></path></svg></span>comercial@agilehomesf.com</a>
-            <a href="https://www.instagram.com/agilehomesf" style="display: flex; align-items: center; gap: 12px; min-height: 48px; text-decoration: none"><span aria-hidden="true" style="flex: none; display: flex; width: 44px; height: 44px; border-radius: 50%; background: #FD4C0B; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2.5h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"></path><circle cx="12" cy="13" r="3.2"></circle></svg></span>Instagram</a>
-            <a href="https://www.linkedin.com/company/agile-home/" style="display: flex; align-items: center; gap: 12px; min-height: 48px; text-decoration: none"><span aria-hidden="true" style="flex: none; display: flex; width: 44px; height: 44px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="8" r="3.5"></circle><path d="M3 20c.9-3.7 3.4-5.5 6.5-5.5s5.6 1.8 6.5 5.5"></path><path d="M19 8v6M16 11h6"></path></svg></span>LinkedIn</a>
-            <a href="https://www.facebook.com/share/1EF232yFGf/" style="display: flex; align-items: center; gap: 12px; min-height: 48px; text-decoration: none"><span aria-hidden="true" style="flex: none; display: flex; width: 44px; height: 44px; border-radius: 50%; background: #020E2E; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.1A8 8 0 1 1 20 11.5z"></path></svg></span>Facebook</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer style="background: #FFFFFF; border-top: 1px solid #E3E1EF">
-    <div style="max-width: 1240px; margin: 0 auto; padding: 36px 24px; font-size: 14px; color: #4E4F52; display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between">
-      <div style="flex: 1 1 520px; min-width: 0">
-        <img src="img/logo-agile-home.png" alt="Agile Home, especialistas en crédito de vivienda" style="height: 44px; width: auto; display: block; margin-bottom: 12px">
-        <p style="margin: 0">Agile Home S.A.S. actúa como broker financiero: no es una entidad financiera ni otorga créditos. La aprobación final depende de las políticas de riesgo de cada entidad. Agile Match entrega un resultado orientativo y las tasas están sujetas a confirmación.</p>
-      </div>
-      <p style="margin: 0"><a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link">Política De Tratamiento De Datos Personales</a><br>Cajicá, Colombia · Cobertura nacional<br>© 2026 Agile Home S.A.S.</p>
+<section id="experiencia" class="banda">
+  <div class="envuelve">
+    <div class="cabeza">
+      <span class="ceja">Nosotros</span>
+      <h2>Nuestra Experiencia, Tu Tranquilidad</h2>
     </div>
-  </footer>
-  <a class="wa-flot" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"></path></svg><span>WhatsApp</span></a>
-  <a class="arriba" href="#inicio" aria-label="Volver arriba"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"></path></svg></a>
+    <div class="exp">
+      <article class="fundadora">
+        <img src="img/marla-lopez.jpg" alt="Marla López, fundadora de Agile Home" width="968" height="1098">
+        <div class="tx">
+          <span class="ceja" style="color:#FF9A6B;margin:0">Fundadora</span>
+          <h3>Marla López</h3>
+          <p class="cifra">20+<small>años de experiencia en el sector financiero, más de 15 de ellos en crédito de vivienda</small></p>
+          <p>Administradora de Empresas, con formación en Alta Gerencia y Gestión Comercial Especializada. Ha liderado equipos comerciales especializados en vivienda multibanco.</p>
+          <blockquote>Acceder a financiación de vivienda puede ser un proceso más claro, sencillo y acompañado.</blockquote>
+        </div>
+      </article>
+      <article class="empresa">
+        <span class="ceja" style="margin:0">La empresa</span>
+        <h3>Agile Home S.A.S.</h3>
+        <p class="desde">Desde <span class="porconfirmar">[año por confirmar]</span></p>
+        <ul>
+          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Especialistas en crédito de vivienda</li>
+          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Trabajamos con varias entidades financieras</li>
+          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Tecnología propia: Agile Match</li>
+          <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>En Cajicá, con cobertura nacional</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" class="banda lila">
+  <div class="envuelve">
+    <div class="cabeza">
+      <span class="ceja">Preguntas frecuentes</span>
+      <h2>Resolvemos Tus Dudas</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq">
+        <details><summary>¿Cuánto cuesta la asesoría?</summary><p>Para ti no tiene costo. Nuestro servicio lo paga la entidad financiera. Los gastos del trámite, como el avalúo, la notaría y el registro, sí se pagan aparte.</p></details>
+        <details><summary>¿Agile Match me aprueba el crédito?</summary><p>No. Agile Match te orienta según tu perfil. La aprobación final depende de las políticas de riesgo de cada entidad. <strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p></details>
+        <details><summary>¿Cuánto me financian?</summary><p>Depende de la entidad y del tipo de vivienda. En crédito hipotecario, la vivienda VIS puede financiarse hasta el 80 % y la no VIS hasta el 70 %, sobre el menor valor entre el avalúo y la promesa de compraventa.</p></details>
+        <details><summary>¿Qué debo cumplir para solicitar el crédito?</summary><p>No tener reportes negativos en centrales de riesgo, tener una actividad económica demostrable, ganar o reunir con tu grupo familiar al menos 2 SMLV, y contar con la cuota inicial o estar pagándola en un proyecto de vivienda. <strong>Agile Match no consulta centrales de riesgo.</strong> La consulta la hace directamente la entidad financiera que elijas, al estudiar tu solicitud.</p></details>
+        <details><summary>¿Necesito tener la cuota inicial?</summary><p>Sí. Además de un perfil que cumpla, debes contar con recursos propios para la parte que no financia la entidad, o estar pagándola en un proyecto de vivienda. También debes prever los gastos de escrituración. Si aún no la tienes completa, te orientamos para prepararte.</p></details>
+        <details><summary>¿Qué parte de mis ingresos puede ir a la cuota?</summary><p>En crédito de vivienda, la primera cuota puede llegar hasta el 40 % de los ingresos del hogar, tanto en VIS como en no VIS. Cada entidad también revisa tus demás deudas.</p></details>
+        <details><summary>¿Qué diferencia hay entre crédito hipotecario y leasing?</summary><p>Con el crédito hipotecario eres propietario desde la compra y el inmueble queda como garantía. En el leasing, la entidad compra el inmueble y te lo entrega en arriendo; eres propietario cuando ejerces la opción de compra.</p></details>
+        <details><summary>¿Qué diferencia hay entre pesos y UVR?</summary><p>En pesos, la cuota se mantiene fija. En UVR la tasa suele ser menor, pero el saldo y la cuota se ajustan con la inflación, así que la cuota sube con los años.</p></details>
+        <details><summary>¿Puedo sumar los ingresos de mi pareja o de un familiar?</summary><p>Sí, varias entidades lo permiten con familiares directos, como cónyuge, padres, hijos o hermanos. Cada una define cuántas personas pueden sumar y qué documentos debe entregar cada una.</p></details>
+        <details><summary>Soy independiente, ¿puedo aplicar?</summary><p>Sí. Debes demostrar tus ingresos con los documentos de tu actividad. Algunas entidades reconocen solo un porcentaje de ellos, según la actividad, por lo que el monto puede ser menor.</p></details>
+        <details><summary>¿Qué pasa si tengo reportes negativos?</summary><p>Con reportes vigentes, normalmente el crédito no se tramita. Algunas entidades estudian casos con obligaciones castigadas ya pagadas, según el puntaje y el tiempo transcurrido.</p></details>
+        <details><summary>¿Y si el avalúo sale por debajo del precio pactado?</summary><p>La entidad presta sobre el valor del avalúo. Debes cubrir la diferencia con recursos propios o renegociar el precio.</p></details>
+        <details><summary>¿Cuánto tarda el proceso?</summary><p>El estudio de crédito suele responder en pocos días hábiles. Después siguen el avalúo, el estudio de títulos, la firma y el desembolso. Los tiempos dependen de la entidad, de la notaría y de que los documentos estén completos.</p></details>
+        <details><summary>¿Hay subsidios de vivienda?</summary><p>Existen subsidios del Gobierno y de las cajas de compensación para vivienda VIS. Sus requisitos y su disponibilidad cambian, así que revisamos tu caso.</p></details>
+      </div>
+      <aside class="recursos" aria-label="Recursos">
+        <h3>Recursos Para Tu Crédito</h3>
+        <p>Guías detalladas para preparar tu solicitud.</p>
+        <a class="rc" href="recursos.html#acompanamiento">Cómo te acompañamos <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <a class="rc" href="recursos.html#etapas">Etapas de una compra de vivienda <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <a class="rc" href="recursos.html#documentos">Documentos según tu actividad <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <a class="rc" href="recursos.html#gastos">Gastos de escrituración <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="banda">
+  <div class="envuelve">
+    <div class="contacto">
+      <div>
+        <span class="ceja" style="color:#FF9A6B">Contacto</span>
+        <h2>Hablemos De Tu Vivienda</h2>
+        <p class="intro">Déjanos tus datos y un asesor revisa tu caso. Si ya hiciste tu perfil en Agile Match, tenlo a la mano para avanzar más rápido.</p>
+        <div class="acciones">
+          <button class="btn btn-n" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button>
+          <a class="btn btn-b" href="simulador.html">Descubre Tus Opciones</a>
+        </div>
+      </div>
+      <div class="datos">
+        <a class="dato" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path></svg></span><span><small>WhatsApp</small><b>312 310 9099</b></span></a>
+        <a class="dato" href="mailto:comercial@agilehomesf.com"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><span><small>Correo</small><b>comercial@agilehomesf.com</b></span></a>
+        <div class="dato"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><span><small>Ubicación</small><b>Cajicá · Cobertura nacional</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="envuelve">
+    <div class="pie">
+      <div>
+        <img src="img/logo-agile-home.png" alt="Agile Home" width="149" height="44" loading="lazy">
+        <p>Especialistas en crédito de vivienda. Te acompañamos desde tu perfil hasta el desembolso de tu crédito.</p>
+      </div>
+      <div>
+        <h4>Navega</h4>
+        <ul>
+          <li><a href="simulador.html">Agile Match</a></li>
+          <li><a href="recursos.html">Recursos</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link" target="_blank" rel="noopener">Política de tratamiento de datos personales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <div class="redes">
+          <a class="red" href="https://www.instagram.com/agilehomesf" target="_blank" rel="noopener">Instagram</a>
+          <a class="red" href="https://www.linkedin.com/company/agile-home/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="red" href="https://www.facebook.com/share/1EF232yFGf/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <p class="legal">Agile Home S.A.S. actúa como broker financiero: no es una entidad financiera ni otorga créditos. La aprobación final depende de las políticas de riesgo de cada entidad. Agile Match entrega un resultado orientativo y las tasas están sujetas a confirmación. © 2026 Agile Home S.A.S. · Cajicá, Colombia.</p>
+  </div>
+</footer>
+
+<a class="wa-flot" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"></path></svg><span>WhatsApp</span></a>
+<a class="arriba" href="#inicio" aria-label="Volver arriba"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"></path></svg></a>
   <dialog id="asesoria" class="as-d" aria-labelledby="as-titulo">
     <button class="as-x" type="button" aria-label="Cerrar"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
     <form id="as-form" novalidate>
@@ -850,6 +548,42 @@ html.js .menu.abierto{display:flex}
       <p style="margin: 0">Un asesor de Agile Home te contactará pronto.</p>
     </div>
   </dialog>
-</div>
+
+<script>
+(function(){
+  var P=[
+    {k:'hipo',t:'Compra De Vivienda',s:'Nueva o usada, VIS o no VIS',i:'<path d="M3 11l9-8 9 8" stroke="#020E2E"/><path d="M5 10v10h14V10" stroke="#020E2E"/><path d="M10 20v-6h4v6" stroke="#FD4C0B"/>',
+     q:'Para quien quiere comprar vivienda y puede aportar una cuota inicial.',c:'La entidad presta una parte del valor y el inmueble queda hipotecado como garantía. Eres propietario desde la compra. Puede financiar hasta el 80 % en VIS y el 70 % en no VIS, sobre el menor valor entre avalúo y promesa.',a:'En pesos la cuota se mantiene fija; en UVR se ajusta con la inflación. Debes prever los seguros y los gastos de legalización.'},
+    {k:'leasing',t:'Leasing Habitacional',s:'Vives en la vivienda mientras la pagas',i:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke="#020E2E"/><path d="M14 3v5h5" stroke="#020E2E"/><path d="M9 13h6M9 17h4" stroke="#FD4C0B"/>',
+     q:'Para quien busca vivienda no VIS y quiere revisar una alternativa al crédito hipotecario.',c:'La entidad compra el inmueble, que queda a su nombre durante el contrato. Tú lo habitas, pagas un canon mensual y al final ejerces la opción de compra.',a:'La opción de compra se pacta desde el inicio y cambia el valor del canon. Al ejercerla se firma una escritura, con sus gastos.'},
+    {k:'cartera',t:'Compra De Cartera',s:'Pasa tu crédito a otra entidad',i:'<path d="M17 2l4 4-4 4" stroke="#FD4C0B"/><path d="M3 11V9a3 3 0 0 1 3-3h15" stroke="#020E2E"/><path d="M7 22l-4-4 4-4" stroke="#FD4C0B"/><path d="M21 13v2a3 3 0 0 1-3 3H3" stroke="#020E2E"/>',
+     q:'Para quien ya tiene un crédito de vivienda y quiere mejorar su tasa o su plazo.',c:'La nueva entidad compra el 100 % del saldo de tu deuda. No se puede trasladar solo una parte.',a:'Conviene si la nueva tasa baja la cuota lo suficiente para cubrir el avalúo y el estudio de títulos.'},
+    {k:'remo',t:'Remodelación',s:'Mejora la vivienda que ya es tuya',i:'<path d="M14 6l4 4" stroke="#FD4C0B"/><path d="M3 21l9-9" stroke="#020E2E"/><path d="M13 3l8 8-3 3-8-8z" stroke="#020E2E"/>',
+     q:'Para propietarios que quieren mejorar su vivienda.',c:'La entidad estudia tu solicitud y puede pedir presupuesto o cotizaciones, además del avalúo del inmueble.',a:'Pueden aplicar avalúo, estudio de títulos, hipoteca, beneficencia y registro. Los requisitos cambian entre entidades.'},
+    {k:'libre',t:'Libre Inversión Con Garantía',s:'Dinero para cualquier uso con tu inmueble',i:'<path d="M3 7a2 2 0 0 1 2-2h13v4" stroke="#020E2E"/><path d="M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2z" stroke="#020E2E"/><circle cx="16.5" cy="14.5" r="1" stroke="#FD4C0B"/>',
+     q:'Para propietarios que necesitan recursos y quieren una alternativa al crédito de consumo.',c:'Pagas en cuotas mensuales y tu inmueble respalda la deuda. Suele tener una tasa menor que un crédito de consumo.',a:'Tu vivienda queda como garantía, así que conviene revisar bien tu capacidad de pago.'},
+    {k:'constr',t:'Construcción En Sitio Propio',s:'En tu lote dentro de un conjunto cerrado',i:'<rect x="5" y="3" width="14" height="18" rx="1.5" stroke="#020E2E"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2" stroke="#FD4C0B"/>',
+     q:'Para quien ya tiene un lote dentro de un condominio o conjunto cerrado urbanizado.',c:'La entidad financia parte de los costos directos de la obra y desembolsa por etapas, según el avance.',a:'Se piden documentos adicionales de la obra. La disponibilidad cambia entre entidades.'},
+    {k:'comer',t:'Inmueble Comercial',s:'Locales, bodegas, oficinas y consultorios',i:'<path d="M3 9l1.5-5h15L21 9" stroke="#020E2E"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" stroke="#FD4C0B"/><path d="M5 12v8h14v-8" stroke="#020E2E"/>',
+     q:'Para quien quiere comprar un inmueble para su negocio o su actividad profesional.',c:'La entidad estudia tu capacidad de pago y el inmueble, que queda como garantía del crédito.',a:'No sigue las reglas del crédito de vivienda: la financiación, el plazo y el monto mínimo cambian entre entidades.'}
+  ];
+  var box=document.getElementById('opciones'),det=document.getElementById('detalle');
+  if(!box||!det)return;
+  function svg(p,s){return '<svg aria-hidden="true" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';}
+  function mostrar(ix){
+    var p=P[ix];
+    [].forEach.call(box.children,function(b,j){b.setAttribute('aria-pressed',j===ix?'true':'false');});
+    det.innerHTML='<h3>'+p.t+'</h3><dl><div><dt>Para quién es</dt><dd>'+p.q+'</dd></div><div><dt>Cómo funciona</dt><dd>'+p.c+'</dd></div><div><dt>Ten en cuenta</dt><dd>'+p.a+'</dd></div></dl>'+
+      '<div class="acciones"><a class="btn btn-n" href="simulador.html?producto='+p.k+'">Simula '+p.t+'</a><button class="btn btn-b" type="button" data-asesoria aria-haspopup="dialog">Habla Con Un Asesor</button></div>';
+  }
+  P.forEach(function(p,ix){
+    var b=document.createElement('button');b.type='button';b.className='opcion';
+    b.innerHTML='<span class="ic">'+svg(p.i,22)+'</span><span><b>'+p.t+'</b><small>'+p.s+'</small></span>';
+    b.addEventListener('click',function(){mostrar(ix);if(window.matchMedia('(max-width:860px)').matches)det.scrollIntoView({behavior:'smooth',block:'start'});});
+    box.appendChild(b);
+  });
+  mostrar(0);
+})();
+</script>
 </body>
 </html>

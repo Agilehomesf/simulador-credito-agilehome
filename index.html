@@ -99,7 +99,12 @@ section{scroll-margin-top:96px}
 .m-btn{display:none;flex:none;width:44px;height:44px;align-items:center;justify-content:center;padding:0;border:0;border-radius:10px;background:#FFF4EC;color:#020E2E;cursor:pointer}
 .m-btn .m-c,.m-btn[aria-expanded="true"] .m-a,.m-btn[aria-expanded="true"] .m-b{display:none}
 .m-btn[aria-expanded="true"] .m-c{display:inline}
-.arriba,.arriba:hover{position:fixed;right:20px;bottom:20px;z-index:25;width:48px;height:48px;border-radius:50%;background:#FD4C0B;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25);text-decoration:none}
+.wa-flot,.wa-flot:hover{position:fixed;right:20px;bottom:20px;z-index:26;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 16px;border-radius:999px;background:#0F7A3E;color:#FFFFFF;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 10px 24px rgba(2,14,46,.28)}
+.wa-flot:hover{background:#0B6633}
+.wa-flot:focus-visible{outline:3px solid #FD4C0B;outline-offset:3px}
+.wa-flot svg{flex:none}
+@media (max-width:760px){.arriba,.arriba:hover{right:20px;bottom:84px}.wa-flot,.wa-flot:hover{right:16px;bottom:16px;width:56px;padding:0;justify-content:center}.wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+.arriba,.arriba:hover{position:fixed;right:24px;bottom:88px;z-index:25;width:48px;height:48px;border-radius:50%;background:#FD4C0B;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(2,14,46,.25);text-decoration:none}
 html.js .arriba{opacity:0;visibility:hidden;transition:opacity .2s}
 html.js .arriba.ver{opacity:1;visibility:visible}
 @media (max-width:1279px){
@@ -801,6 +806,7 @@ html.js .menu.abierto{display:flex}
       <p style="margin: 0"><a href="https://drive.google.com/file/d/1BUpoSu0UVyNy0dsXkmw6xF_Go8Ag7uVY/view?usp=drive_link">Política De Tratamiento De Datos Personales</a><br>Cajicá, Colombia · Cobertura nacional<br>© 2026 Agile Home S.A.S.</p>
     </div>
   </footer>
+  <a class="wa-flot" href="https://wa.me/message/PMWO6BQHZCRSD1" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"></path></svg><span>WhatsApp</span></a>
   <a class="arriba" href="#inicio" aria-label="Volver arriba"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"></path></svg></a>
   <dialog id="asesoria" class="as-d" aria-labelledby="as-titulo">
     <button class="as-x" type="button" aria-label="Cerrar"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>

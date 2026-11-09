@@ -719,3 +719,9 @@ body.form-visible .wa-flot,body.form-visible .volver{opacity:0;pointer-events:no
 .c8-in select{width:100%}
 .c8-campo>label.c8-chk{font-family:"Nunito Sans","Segoe UI",sans-serif;font-weight:400;font-size:13.5px;color:#2C3145}
 .c8-foto{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 24%,#000 52%);mask-image:linear-gradient(90deg,transparent 0,transparent 24%,#000 52%);object-position:70% 70%}
+.c8-fs{border:0;margin:0;padding:0;display:grid;gap:4px;min-width:0}
+.c8-fs legend{padding:0;margin-bottom:4px;font-family:Poppins,sans-serif;font-size:14px;font-weight:600;color:#020E2E}
+.c8-sn{display:flex;gap:24px}
+.c8-op{display:flex;gap:10px;align-items:center;min-height:40px;cursor:pointer;font-size:15px}
+.c8-op input{flex:none;width:20px;height:20px;margin:0;accent-color:#FD4C0B}
+.c8-nota{padding:10px 12px;border-radius:12px;background:#FFF4EC;font-size:13.5px;color:#2C3145}

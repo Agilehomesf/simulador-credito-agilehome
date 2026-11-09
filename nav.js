@@ -65,7 +65,7 @@
 /* Formulario "Quiero Asesoría": usa el mismo destino y las mismas validaciones de Agile Match. */
 (function () {
   var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
-  var TEXTO = 'Quiero mi asesoría gratuita';
+  var TEXTO = 'Quiero Mi Asesoría Gratuita';
   var NIVEL = {
     total: ['Tiene los recursos completos'],
     proyecto: ['La está pagando en un proyecto'],
@@ -265,12 +265,13 @@
   var f = document.getElementById('c8-form');
   if (!f) return;
   var DESTINO = 'https://script.google.com/macros/s/AKfycbx0-N-hv7v45HoEwT96HzbHfGzNIxnVJCC4P5e3UaLRkUAxqfwWuZ85RowlkpUKBvq6/exec';
-  var TEXTO_AUT = 'Autorizo a Agile Home para tratar mis datos personales con el fin de gestionar mi solicitud de asesoría y contactarme, de acuerdo con su Política de Tratamiento de Datos Personales.';
   var WA_BASE = 'https://wa.me/573123109099?text=';
   var enVivo = /(^|\.)agilehomesf\.(com|github\.io)$/.test(location.hostname) || window.AGILE_PRUEBA_ENVIO === true;
   var inicio = Date.now(), enviando = false;
   function $(id) { return document.getElementById(id); }
   function limpio(t, max) { return String(t || '').replace(/[<>]/g, '').replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max); }
+  function marcada(n) { var o = f.querySelector('input[name="' + n + '"]:checked'); return o ? o.value : ''; }
+  var NIVEL = { total: ['Tiene los recursos completos'], proyecto: ['La está pagando en un proyecto'], parcial: ['Tiene una parte'], no: ['Aún no tiene recursos'] };
   function marcar(id, msg) {
     var e = $(id + '-e'), campo = $(id), caja = campo && campo.closest('.c8-in');
     if (e) { e.textContent = msg || ''; e.hidden = !msg; }
@@ -291,10 +292,23 @@
     'c8-tel': function () { return telefono() ? '' : 'Escribe un número de WhatsApp válido, por ejemplo +57 300 123 4567.'; },
     'c8-mail': function () { return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]{2,}$/.test($('c8-mail').value.trim()) ? '' : 'Escribe un correo válido, por ejemplo tunombre@correo.com.'; },
     'c8-prod': function () { return $('c8-prod').value ? '' : 'Selecciona qué necesitas financiar.'; },
+    'c8-rep': function () { return marcada('c8-rep') ? '' : 'Cuéntanos si tienes reportes negativos en centrales de riesgo.'; },
+    'c8-dem': function () { return marcada('c8-dem') ? '' : 'Cuéntanos si puedes demostrar tus ingresos con documentos.'; },
+    'c8-ing': function () { return marcada('c8-ing') ? '' : 'Cuéntanos si tus ingresos suman al menos $3.501.810 al mes.'; },
+    'c8-ci': function () { return marcada('c8-ci') ? '' : 'Cuéntanos si cuentas con la cuota inicial.'; },
     'c8-acepta': function () { return $('c8-acepta').checked ? '' : 'Para enviar tu solicitud debes autorizar el tratamiento de tus datos.'; }
   };
+  f.addEventListener('change', function (e) {
+    var n = e.target && e.target.name;
+    if (!/^c8-(rep|dem|ing|ci)$/.test(n || '')) return;
+    marcar(n, '');
+    if (n === 'c8-ci') $('c8-n').hidden = e.target.value !== 'no';
+    var r = marcada('c8-rep'), d = marcada('c8-dem'), i = marcada('c8-ing');
+    $('c8-nr').hidden = !(r === 'si' || d === 'no' || i === 'no');
+  });
   Object.keys(reglas).forEach(function (id) {
     var el = $(id);
+    if (!el) return;
     el.addEventListener(id === 'c8-acepta' || id === 'c8-prod' ? 'change' : 'blur', function () { marcar(id, reglas[id]()); });
     el.addEventListener('input', function () { if (el.getAttribute('aria-invalid') === 'true') marcar(id, reglas[id]()); });
   });
@@ -313,19 +327,26 @@
     if (enviando) return;
     $('c8-err').hidden = true; $('c8-prev').hidden = true;
     var primero = null;
-    Object.keys(reglas).forEach(function (id) { if (!marcar(id, reglas[id]()) && !primero) primero = $(id); });
+    Object.keys(reglas).forEach(function (id) { if (!marcar(id, reglas[id]()) && !primero) primero = $(id) || f.querySelector('input[name="' + id + '"]'); });
     if (primero) { primero.focus(); return; }
     if ($('c8-hp').value || Date.now() - inicio < 2500) return;
     var ultimo = 0; try { ultimo = +localStorage.getItem('ah_c8_ultimo') || 0; } catch (x) {}
     if (Date.now() - ultimo < 60000) { $('c8-err').hidden = false; return; }
     if (!enVivo) { $('c8-prev').hidden = false; return; }
     enviando = true; estado(true);
+    var rep = marcada('c8-rep'), dem = marcada('c8-dem'), ing = marcada('c8-ing'), ci = marcada('c8-ci');
+    var noCumple = [];
+    if (rep === 'si') noCumple.push('Tiene reportes en centrales de riesgo');
+    if (dem === 'no') noCumple.push('No puede demostrar sus ingresos');
+    if (ing === 'no') noCumple.push('Ingresos menores a 2 SMLV');
+    if (ci === 'no') noCumple.push('No tiene recursos para la cuota inicial');
+    var calif = noCumple.length ? 'D: No calificado' : 'C: Por perfilar';
+    var falta = noCumple.length ? noCumple : ['Simular en Agile Match'].concat(ci === 'parcial' ? ['Completar la cuota inicial'] : []);
     var datos = {
       fecha: new Date().toISOString(), nombre: limpio($('c8-nombre').value, 80), celular: telefono().replace(/^\+57(?=[36]\d{9}$)/, ''), correo: limpio($('c8-mail').value, 100).toLowerCase(),
-      producto: limpio($('c8-prod').value, 80), mensaje: limpio($('c8-msg').value, 500),
-      autorizacion: 'Sí', version_politica: '1.0', texto_autorizacion: TEXTO_AUT,
-      origen: 'Formulario de contacto del sitio web · ' + location.href.split('#')[0].split('?')[0],
-      top3: '[]', calificacion: 'C: Por perfilar', que_falta: 'Simular en Agile Match'
+      autorizacion: 'Sí', version_politica: '1.0', origen: 'Contacto web — Sección 8', producto: limpio($('c8-prod').value, 80), top3: '[]',
+      cuota_inicial: NIVEL[ci][0], reportes: rep === 'si' ? 'Sí' : 'No', ingresos_demostrables: dem === 'si' ? 'Sí' : 'No', ingresos_2_smlv: ing === 'si' ? 'Sí' : 'No',
+      calificacion: calif, que_falta: falta.join('; ')
     };
     var control = window.AbortController ? new AbortController() : null;
     var espera = setTimeout(function () { if (control) control.abort(); }, 25000);

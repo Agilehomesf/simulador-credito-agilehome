@@ -290,10 +290,10 @@ svg{flex:none}
 .canal b,.pie a{overflow-wrap:anywhere}
 
 /* Sección 3 del inicio: ¿Por qué elegir Agile Home? */
-.pq{position:relative;overflow:hidden;background:#020E2E;color:#FFFFFF;display:grid;grid-template-columns:minmax(0,30fr) minmax(0,70fr)}
+.pq{position:relative;overflow:hidden;background:#020E2E;color:#FFFFFF;display:grid;grid-template-columns:minmax(0,32fr) minmax(0,68fr)}
 .pq-foto{position:relative;min-height:560px}
-.pq-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 20%}
-.pq-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,14,46,0) 55%,rgba(2,14,46,.75) 85%,#020E2E 100%)}
+.pq-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:24% 30%}
+.pq-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,14,46,0) 74%,rgba(2,14,46,.55) 90%,#020E2E 100%)}
 .pq-txt{position:relative;z-index:1;padding:72px max(32px,calc((100vw - 1200px)/2 + 32px)) 88px 48px;display:grid;gap:22px;align-content:center}
 .pq-h2{color:#FFFFFF;font-size:44px;line-height:1.1;font-weight:700}
 .pq-h2::after{content:"";display:block;width:180px;height:4px;border-radius:4px;background:linear-gradient(90deg,#FD4C0B,rgba(253,76,11,0));margin-top:16px}
@@ -315,9 +315,9 @@ svg{flex:none}
 @media (max-width:1100px){.pq-ben{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pq-b:nth-child(3)::before{display:none}.pq-txt{padding:56px 32px 80px 32px}}
 @media (max-width:900px){
  .pq{grid-template-columns:1fr}
- .pq-foto{min-height:0;height:340px;order:2}
- .pq-foto img{object-position:30% 18%}
- .pq-foto::after{background:linear-gradient(180deg,rgba(2,14,46,.0) 60%,#020E2E 100%)}
+ .pq-foto{min-height:0;height:380px;order:2}
+ .pq-foto img{object-position:35% 22%}
+ .pq-foto::after{background:linear-gradient(180deg,rgba(2,14,46,0) 78%,#020E2E 100%)}
  .pq-txt{display:contents}
  .pq-h2{order:1;padding:56px 20px 0;font-size:34px}
  .pq-sub{order:1;padding:0 20px 24px;font-size:17px}

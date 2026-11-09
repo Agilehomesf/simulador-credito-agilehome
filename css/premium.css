@@ -396,3 +396,52 @@ svg{flex:none}
 .volver.solo-arriba{display:none}
 .volver.solo-arriba.subio{display:flex}
 @media (max-width:600px){.volver{left:12px;bottom:16px}.volver a{padding:0 12px;font-size:13px}}
+
+/* Sección 4 del inicio: Agile Match */
+.am4{background:#FFFFFF;padding:96px 0}
+.am4-grid{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:56px;align-items:center}
+.am4-txt{display:grid;gap:22px}
+.am4-h2{font-size:42px;line-height:1.12;font-weight:700}
+.marca-m{white-space:nowrap;color:#020E2E}
+.marca-m span{color:#FD4C0B}
+.am4-sub{font-size:19px;color:#4E5163;max-width:600px}
+.am4-ben{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.am4-ben li{display:grid;gap:8px;align-content:start;padding:18px 16px;border:1px solid #E3E1EF;border-radius:18px;background:#FFFFFF;transition:border-color .25s,box-shadow .25s,transform .25s}
+.am4-ben li:hover{border-color:#FD4C0B;box-shadow:0 14px 30px rgba(2,14,46,.08);transform:translateY(-3px)}
+.am4-ic{width:52px;height:52px;border-radius:14px;background:#FFF4EC;display:grid;place-items:center}
+.am4-ben h3{font-size:16px;line-height:1.25}
+.am4-ben p{font-size:14px;color:#4E5163;line-height:1.5}
+.am4-acc{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.am4-foto img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:28px;box-shadow:0 26px 56px rgba(2,14,46,.16)}
+@media (max-width:1100px){.am4-ben{grid-template-columns:repeat(2,minmax(0,1fr))}.am4-h2{font-size:36px}}
+@media (max-width:900px){
+ .am4{padding:64px 0}
+ .am4-grid{grid-template-columns:1fr;gap:28px}
+ .am4-txt{display:contents}
+ .am4-h2{order:1;font-size:32px}.am4-sub{order:2}.am4-foto{order:3}.am4-ben{order:4}.am4-acc{order:5}
+ .marca-m{white-space:normal}
+}
+@media (max-width:600px){.am4-acc{flex-direction:column}.am4-ben li{padding:14px 12px}}
+@media (max-width:360px){.am4-ben{grid-template-columns:1fr}}
+
+/* Vista explicativa de Agile Match */
+.cap{margin:0;display:grid;gap:10px}
+.cap img{width:100%;height:auto;border-radius:20px;border:1px solid #E3E1EF;box-shadow:0 22px 48px rgba(2,14,46,.14);background:#FFFFFF}
+.cap figcaption{font-size:13px;color:#4E5163;padding-left:4px}
+.saber{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.saber>div{display:grid;gap:10px;align-content:start;padding:24px;border:1px solid #E3E1EF;border-radius:20px;background:#FFFFFF}
+.saber h3{font-size:18px}
+.saber p{font-size:15px;color:#4E5163}
+@media (max-width:900px){.saber{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.saber{grid-template-columns:1fr}}
+.am4 .w{max-width:1320px}
+.am4-grid{grid-template-columns:minmax(0,57fr) minmax(0,43fr);gap:48px}
+.am4-ben{gap:12px}
+.am4-ben li{padding:16px 13px;hyphens:auto;-webkit-hyphens:auto}
+.am4-ben h3{font-size:15px}
+.am4-ben p{font-size:13.5px}
+@media (max-width:1100px){.am4-ben h3{font-size:16px}.am4-ben p{font-size:14px}}
+.am4-ben h3{hyphens:manual;-webkit-hyphens:manual;font-size:14.5px}
+@media (max-width:1100px){.am4-ben h3{font-size:16px}}
+.am4-grid>*,.am4-ben>*,.pq>*,.pq-ben>*{min-width:0}
+.am4-ben h3,.pq-b h3{overflow-wrap:anywhere}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /legado/
+
+Sitemap: https://agilehomesf.com/sitemap.xml

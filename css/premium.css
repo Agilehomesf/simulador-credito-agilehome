@@ -384,3 +384,15 @@ svg{flex:none}
  .linea h3,.linea p{grid-column:2}
 }
 @media (max-width:600px){.comp{padding:22px}.comp-cols{gap:8px}.comp-c{padding:14px 10px}.comp-crit{grid-template-columns:1fr}.amp-indice a{flex:1 1 calc(50% - 10px);justify-content:center}}
+
+/* Barra para regresar: volver a donde estabas, ir al inicio o subir */
+.volver{position:fixed;left:20px;bottom:20px;z-index:30;display:flex;gap:4px;padding:5px;border-radius:999px;background:#FFFFFF;box-shadow:0 10px 26px rgba(2,14,46,.22);border:1px solid #E3E1EF}
+.volver a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;color:#020E2E;text-decoration:none;font-family:Poppins,sans-serif;font-size:14px;font-weight:600;transition:background .2s,color .2s}
+.volver a:hover,.volver a:focus-visible{background:#FFF4EC;color:#C93400}
+.volver .v-atras{background:#020E2E;color:#FFFFFF}
+.volver .v-atras:hover,.volver .v-atras:focus-visible{background:#FD4C0B;color:#FFFFFF}
+.volver .v-arriba{width:44px;padding:0;justify-content:center;display:none}
+.volver.subio .v-arriba{display:inline-flex}
+.volver.solo-arriba{display:none}
+.volver.solo-arriba.subio{display:flex}
+@media (max-width:600px){.volver{left:12px;bottom:16px}.volver a{padding:0 12px;font-size:13px}}

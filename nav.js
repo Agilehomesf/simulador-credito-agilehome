@@ -163,3 +163,22 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   els.forEach(function (e, i) { e.style.transitionDelay = (Math.min(i % 6, 5) * 70) + 'ms'; io.observe(e); });
 })();
+
+/* Regresar: "Volver" lleva al punto exacto donde estabas (historial del navegador); si llegaste directo, va al inicio. */
+(function () {
+  var barra = document.querySelector('.volver');
+  if (!barra) return;
+  var mismoSitio = false;
+  try { mismoSitio = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+  var saltoInterno = false;
+  window.addEventListener('hashchange', function () { saltoInterno = true; });
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target : null;
+    if (!t) return;
+    if (t.closest('.v-atras') && (mismoSitio || saltoInterno) && history.length > 1) { e.preventDefault(); history.back(); }
+    if (t.closest('.v-arriba')) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
+  function ver() { barra.classList.toggle('subio', window.scrollY > 500); }
+  window.addEventListener('scroll', ver, { passive: true });
+  ver();
+})();

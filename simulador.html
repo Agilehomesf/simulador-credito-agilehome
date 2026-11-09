@@ -877,8 +877,8 @@ details.more>summary::before{color:#020E2E}
 .learn-note .i,.uvrp-h .i,.pc.tot .i,.pc.fam .i{color:#020E2E}
 .steps-list li::before{background:#020E2E}
 .tile em{color:#020E2E}
-.rbar u{background:#020E2E}
-.row.top .rbar u{background:linear-gradient(90deg,#FD4C0B,#FF7A3D)}
+.row .rk{border-color:#FD4C0B;color:#FD4C0B}
+.row.top .rk{color:#fff}
 /* Íconos a dos tonos: trazo principal azul oscuro y detalle naranja */
 .hv-feats .i>*,h2.sec .hic .i>*,.hic .i>*,.opt input:not(:checked)+span .ic .i>*,.learn-note .i>*,.uvrp-h .i>*,.pc .i>*{stroke:#FD4C0B}
 .hv-feats .i>:first-child,h2.sec .hic .i>:first-child,.hic .i>:first-child,.opt input:not(:checked)+span .ic .i>:first-child,.learn-note .i>:first-child,.uvrp-h .i>:first-child,.pc .i>:first-child{stroke:#020E2E}
@@ -958,7 +958,7 @@ const ACT={
   trans:{n:'Transportador',d:'Vehículo propio o vinculado a una empresa',ind:true},
   ren:{n:'Rentista',d:'Arriendos o inversiones',ind:true}
 };
-const ACTK=Object.keys(ACT).filter(function(k){return k!=='trans'&&k!=='ren';});
+const ACTK=Object.keys(ACT).filter(function(k){return k!=='trans'&&k!=='ren'&&k!=='ps';});
 const INDSUB={e_comercio:'comercio',e_constr:'manuf',e_finan:'manuf',e_prof:'prof',e_ind:'manuf',e_transp:'carga',e_tec:'manuf',e_inmob:'manuf',e_rest:'manuf',e_hotel:'manuf',e_salud:'manuf',e_edu:'manuf',e_agro:'agro',e_agroind:'manuf',e_impexp:'comercio',e_belleza:'manuf',e_publi:'manuf',e_admin:'manuf',e_entret:'manuf',e_otros:'prof_con',comerciante:'comercio',profesional:'prof',prestador:'prof',contratista:'prof',consultor:'prof',transportador:'carga',agro:'agro',constructor:'manuf',tecnico:'manuf',belleza:'manuf',restaurante:'manuf',catalogo:'comercio',inmobiliario:'prof',intermediario:'prof',salud:'prof',educador:'prof',artista:'prof',fabricante:'manuf',turismo:'manuf',rentista:'ren',otros:'comercio'};
 function subCode(k,v){if(k!=='ind'&&k!=='soc')return v;const c=INDSUB[v]||'comercio';return c;}
 function indOfi(){}

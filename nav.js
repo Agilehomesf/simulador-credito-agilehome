@@ -152,3 +152,14 @@
     });
   });
 })();
+
+/* Aparición progresiva de bloques marcados con .rev */
+(function () {
+  var els = document.querySelectorAll('.rev');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('visto'); }); return; }
+  var io = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (en) { if (en.isIntersecting) { var t = en.target; t.classList.add('visto'); io.unobserve(t); setTimeout(function () { t.style.transitionDelay = ''; }, 1100); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (e, i) { e.style.transitionDelay = (Math.min(i % 6, 5) * 70) + 'ms'; io.observe(e); });
+})();
